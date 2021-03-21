@@ -1,55 +1,44 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>abstract-board</title>
-        <link rel="stylesheet" href="/static/css/home.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+{{template "header"}}
 
-        <script type="text/javascript" src="/static/js/home.js"></script>
-    </head>
-    <body>
-        <div class="sd-item" style="width: 1000px; margin: 100px auto;">
-            <script async class="speakerdeck-embed" data-id="d7331974f98b4601bc852f8214d688df" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
-        </div>
-        <div class="add-sticky-item">
-            <button type="button" class="add-sticky">付箋を追加する</button>
-        </div>
+<div class="sd-item" style="width: 1000px; margin: 100px auto;">
+    <script async class="speakerdeck-embed" data-id="d7331974f98b4601bc852f8214d688df" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+</div>
+<div class="add-sticky-item">
+    <button type="button" class="add-sticky">付箋を追加する</button>
+</div>
 
-        <div class="add-sticky-modal-item">
-            <div class="add-sticky-modal-bg"></div>
-            <div class="add-sticky-modal-container">
-                <div class="add-sticky-title-item">
-                    <div class="add-sticky-title">
-                        付箋を追加する
-                    </div>
+<div class="add-sticky-modal-item">
+    <div class="add-sticky-modal-bg"></div>
+    <div class="add-sticky-modal-container">
+        <div class="add-sticky-title-item">
+            <div class="add-sticky-title">
+                付箋を追加する
+            </div>
+        </div>
+        <div class="new-sticky-item">
+            <div class="new-sticky-design-item">
+                <div class="new-sticky-design" data-color="blue" data-shape="short">
+                    <span class="new-sticky-design-text"></span>
                 </div>
-                <div class="new-sticky-item">
-                    <div class="new-sticky-design-item">
-                        <div class="new-sticky-design" data-color="blue" data-shape="short">
-                            <span class="new-sticky-design-text"></span>
-                        </div>
-                    </div>
-                    <div class="new-sticky-content-item">
-                        <div class="new-sticky-color">
-                            <ul>
-                                <li class="new-sticky-color-blue selected-color"></li>
-                                <li class="new-sticky-color-red"></li>
-                                <li class="new-sticky-color-yellow"></li>
-                                <li class="new-sticky-color-green"></li>
-                            </ul>
-                        </div>
-                        <div class="new-sticky-text">
-                            <textarea rows="10" cols="30" id="new-sticky-textarea"></textarea>
-                        </div>
-                    </div>
+            </div>
+            <div class="new-sticky-content-item">
+                <div class="new-sticky-color">
+                    <ul>
+                        <li class="new-sticky-color-blue selected-color"></li>
+                        <li class="new-sticky-color-red"></li>
+                        <li class="new-sticky-color-yellow"></li>
+                        <li class="new-sticky-color-green"></li>
+                    </ul>
                 </div>
-                <div class="add-sticky-item">
-                    <button type="button" class="new-sticky-btn">付箋を作成</button>
+                <div class="new-sticky-text">
+                    <textarea rows="10" cols="30" id="new-sticky-textarea"></textarea>
                 </div>
             </div>
         </div>
+        <div class="add-sticky-item">
+            <button type="button" class="new-sticky-btn">付箋を作成</button>
+        </div>
+    </div>
+</div>
 
-    </body>
-</html>
+{{template "footer"}}
