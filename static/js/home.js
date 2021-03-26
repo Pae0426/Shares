@@ -1,6 +1,6 @@
 $(function() {
-    function newSticky(color) {
-        return '<span class="sticky ' + color + '">テスト</span>';
+    function newSticky(color, text) {
+        return '<span class="sticky ' + color + '">' + text + '</span>';
     }
 
     $('.sticky').draggable({
@@ -30,7 +30,8 @@ $(function() {
 
     $('.new-sticky-btn').on('click', function() {
         let color = $('.new-sticky-design').data('color');
-        let sticky = newSticky(color);
+        let text = $('.new-sticky-design-text').text();
+        let sticky = newSticky(color, text);
         $('.sd-item').append(sticky);
         $('.sticky').draggable({
             containment: '.sd-item',

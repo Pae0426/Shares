@@ -1,12 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Kosugi');
 
+* {
+    margin: 0;
+    padding: 0;
+}
+.wrapper {
+    background-color: #e6f2ff;
+    padding: 30px 0;
+}
+html {
+    background-color: #fff;
+}
 body {
     font-family: 'Kosugi', sans-serif;
-    margin: 0;
+}
+header {
+    background-color: #fff;
+    padding: 10px 0 30px;
 }
 
 .sticky {
-    padding: 10px 30px;
+    padding: 15px 50px;
 }
 .sd-item .blue {
     background-color: #aff;
@@ -84,7 +98,7 @@ body {
     background-color: rgb(130, 255, 255);
 }
 .new-sticky-content-item {
-    
+
 }
 .new-sticky-text {
     padding: 30px 50px;
