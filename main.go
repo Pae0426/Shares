@@ -8,9 +8,9 @@ import (
 
 func templateHandler(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles(
-		"/app/home/views/home.html",
-		"/app/home/views/header.html",
-		"/app/home/views/footer.html",
+		"/go/src/app/views/home.html",
+		"/go/src/app/views/header.html",
+		"/go/src/app/views/footer.html",
 	)
 	if err != nil {
 		log.Fatalln("テンプレートファイルを読み込めません:", err.Error())
@@ -23,9 +23,9 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	log.Println("Webサーバーを開始します...")
 	server := http.Server{
-		Addr: ":8080",
+		Addr: ":80",
 	}
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("/app/home/static"))))
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("/go/src/app/static"))))
 	http.HandleFunc("/home", templateHandler)
 	server.ListenAndServe()
 }
