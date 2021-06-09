@@ -8,14 +8,16 @@ import (
 	"net/http"
 )
 
+//指定ディレクトリ下のファイル数をカウントする
 func countFiles() int {
 	files, _ := ioutil.ReadDir("./static/pdf/1/")
 	var count int
 	for _, f := range files {
-		fmt.Println(f.Name())
+		if f.Name() == ".DS_Store" {
+			continue
+		}
 		count++
 	}
-	fmt.Println(count)
 	return count
 }
 
