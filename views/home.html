@@ -1,8 +1,20 @@
 {{template "header"}}
 
-<div class="sd-item" style="width: 1000px; margin: 100px auto;">
-    <script async class="speakerdeck-embed" data-id="d7331974f98b4601bc852f8214d688df" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+<div class="slide">
+    <img src="/static/pdf/1/test_0.jpeg" width="800">
+    <div class="progressbar-background">
+        <span class="progressbar" data-now-progress="1" data-total-progress={{.pages}}></span>
+    </div>
+    <div class="slide-control-content">
+        <button class="button-prev" type="image"><i class="fas fa-chevron-left"></i></button>
+        <span class="page-info">
+            <span class="page-now-text">1</span><span class="page-total-text"> / {{ .pages }}</span>
+        </span>
+        <button class="button-next" type="image"><i class="fas fa-chevron-right"></i></button>
+    </div>
 </div>
+
+
 <div class="add-sticky-item">
     <button type="button" class="add-sticky">付箋を追加する</button>
 </div>

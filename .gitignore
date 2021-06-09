@@ -44,3 +44,5 @@ Temporary Items
 go.mod
 go.sum
 home
+.github/
+pdf/

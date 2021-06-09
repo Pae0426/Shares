@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Kosugi');
+@import url("https://fonts.googleapis.com/css?family=Kosugi");
 
 * {
     margin: 0;
@@ -12,11 +12,70 @@ html {
     background-color: #fff;
 }
 body {
-    font-family: 'Kosugi', sans-serif;
+    font-family: "Kosugi", sans-serif;
 }
 header {
     background-color: #fff;
     padding: 10px 0 30px;
+}
+#app-title {
+    font-family: 'Noteworthy',sans-serif;
+}
+
+.slide {
+    margin: 0 auto;
+    width: 800px;
+}
+.progressbar-background {
+    position: relative;
+    background: #aaacaf;
+    height: 5px;
+    width: 100%;
+}
+.progressbar {
+    position: absolute;
+    width: calc((1 / 47) * 100%);
+    height: 5px;
+    background: #22a7da;
+    transition: all 150ms 0s ease;
+}
+.slide-control-content {
+    background-color: #3d424a;
+    width: 800px;
+    height: 50px;
+    padding: 5px 0;
+    text-align: center;
+    vertical-align: middle;
+}
+.button-prev,
+.button-next {
+    border: none;
+    background-color: #3d424a;
+    width: 40px;
+    height: 100%;
+    cursor: pointer;
+    border-radius: .15rem;
+}
+.button-prev:hover,
+.button-next:hover {
+    background-color: #22a7da;
+}
+.fa-chevron-left,
+.fa-chevron-right {
+    size: 30px;
+    color: #fff;
+    stroke-width: 3px;
+}
+.fa-chevron-left {
+    color: #C0C0C0;
+}
+.page-info {
+    height: 100%;
+    margin: 0 10px;
+}
+.page-now-text,
+.page-total-text {
+    color: #fff;
 }
 
 .sticky {
@@ -49,6 +108,9 @@ header {
     color: #fff;
     font-size: 20px;
     font-weight: 800;
+}
+.add-sticky {
+    margin: 30px 0;
 }
 .add-sticky-modal-item {
     display: none;
@@ -98,7 +160,6 @@ header {
     background-color: rgb(130, 255, 255);
 }
 .new-sticky-content-item {
-
 }
 .new-sticky-text {
     padding: 30px 50px;
@@ -120,7 +181,6 @@ header {
     position: absolute;
     content: "";
     border: 1px solid rgba(201, 201, 201);
-
 }
 .new-sticky-color-blue {
     background-color: #aff;
