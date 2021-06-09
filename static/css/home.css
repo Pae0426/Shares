@@ -28,7 +28,7 @@ header {
 }
 .progressbar-background {
     position: relative;
-    background: #aaacaf;
+    background-color: #aaacaf;
     height: 5px;
     width: 100%;
 }
@@ -36,7 +36,7 @@ header {
     position: absolute;
     width: calc((1 / 47) * 100%);
     height: 5px;
-    background: #22a7da;
+    background-color: #22a7da;
     transition: all 150ms 0s ease;
 }
 .slide-control-content {
