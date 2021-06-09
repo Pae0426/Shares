@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -38,17 +37,11 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func headerHandler(w http.ResponseWriter, r *http.Request) {
-	h := r.Header
-	fmt.Fprintln(w, h)
-}
-
 func main() {
 	log.Println("Webサーバーを開始します...")
 	server := http.Server{
 		Addr: ":8080",
 	}
-	http.HandleFunc("/", headerHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("/go/src/app/static"))))
 	http.HandleFunc("/home", templateHandler)
 	server.ListenAndServe()
