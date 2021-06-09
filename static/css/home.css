@@ -60,6 +60,9 @@ header {
 .button-next:hover {
     background-color: #22a7da;
 }
+button[disabled] {
+    pointer-events: none;
+}
 .fa-chevron-left,
 .fa-chevron-right {
     size: 30px;
