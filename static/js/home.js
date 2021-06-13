@@ -43,6 +43,8 @@ $(function() {
             }
             page_now -= 1;
         }
+        let next_jpeg_file_path = '/static/pdf/1/' + page_now + '.jpeg';
+        $('.display-page').attr('src', next_jpeg_file_path);
         $('.progressbar').css('width', 'calc(' + page_now + ' / ' + PAGE_TOTAL + ' * 100%)');
         $('.page-now-text').html(page_now);
     }

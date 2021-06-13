@@ -45,7 +45,7 @@ func Pdf_to_image() {
 		}
 
 		// 画像を出力する。
-		err = mw.WriteImage(fmt.Sprintf("static/pdf/2/%d.jpeg", i))
+		err = mw.WriteImage(fmt.Sprintf("static/pdf/1/%d.jpeg", i+1))
 		if err != nil {
 			log.Fatal("failed at WriteImage")
 		}
