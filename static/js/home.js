@@ -18,28 +18,28 @@ $(function() {
             //最終ページか否かで処理を分岐
             if (page_now == PAGE_TOTAL) {
                 $('.fa-chevron-right').css('color', '#C0C0C0');
-                $('.button-next').prop('disabled', true);
+                $('.slide-button-next').prop('disabled', true);
                 return;
             }else if(page_now + 1 == PAGE_TOTAL) {
                 $('.fa-chevron-right').css('color', '#C0C0C0');
-                $('.button-next').prop('disabled', true);
+                $('.slide-button-next').prop('disabled', true);
             } else {
                 $('.fa-chevron-left').css('color', '#fff');
-                $('.button-prev').prop('disabled', false);
+                $('.slide-button-prev').prop('disabled', false);
             }
             page_now += 1;
         } else if(action == 'prev') {
             //初期ページか否かで処理を分岐
             if (page_now == 1) {
                 $('.fa-chevron-left').css('color', '#C0C0C0');
-                $('.button-prev').prop('disabled', true);
+                $('.slide-button-prev').prop('disabled', true);
                 return;
             } else if(page_now - 1 == 1) {
                 $('.fa-chevron-left').css('color', '#C0C0C0');
-                $('.button-prev').prop('disabled', true);
+                $('.slide-button-prev').prop('disabled', true);
             } else {
                 $('.fa-chevron-right').css('color', '#fff');
-                $('.button-next').prop('disabled', false);
+                $('.slide-button-next').prop('disabled', false);
             }
             page_now -= 1;
         }
@@ -82,10 +82,10 @@ $(function() {
         $('.add-sticky-modal-item').fadeOut();
     });
 
-    $('.button-next').on('click', function() {
+    $('.slide-button-next').on('click', function() {
         pageControl('next');
     });
-    $('.button-prev').on('click', function() {
+    $('.slide-button-prev').on('click', function() {
         pageControl('prev');
     });
 });

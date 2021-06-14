@@ -47,8 +47,8 @@ header {
     text-align: center;
     vertical-align: middle;
 }
-.button-prev,
-.button-next {
+.slide-button-prev,
+.slide-button-next {
     border: none;
     background-color: #3d424a;
     width: 40px;
@@ -56,8 +56,8 @@ header {
     cursor: pointer;
     border-radius: .15rem;
 }
-.button-prev:hover,
-.button-next:hover {
+.slide-button-prev:hover,
+.slide-button-next:hover {
     background-color: #22a7da;
 }
 button[disabled] {
