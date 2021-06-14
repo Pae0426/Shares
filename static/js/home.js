@@ -8,7 +8,8 @@ $(function() {
 
     
     function newSticky(color, text) {
-        return '<span class="sticky ' + color + '">' + text + '</span>';
+        let page_now = $('.page-now-text').html();
+        return '<span class="sticky ' + color + ' sticky-page' + page_now + '">' + text + '</span>';
     }
 
     function pageControl(action) {
@@ -75,9 +76,9 @@ $(function() {
         let color = $('.new-sticky-design').data('color');
         let text = $('.new-sticky-design-text').text();
         let sticky = newSticky(color, text);
-        $('.sd-item').append(sticky);
+        $('.slide').append(sticky);
         $('.sticky').draggable({
-            containment: '.sd-item',
+            containment: '.slide',
         });
         $('.add-sticky-modal-item').fadeOut();
     });

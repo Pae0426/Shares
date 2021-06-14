@@ -84,16 +84,16 @@ button[disabled] {
 .sticky {
     padding: 15px 50px;
 }
-.sd-item .blue {
+.slide .blue {
     background-color: #aff;
 }
-.sd-item .red {
+.slide .red {
     background-color: #faa;
 }
-.sd-item .yellow {
+.slide .yellow {
     background-color: #ffa;
 }
-.sd-item .green {
+.slide .green {
     background-color: #afa;
 }
 
