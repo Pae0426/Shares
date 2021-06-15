@@ -9,7 +9,7 @@ $(function() {
     
     function newSticky(color, text) {
         let page_now = $('.page-now-text').html();
-        return '<span class="sticky ' + color + ' sticky-page' + page_now + '">' + text + '</span>';
+        return '<span class="sticky ' + color + ' sticky-page' + page_now + '">' + '<span class="sticky-text">' + text +'</span></span>';
     }
 
     function pageControl(action) {

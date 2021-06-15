@@ -24,7 +24,7 @@ header {
 
 .slide {
     margin: 0 auto;
-    width: 800px;
+    width: 70%;
     position: relative;
 }
 .progressbar-background {
@@ -42,7 +42,7 @@ header {
 }
 .slide-control-content {
     background-color: #3d424a;
-    width: 800px;
+    width: 100%;
     height: 50px;
     padding: 5px 0;
     text-align: center;
@@ -84,7 +84,12 @@ button[disabled] {
 
 .sticky {
     position: absolute;
-    padding: 15px 50px;
+    padding: 5px;
+    width: 180px;
+    height: 50px;
+}
+.sticky-text {
+    overflow-wrap: break-word;
 }
 .slide .blue {
     background-color: #aff;
@@ -161,8 +166,14 @@ button[disabled] {
     margin: auto 0;
 }
 .new-sticky-design {
-    padding: 30px 100px;
+    padding: 5px;
+    width: 180px;
+    height: 50px;
     background-color: rgb(130, 255, 255);
+}
+.new-sticky-design-text {
+    /*position: absolute;*/
+    overflow-wrap: break-word;
 }
 .new-sticky-text {
     padding: 30px 50px;
