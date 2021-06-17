@@ -20,11 +20,12 @@ header {
 }
 #app-title {
     font-family: 'Noteworthy',sans-serif;
+    margin-left: 10px;
 }
 
 .slide {
     margin: 0 auto;
-    width: 70%;
+    width: 60%;
     position: relative;
 }
 .progressbar-background {
@@ -87,6 +88,8 @@ button[disabled] {
     padding: 5px;
     width: 180px;
     height: 50px;
+    box-shadow: 3px 3px 5px #9d9592;
+    border-radius: 5px;
 }
 .sticky-text {
     overflow-wrap: break-word;
@@ -162,6 +165,11 @@ button[disabled] {
     display: flex;
     justify-content: center;
 }
+.column-color,
+.column-text {
+    color: rgb(190, 190, 190);
+    padding-bottom: 10px;
+}
 .new-sticky-design-item {
     margin: auto 0;
 }
@@ -170,6 +178,8 @@ button[disabled] {
     width: 180px;
     height: 50px;
     background-color: rgb(130, 255, 255);
+    box-shadow: 3px 3px 5px #9d9592;
+    border-radius: 5px;
 }
 .new-sticky-design-text {
     /*position: absolute;*/
