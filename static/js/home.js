@@ -67,10 +67,37 @@ $(function() {
         let color_rgb = ($(this).css('background-color'));
         $('.new-sticky-design').css('background-color', color_rgb);
         let color_name = $(this).attr('class').replace('new-sticky-color-', '');
-        console.log(color_name);
         $('.new-sticky-design').data('color', color_name);
         $('.selected-color').removeClass('selected-color');
         $(this).addClass('selected-color');
+    });
+
+    $('[class^=new-sticky-shape-]').on('click', function() {
+        if($(this).hasClass("selected-shape") || $(this).hasClass("selected-shape-left") || $(this).hasClass("selected-shape-right")) {
+            return;
+        }
+        let left_or_right = $(this).attr('class').replace('new-sticky-shape-', '');
+
+        //選択表示を消去
+        $('.selected-shape').removeClass('selected-shape');
+        $('.selected-shape-left').removeClass('selected-shape-left');
+        $('.selected-shape-right').removeClass('selected-shape-right');
+        $('.selected-shape-triangle-left').removeClass('selected-shape-triangle-left');
+        $('.selected-shape-triangle-right').removeClass('selected-shape-triangle-right');
+
+        if(/left$/.test(left_or_right)) {
+            $('.new-sticky-shape-left').addClass('selected-shape');
+            $('.new-sticky-shape-left').addClass('selected-shape-left');
+            $('.new-sticky-shape-triangle-left').addClass('selected-shape-triangle-left');
+        }
+        else if(/right$/.test(left_or_right)) {
+            $('.new-sticky-shape-right').addClass('selected-shape');
+            $('.new-sticky-shape-right').addClass('selected-shape-right');
+            $('.new-sticky-shape-triangle-right').addClass('selected-shape-triangle-right');
+        }
+        else {
+            $(this).addClass('selected-shape');
+        }
     });
 
     $(document).on('input', '#new-sticky-textarea', function() {
