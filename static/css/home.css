@@ -166,6 +166,7 @@ button[disabled] {
     justify-content: center;
 }
 .column-color,
+.column-shape,
 .column-text {
     color: rgb(190, 190, 190);
     padding-bottom: 10px;
@@ -182,14 +183,15 @@ button[disabled] {
     border-radius: 5px;
 }
 .new-sticky-design-text {
-    /*position: absolute;*/
     overflow-wrap: break-word;
 }
-.new-sticky-text {
-    padding: 30px 50px;
+.new-sticky-color,
+.new-sticky-text,
+.new-sticky-shape {
+    padding: 0 50px 30px;
 }
 .new-sticky-color {
-    padding: 0 50px 30px;
+    padding-bottom: 50px;
 }
 .new-sticky-color li {
     float: left;
@@ -236,4 +238,81 @@ button[disabled] {
 }
 .selected-color:before {
     border: 1.5px solid rgb(146, 146, 146) !important;
+}
+
+.new-sticky-shape-item {
+    display: flex;
+}
+.new-sticky-shape-square {
+    border-radius: 3px;
+    width: 40px;
+    height:16px;
+    margin: 10px 15px 0;
+    background-color:#fff;
+    border: 1px solid rgba(201, 201, 201);
+}
+.new-sticky-shape-rectangle {
+    border-radius: 3px;
+    width: 40px;
+    height: 40px;
+    background-color:#fff;
+    border: 1px solid rgba(201, 201, 201);
+}
+.new-sticky-shape-left,
+.new-sticky-shape-right {
+    position: relative;
+    height:16px;
+    width:25px;
+    background-color:#fff;
+    border: 1px solid rgba(201, 201, 201);
+    z-index: auto;
+}
+.new-sticky-shape-left {
+    border-left-color: #fff;
+    margin: 10px 10px 0 25px;
+}
+.new-sticky-shape-right {
+    border-right-color: #fff;
+    margin: 10px 0 0 10px;
+}
+.new-sticky-shape-left::before {
+    position:absolute;
+    content:"";
+    border:solid 16px transparent;
+    border-right:solid 16px rgba(201, 201, 201);
+    top:-8px;
+    left:-31px;
+    z-index: -1;
+}
+.new-sticky-shape-left::after {
+    position:absolute;
+    content:"";
+    border:solid 14px transparent;
+    border-right:solid 14px #fff;
+    top:-6px;
+    left:-28px;
+    z-index: -1;
+}
+.new-sticky-shape-right::before {
+    position:absolute;
+    content:"";
+    border:solid 16px transparent;
+    background-color: #fff;
+    border-left:solid 16px rgba(201, 201, 201);
+    top:-8px;
+    left:25px;
+    z-index: -1;
+}
+.new-sticky-shape-right::after {
+    position:absolute;
+    content:"";
+    border:solid 14px transparent;
+    border-left:solid 14px #fff;
+    top:-6px;
+    left:26px;
+    z-index: -1;
+}
+.selected-shape {
+    border: 1.5px solid rgb(146, 146, 146) !important;
+    background: #fff;
 }
