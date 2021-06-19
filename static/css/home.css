@@ -98,16 +98,16 @@ button[disabled] {
 .sticky-text {
     overflow-wrap: break-word;
 }
-.slide .blue {
+[data-color=blue] {
     background-color: #aff;
 }
-.slide .red {
+[data-color=red] {
     background-color: #faa;
 }
-.slide .yellow {
+[data-color=yellow] {
     background-color: #ffa;
 }
-.slide .green {
+[data-color=green] {
     background-color: #afa;
 }
 
@@ -182,17 +182,17 @@ button[disabled] {
 .new-sticky-design-item {
     margin: auto 0;
 }
-.new-sticky-design {
-    padding: 5px;
-    width: 180px;
-    height: 50px;
-    background-color: rgb(130, 255, 255);
-    box-shadow: 3px 3px 5px #9d9592;
-    border-radius: 5px;
-}
 .new-sticky-design-text {
     overflow-wrap: break-word;
 }
+[data-shape=square] {
+    padding: 5px;
+    width: 180px;
+    height: 50px;
+    box-shadow: 3px 3px 5px #9d9592;
+    border-radius: 5px;
+}
+
 .new-sticky-color,
 .new-sticky-text,
 .new-sticky-shape {

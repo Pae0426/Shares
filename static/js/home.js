@@ -9,7 +9,7 @@ $(function() {
     
     function newSticky(color, text) {
         let page_now = $('.page-now-text').html();
-        return '<span class="sticky ' + color + ' sticky-page' + page_now + '">' + '<span class="sticky-text">' + text +'</span></span>';
+        return '<span class="sticky sticky-page' + page_now + '" data-color="' + color + '">' + '<span class="sticky-text">' + text +'</span></span>';
     }
 
     function pageControl(action) {
@@ -64,10 +64,8 @@ $(function() {
     });
 
     $('[class^=new-sticky-color-]').on('click', function() {
-        let color_rgb = ($(this).css('background-color'));
-        $('.new-sticky-design').css('background-color', color_rgb);
         let color_name = $(this).attr('class').replace('new-sticky-color-', '');
-        $('.new-sticky-design').data('color', color_name);
+        $('.new-sticky-design').attr('data-color', color_name);
         $('.selected-color').removeClass('selected-color');
         $(this).addClass('selected-color');
     });
