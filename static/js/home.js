@@ -63,18 +63,37 @@ $(function() {
         $('.add-sticky-modal-item').fadeOut();
     });
 
+    //色の変更
     $('[class^=new-sticky-color-]').on('click', function() {
-        let color_name = $(this).attr('class').replace('new-sticky-color-', '');
-        $('.new-sticky-design').attr('data-color', color_name);
+        if($(this).hasClass("selected-color")) {
+            return;
+        }
+        let new_color = $(this).attr('class').replace('new-sticky-color-', '');
+        let old_color = $('.new-sticky-design').attr('data-color');
+        let shape = $('.new-sticky-design').attr('data-shape');
+
+        $('.new-sticky-design').attr('data-color', new_color);
         $('.selected-color').removeClass('selected-color');
         $(this).addClass('selected-color');
+
+        $('.new-sticky-design').removeClass('change-color-left-' + old_color);
+        $('.new-sticky-design').removeClass('change-color-right-' + old_color);
+
+        if(shape == 'left') {
+            $('.new-sticky-design').addClass('change-color-left-' + new_color);
+        }
+        else if(shape == 'right') {
+            $('.new-sticky-design').addClass('change-color-right-' + new_color);
+        }
     });
 
+    //形の変更
     $('[class^=new-sticky-shape-]').on('click', function() {
         if($(this).hasClass("selected-shape") || $(this).hasClass("selected-shape-left") || $(this).hasClass("selected-shape-right")) {
             return;
         }
-        let left_or_right = $(this).attr('class').replace('new-sticky-shape-', '');
+        let shape = $(this).attr('class').replace('new-sticky-shape-', '');
+        let color = $('.new-sticky-design').attr('data-color');
 
         //選択表示を消去
         $('.selected-shape').removeClass('selected-shape');
@@ -83,18 +102,31 @@ $(function() {
         $('.selected-shape-triangle-left').removeClass('selected-shape-triangle-left');
         $('.selected-shape-triangle-right').removeClass('selected-shape-triangle-right');
 
-        if(/left$/.test(left_or_right)) {
-            $('.new-sticky-shape-left').addClass('selected-shape');
-            $('.new-sticky-shape-left').addClass('selected-shape-left');
-            $('.new-sticky-shape-triangle-left').addClass('selected-shape-triangle-left');
-        }
-        else if(/right$/.test(left_or_right)) {
-            $('.new-sticky-shape-right').addClass('selected-shape');
-            $('.new-sticky-shape-right').addClass('selected-shape-right');
-            $('.new-sticky-shape-triangle-right').addClass('selected-shape-triangle-right');
-        }
-        else {
+        //矢印付箋の三角形とbeforeをリセット
+        $('.new-sticky-design').removeClass('change-color-left-' + color);
+        $('.new-sticky-design').removeClass('change-color-right-' + color);
+
+        if(/square$/.test(shape)) {
             $(this).addClass('selected-shape');
+            $('.new-sticky-design').attr('data-shape', 'square');
+        }
+        else if(/rectangle$/.test(shape)) {
+            $(this).addClass('selected-shape');
+            $('.new-sticky-design').attr('data-shape', 'rectangle');
+        }
+        else if(/left$/.test(shape)) {
+            $('.new-sticky-shape-left').addClass('selected-shape selected-shape-left');
+            $('.new-sticky-shape-triangle-left').addClass('selected-shape-triangle-left');
+
+            $('.new-sticky-design').attr('data-shape', 'left');
+            $('.new-sticky-design').addClass('change-color-left-' + color);
+        }
+        else if(/right$/.test(shape)) {
+            $('.new-sticky-shape-right').addClass('selected-shape selected-shape-right');
+            $('.new-sticky-shape-triangle-right').addClass('selected-shape-triangle-right');
+
+            $('.new-sticky-design').attr('data-shape', 'right');
+            $('.new-sticky-design').addClass('change-color-right-' + color);
         }
     });
 
