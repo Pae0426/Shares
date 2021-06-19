@@ -86,14 +86,34 @@ button[disabled] {
 }
 
 
-
-.sticky {
+/*.abs {
     position: absolute;
-    padding: 5px;
+}*/
+.sticky {
+    position: absolute !important;
+    /*padding: 5px;
     width: 180px;
     height: 50px;
     box-shadow: 3px 3px 5px #9d9592;
-    border-radius: 5px;
+    border-radius: 5px;*/
+}
+.sticky-left::before {
+    z-index: 0 !important;
+    left: -117px !important;
+}
+.sticky-left::after {
+    z-index: 0 !important;
+    height: 60px !important;
+    left: -10px !important;
+}
+.sticky-right::before {
+    z-index: 0 !important;
+    left: 159px !important;
+}
+.sticky-right::after {
+    z-index: 0 !important;
+    height: 60px !important;
+    left: 152px !important;
 }
 .sticky-text {
     overflow-wrap: break-word;
@@ -186,14 +206,14 @@ button[disabled] {
     overflow-wrap: break-word;
 }
 [data-shape=square] {
-    padding: 5px;
+    padding: 5px 10px;
     width: 180px;
     height: 50px;
     box-shadow: 3px 3px 5px #9d9592;
     border-radius: 5px;
 }
 [data-shape=rectangle] {
-    padding: 5px;
+    padding: 5px 10px;
     width: 180px;
     height: 180px;
     box-shadow: 3px 3px 5px #9d9592;
@@ -201,7 +221,7 @@ button[disabled] {
 }
 [data-shape=left] {
     position: relative;
-    padding: 5px;
+    padding: 5px 10px;
     margin-left: 41px;
     width: 140px;
     height: 50px;
@@ -221,7 +241,7 @@ button[disabled] {
     /*border-right:60px solid #aff;*/
     left:-116px;
     top:-28px;
-    box-shadow: 10px 0 5px -8px #9d9592;
+    box-shadow: 10px 0 5px -9px #9d9592;
     z-index: -1;
 }
 [data-shape=left]::after {
@@ -235,7 +255,7 @@ button[disabled] {
 }
 [data-shape=right] {
     position: relative;
-    padding: 5px;
+    padding: 5px 10px;
     margin-right: 41px;
     width: 140px;
     height: 50px;

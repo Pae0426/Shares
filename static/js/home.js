@@ -7,9 +7,17 @@ $(function() {
     $('.progressbar').css('width', 'calc(1 / ' + page_total + ' * 100%)');
 
     
-    function newSticky(color, text) {
+    function newSticky(color, shape, text) {
         let page_now = $('.page-now-text').html();
-        return '<span class="sticky sticky-page' + page_now + '" data-color="' + color + '">' + '<span class="sticky-text">' + text +'</span></span>';
+        if(shape == 'left') {
+            return '<span class="sticky sticky-left sticky-page' + page_now + ' change-color-left-' + color + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
+        }
+        else if(shape == 'right') {
+            return '<span class="sticky sticky-right sticky-page' + page_now + ' change-color-right-' + color + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
+        }
+        else {
+            return '<span class="sticky sticky-page' + page_now + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
+        }
     }
 
     function pageControl(action) {
@@ -135,9 +143,10 @@ $(function() {
     });
 
     $('.new-sticky-btn').on('click', function() {
-        let color = $('.new-sticky-design').data('color');
+        let color = $('.new-sticky-design').attr('data-color');
+        let shape = $('.new-sticky-design').attr('data-shape');
         let text = $('.new-sticky-design-text').text();
-        let sticky = newSticky(color, text);
+        let sticky = newSticky(color, shape, text);
         $('.slide').append(sticky);
         $('.sticky').draggable({
             containment: '.slide',
