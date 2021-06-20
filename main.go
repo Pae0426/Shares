@@ -5,7 +5,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	//"shares/package/pdf_to_image"
 )
 
 //指定ディレクトリ下のファイル数をカウントする
@@ -29,9 +28,6 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 		"/go/src/app/views/home.html",
 		"/go/src/app/views/header.html",
 		"/go/src/app/views/footer.html",
-		//"views/home.html",
-		//"views/header.html",
-		//"views/footer.html",
 	)
 	if err != nil {
 		log.Fatalln("テンプレートファイルを読み込めません:", err.Error())
@@ -41,17 +37,12 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-/*func convertHandler(w http.ResponseWriter, r *http.Request) {
-	pdf_to_image.Pdf_to_image()
-}*/
-
 func main() {
 	log.Println("Webサーバーを開始します...")
 	server := http.Server{
 		Addr: ":8080",
 	}
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("/go/src/app/static"))))
 	http.HandleFunc("/home", templateHandler)
-	//http.HandleFunc("/pdf_to_image", convertHandler)
 	server.ListenAndServe()
 }
