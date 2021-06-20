@@ -86,16 +86,9 @@ button[disabled] {
 }
 
 
-/*.abs {
-    position: absolute;
-}*/
+
 .sticky {
     position: absolute !important;
-    /*padding: 5px;
-    width: 180px;
-    height: 50px;
-    box-shadow: 3px 3px 5px #9d9592;
-    border-radius: 5px;*/
 }
 .sticky-left::before {
     z-index: 0 !important;
@@ -118,26 +111,14 @@ button[disabled] {
 .sticky-text {
     overflow-wrap: break-word;
 }
-[data-color=blue] {
-    background-color: #aff;
-}
-[data-color=red] {
-    background-color: #faa;
-}
-[data-color=yellow] {
-    background-color: #ffa;
-}
-[data-color=green] {
-    background-color: #afa;
-}
 
 
 
-.add-sticky-item {
+.add-sticky-container {
     text-align: center;
 }
 
-.add-sticky,
+.add-sticky-btn,
 .new-sticky-btn {
     border: none;
     border-radius: 5px;
@@ -148,7 +129,7 @@ button[disabled] {
     font-size: 20px;
     font-weight: 800;
 }
-.add-sticky {
+.add-sticky-btn {
     margin: 30px 0;
 }
 .add-sticky-modal-item {
@@ -189,7 +170,7 @@ button[disabled] {
 
 
 
-.new-sticky-item {
+.new-sticky-container {
     display: flex;
     justify-content: center;
 }
@@ -199,7 +180,7 @@ button[disabled] {
     color: rgb(190, 190, 190);
     padding-bottom: 10px;
 }
-.new-sticky-design-item {
+.new-sticky-model-container {
     margin: auto 0;
 }
 .new-sticky-design-text {
@@ -228,7 +209,6 @@ button[disabled] {
     box-shadow: 3px 3px 5px #9d9592;
     border-radius: 5px;
 }
-[data-shape=left]::before,
 .change-color-left-blue::before,
 .change-color-left-red::before,
 .change-color-left-yellow::before,
@@ -238,7 +218,6 @@ button[disabled] {
     width:0;
     height:0;
     border:60px solid transparent;
-    /*border-right:60px solid #aff;*/
     left:-116px;
     top:-28px;
     box-shadow: 10px 0 5px -9px #9d9592;
@@ -253,6 +232,7 @@ button[disabled] {
     left: -14px;
     top: 0;
 }
+
 [data-shape=right] {
     position: relative;
     padding: 5px 10px;
@@ -262,7 +242,6 @@ button[disabled] {
     box-shadow: -3px 3px 5px #9d9592;
     border-radius: 5px;
 }
-[data-shape=right]::before,
 .change-color-right-blue::before,
 .change-color-right-red::before,
 .change-color-right-yellow::before,
@@ -312,23 +291,6 @@ button[disabled] {
     border-left:60px solid #afa;
 }
 
-.change-color-left-blue::after,
-.change-color-right-blue::after {
-    background-color: #aff;
-}
-.change-color-left-red::after,
-.change-color-right-red::after {
-    background-color: #faa;
-}
-.change-color-left-yellow::after,
-.change-color-right-yellow::after
- {
-    background-color: #ffa;
-}
-.change-color-left-green::after,
-.change-color-right-green::after {
-    background-color: #afa;
-}
 
 .new-sticky-color,
 .new-sticky-text,
@@ -353,33 +315,18 @@ button[disabled] {
     content: "";
     border: 1px solid rgba(201, 201, 201);
 }
-.new-sticky-color-blue {
-    background-color: #aff;
-}
+
 .new-sticky-color-blue:before {
     left: 0;
-    background-color: #aff;
-}
-.new-sticky-color-red {
-    background-color: #faa;
 }
 .new-sticky-color-red:before {
     left: 40px;
-    background-color: #faa;
-}
-.new-sticky-color-yellow {
-    background-color: #ffa;
 }
 .new-sticky-color-yellow:before {
     left: 80px;
-    background-color: #ffa;
-}
-.new-sticky-color-green {
-    background-color: #afa;
 }
 .new-sticky-color-green:before {
     left: 120px;
-    background-color: #afa;
 }
 .selected-color:before {
     border: 1.5px solid rgb(146, 146, 146) !important;
@@ -496,4 +443,35 @@ button[disabled] {
 }
 .selected-shape-triangle-right {
     border-left: 17px solid rgb(146, 146, 146);
+}
+
+
+
+[data-color=blue],
+.change-color-left-blue::after,
+.change-color-right-blue::after,
+.new-sticky-color-blue,
+.new-sticky-color-blue::before {
+    background-color: #aff;
+}
+[data-color=red],
+.change-color-left-red::after,
+.change-color-right-red::after,
+.new-sticky-color-red,
+.new-sticky-color-red::before {
+    background-color: #faa;
+}
+[data-color=yellow],
+.change-color-left-yellow::after,
+.change-color-right-yellow::after,
+.new-sticky-color-yellow,
+.new-sticky-color-yellow::before {
+    background-color: #ffa;
+}
+[data-color=green],
+.change-color-left-green::after,
+.change-color-right-green::after,
+.new-sticky-color-green,
+.new-sticky-color-green::before {
+    background-color: #afa;
 }

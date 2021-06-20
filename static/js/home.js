@@ -6,7 +6,7 @@ $(function() {
     });
     $('.progressbar').css('width', 'calc(1 / ' + page_total + ' * 100%)');
 
-    
+    //スライド上に新しい付箋を追加
     function newSticky(color, shape, text) {
         let page_now = $('.page-now-text').html();
         if(shape == 'left') {
@@ -20,6 +20,7 @@ $(function() {
         }
     }
 
+    //スライドの遷移を制御
     function pageControl(action) {
         let page_now = $('.page-now-text').html();
         page_now = parseInt(page_now);
@@ -64,7 +65,17 @@ $(function() {
     }
 
 
-    $('.add-sticky').on('click', function() {
+    //スライドの遷移操作
+    $('.slide-button-next').on('click', function() {
+        pageControl('next');
+    });
+    $('.slide-button-prev').on('click', function() {
+        pageControl('prev');
+    });
+
+
+    //付箋作成モーダルの表示・非表示
+    $('.add-sticky-btn').on('click', function() {
         $('.add-sticky-modal-item').fadeIn();
     });
     $('.add-sticky-modal-bg').on('click', function() {
@@ -76,22 +87,26 @@ $(function() {
         if($(this).hasClass("selected-color")) {
             return;
         }
-        let new_color = $(this).attr('class').replace('new-sticky-color-', '');
-        let old_color = $('.new-sticky-design').attr('data-color');
-        let shape = $('.new-sticky-design').attr('data-shape');
 
-        $('.new-sticky-design').attr('data-color', new_color);
+        let new_color = $(this).attr('class').replace('new-sticky-color-', '');
+        let old_color = $('.new-sticky-model').attr('data-color');
+        let shape = $('.new-sticky-model').attr('data-shape');
+
+        $('.new-sticky-model').attr('data-color', new_color);
+
+        //選択表示の切り替え
         $('.selected-color').removeClass('selected-color');
         $(this).addClass('selected-color');
 
-        $('.new-sticky-design').removeClass('change-color-left-' + old_color);
-        $('.new-sticky-design').removeClass('change-color-right-' + old_color);
+        //矢印付箋の三角形とbeforeをリセット
+        $('.new-sticky-model').removeClass('change-color-left-' + old_color);
+        $('.new-sticky-model').removeClass('change-color-right-' + old_color);
 
         if(shape == 'left') {
-            $('.new-sticky-design').addClass('change-color-left-' + new_color);
+            $('.new-sticky-model').addClass('change-color-left-' + new_color);
         }
         else if(shape == 'right') {
-            $('.new-sticky-design').addClass('change-color-right-' + new_color);
+            $('.new-sticky-model').addClass('change-color-right-' + new_color);
         }
     });
 
@@ -101,7 +116,7 @@ $(function() {
             return;
         }
         let shape = $(this).attr('class').replace('new-sticky-shape-', '');
-        let color = $('.new-sticky-design').attr('data-color');
+        let color = $('.new-sticky-model').attr('data-color');
 
         //選択表示を消去
         $('.selected-shape').removeClass('selected-shape');
@@ -111,53 +126,47 @@ $(function() {
         $('.selected-shape-triangle-right').removeClass('selected-shape-triangle-right');
 
         //矢印付箋の三角形とbeforeをリセット
-        $('.new-sticky-design').removeClass('change-color-left-' + color);
-        $('.new-sticky-design').removeClass('change-color-right-' + color);
+        $('.new-sticky-model').removeClass('change-color-left-' + color);
+        $('.new-sticky-model').removeClass('change-color-right-' + color);
 
         if(/square$/.test(shape)) {
             $(this).addClass('selected-shape');
-            $('.new-sticky-design').attr('data-shape', 'square');
+            $('.new-sticky-model').attr('data-shape', 'square');
         }
         else if(/rectangle$/.test(shape)) {
             $(this).addClass('selected-shape');
-            $('.new-sticky-design').attr('data-shape', 'rectangle');
+            $('.new-sticky-model').attr('data-shape', 'rectangle');
         }
         else if(/left$/.test(shape)) {
             $('.new-sticky-shape-left').addClass('selected-shape selected-shape-left');
             $('.new-sticky-shape-triangle-left').addClass('selected-shape-triangle-left');
 
-            $('.new-sticky-design').attr('data-shape', 'left');
-            $('.new-sticky-design').addClass('change-color-left-' + color);
+            $('.new-sticky-model').attr('data-shape', 'left');
+            $('.new-sticky-model').addClass('change-color-left-' + color);
         }
         else if(/right$/.test(shape)) {
             $('.new-sticky-shape-right').addClass('selected-shape selected-shape-right');
             $('.new-sticky-shape-triangle-right').addClass('selected-shape-triangle-right');
 
-            $('.new-sticky-design').attr('data-shape', 'right');
-            $('.new-sticky-design').addClass('change-color-right-' + color);
+            $('.new-sticky-model').attr('data-shape', 'right');
+            $('.new-sticky-model').addClass('change-color-right-' + color);
         }
     });
 
     $(document).on('input', '#new-sticky-textarea', function() {
-        $('.new-sticky-design-text').text($('#new-sticky-textarea').val());
+        $('.new-sticky-model-text').text($('#new-sticky-textarea').val());
     });
 
+    //新しい付箋の作成
     $('.new-sticky-btn').on('click', function() {
-        let color = $('.new-sticky-design').attr('data-color');
-        let shape = $('.new-sticky-design').attr('data-shape');
-        let text = $('.new-sticky-design-text').text();
+        let color = $('.new-sticky-model').attr('data-color');
+        let shape = $('.new-sticky-model').attr('data-shape');
+        let text = $('.new-sticky-model-text').text();
         let sticky = newSticky(color, shape, text);
         $('.slide').append(sticky);
         $('.sticky').draggable({
             containment: '.slide',
         });
         $('.add-sticky-modal-item').fadeOut();
-    });
-
-    $('.slide-button-next').on('click', function() {
-        pageControl('next');
-    });
-    $('.slide-button-prev').on('click', function() {
-        pageControl('prev');
     });
 });
