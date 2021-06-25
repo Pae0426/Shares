@@ -156,16 +156,24 @@ button[disabled] {
     height: 60%;
     border-radius: 10px;
 }
-.add-sticky-title-item {
+.add-sticky-title-container {
     padding: 30px 100px;
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
 }
-.add-sticky-title {
+.create-sticky-title,
+.template-sticky-title {
     text-align: center;
     font-size: 30px;
-    color: rgb(190, 190, 190);
+    color: rgb(230, 230, 230);
     padding-bottom: 10px;
     border-bottom: solid;
+    width: 300px;
+    margin: 0 10x;
+    cursor: pointer;
+}
+.title-selected {
+    color: rgb(190, 190, 190);
 }
 
 
@@ -306,7 +314,7 @@ button[disabled] {
     list-style-type: none;
     position: relative;
 }
-.new-sticky-color li:before {
+.new-sticky-color li::before {
     border-radius: 50%;
     width: 25px;
     height: 25px;

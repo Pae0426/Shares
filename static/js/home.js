@@ -157,6 +157,16 @@ $(function() {
         $('.new-sticky-model-text').text($('#new-sticky-textarea').val());
     });
 
+    $('.template-sticky-title').on('click', function() {
+        $(this).addClass('title-selected');
+        $('.create-sticky-title').removeClass('title-selected');
+    });
+
+    $('.create-sticky-title').on('click', function() {
+        $(this).addClass('title-selected');
+        $('.template-sticky-title').removeClass('title-selected');
+    });
+
     //新しい付箋の作成
     $('.new-sticky-btn').on('click', function() {
         let color = $('.new-sticky-model').attr('data-color');
