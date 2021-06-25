@@ -221,13 +221,13 @@ button[disabled] {
 .change-color-left-red::before,
 .change-color-left-yellow::before,
 .change-color-left-green::before {
-    position:absolute;
-    content:"";
-    width:0;
-    height:0;
-    border:60px solid transparent;
-    left:-116px;
-    top:-28px;
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border: 60px solid transparent;
+    left: -116px;
+    top: -28px;
     box-shadow: 10px 0 5px -9px #9d9592;
     z-index: -1;
 }
@@ -254,15 +254,15 @@ button[disabled] {
 .change-color-right-red::before,
 .change-color-right-yellow::before,
 .change-color-right-green::before {
-    position:absolute;
-    content:"";
-    width:0;
-    height:0;
-    border:60px solid transparent;
-    border-left:60px solid #aff;
-    left:140px;
-    top:-28px;
-    box-shadow: -10px 0 5px -8px #9d9592;
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border: 60px solid transparent;
+    border-left: 60px solid #aff;
+    left: 152px;
+    top: -28px;
+    box-shadow: -10px 0 5px -9px #9d9592;
     z-index: -1;
 }
 [data-shape=right]::after {
@@ -270,8 +270,8 @@ button[disabled] {
     content: "";
     background-color: #aff;
     width: 18px;
-    height: 68px;
-    left: 140px;
+    height: 66px;
+    left: 152px;
     top: 0;
 }
 .change-color-left-blue::before {
