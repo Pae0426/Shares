@@ -313,6 +313,7 @@ button[disabled] {
     margin-left: 10px;
     list-style-type: none;
     position: relative;
+    cursor: pointer;
 }
 .new-sticky-color li::before {
     border-radius: 50%;
@@ -324,19 +325,19 @@ button[disabled] {
     border: 1px solid rgba(201, 201, 201);
 }
 
-.new-sticky-color-blue:before {
+.new-sticky-color-blue::before {
     left: 0;
 }
-.new-sticky-color-red:before {
+.new-sticky-color-red::before {
     left: 40px;
 }
-.new-sticky-color-yellow:before {
+.new-sticky-color-yellow::before {
     left: 80px;
 }
-.new-sticky-color-green:before {
+.new-sticky-color-green::before {
     left: 120px;
 }
-.selected-color:before {
+.selected-color::before {
     border: 1.5px solid rgb(146, 146, 146) !important;
 }
 
@@ -352,6 +353,7 @@ button[disabled] {
     margin: 10px 15px 0;
     background-color: #fff;
     border: 1px solid rgba(201, 201, 201);
+    cursor: pointer;
 }
 .new-sticky-shape-rectangle {
     border-radius: 3px;
@@ -359,6 +361,7 @@ button[disabled] {
     height: 40px;
     background-color: #fff;
     border: 1px solid rgba(201, 201, 201);
+    cursor: pointer;
 }
 .new-sticky-shape-left,
 .new-sticky-shape-right {
@@ -368,6 +371,7 @@ button[disabled] {
     background-color: #fff;
     border: 1px solid rgba(201, 201, 201);
     z-index: 1;
+    cursor: pointer;
 }
 .new-sticky-shape-left {
     margin: 10px 10px 0 0;
@@ -381,6 +385,7 @@ button[disabled] {
     border-top: 16px solid transparent;
     border-bottom: 16px solid transparent;
     z-index: -1;
+    cursor: pointer;
 }
 .new-sticky-shape-triangle-left {
     border-right: 16px solid rgba(201, 201, 201);
