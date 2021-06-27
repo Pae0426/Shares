@@ -5,6 +5,7 @@ $(function() {
         containment: '.slide',
     });
     $('.progressbar').css('width', 'calc(1 / ' + page_total + ' * 100%)');
+    $('.template-sticky-container').hide();
 
     //スライド上に新しい付箋を追加
     function newSticky(color, shape, text) {
@@ -80,6 +81,16 @@ $(function() {
     });
     $('.add-sticky-modal-bg').on('click', function() {
         $('.add-sticky-modal-item').fadeOut();
+    });
+
+    $('.create-sticky-title').on('click', function() {
+        $('.template-sticky-container').hide();
+        $('.create-sticky-container').show();
+    });
+
+    $('.template-sticky-title').on('click', function() {
+        $('.create-sticky-container').hide();
+        $('.template-sticky-container').show();
     });
 
     //色の変更

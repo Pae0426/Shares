@@ -179,6 +179,8 @@ button[disabled] {
 
 
 .new-sticky-container {
+}
+.create-sticky-container {
     display: flex;
     justify-content: center;
 }
@@ -458,6 +460,23 @@ button[disabled] {
     border-left: 17px solid rgb(146, 146, 146);
 }
 
+
+
+.template-sticky-container {
+
+}
+.template-sticky-models {
+    display: flex;
+    flex-wrap: wrap;
+    width: 600px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+[class^="template-sticky-model-"] {
+    margin: 20px 20px;
+}
 
 
 [data-color=blue],
