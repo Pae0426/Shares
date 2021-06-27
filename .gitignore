@@ -47,6 +47,4 @@ home
 .github/
 pdf/
 AWSCLIV2.pkg
-Dockerfile
-docker-compose.yml
 .vscode
