@@ -50,7 +50,6 @@ jobs:
         aws-access-key-id: ${{AWS_ACCESS_KEY_ID}}
         aws-secret-access-key: ${{AWS_SECRET_ACCESS_KEY}}
         aws-region: ap-northeast-1
-    - run: echo "access-key: ${{AWS_ACCESS_KEY_ID}}"
 
     - name: Login to Amazon ECR
       id: login-ecr
