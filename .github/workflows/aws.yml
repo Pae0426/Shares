@@ -37,7 +37,7 @@ jobs:
 
     steps:
     - run: echo "Hello, ${{ github.event_name }}"
-    - run: echo "World, ${{ secrets.AWS_ACCESS_KEY_ID }}"
+    - run: echo "World, ${{ secrets.aws-iam-ecs.AWS_ACCESS_KEY_ID }}"
     - name: Checkout
       uses: actions/checkout@v2
 
