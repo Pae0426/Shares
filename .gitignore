@@ -45,6 +45,5 @@ go.mod
 go.sum
 home
 .github/
-pdf/
 AWSCLIV2.pkg
 .vscode
