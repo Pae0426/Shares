@@ -169,25 +169,44 @@ $(function() {
     });
 
     $('.template-sticky-title').on('click', function() {
-        $(this).addClass('title-selected');
-        $('.create-sticky-title').removeClass('title-selected');
+        $(this).addClass('selected-title');
+        $('.create-sticky-title').removeClass('selected-title');
+        $('.new-sticky-btn').removeClass('create-mode');
+        $('.new-sticky-btn').addClass('template-mode');
     });
 
     $('.create-sticky-title').on('click', function() {
-        $(this).addClass('title-selected');
-        $('.template-sticky-title').removeClass('title-selected');
+        $(this).addClass('selected-title');
+        $('.template-sticky-title').removeClass('selected-title');
+        $('.new-sticky-btn').removeClass('template-mode');
+        $('.new-sticky-btn').addClass('create-mode');
     });
 
     //新しい付箋の作成
     $('.new-sticky-btn').on('click', function() {
-        let color = $('.new-sticky-model').attr('data-color');
-        let shape = $('.new-sticky-model').attr('data-shape');
-        let text = $('.new-sticky-model-text').text();
-        let sticky = newSticky(color, shape, text);
-        $('.slide').append(sticky);
+        if($(this).hasClass('create-mode')) {
+            let color = $('.new-sticky-model').attr('data-color');
+            let shape = $('.new-sticky-model').attr('data-shape');
+            let text = $('.new-sticky-model-text').text();
+            let sticky = newSticky(color, shape, text);
+            $('.slide').append(sticky);
+        }
+        else if($(this).hasClass('template-mode')) {
+            let color = $('.selected-template').data('color').replace('light-', '');
+            let shape = $('.selected-template').data('shape');
+            let text = $('.selected-template > .template-sticky-text').text();
+            let sticky = newSticky(color, shape, text);
+            $('.slide').append(sticky);
+        }
+
         $('.sticky').draggable({
             containment: '.slide',
         });
         $('.add-sticky-modal-item').fadeOut();
+    });
+
+    $("[class^='template-sticky-model-']").on('click', function() {
+        $('.selected-template').removeClass('selected-template');
+        $(this).addClass('selected-template');
     });
 });

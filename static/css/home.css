@@ -25,6 +25,8 @@ header {
 
 
 
+/* スライド制御 */
+
 .slide {
     margin: 0 auto;
     width: 60%;
@@ -87,6 +89,8 @@ button[disabled] {
 
 
 
+/* スライド上の付箋 */
+
 .sticky {
     position: absolute !important;
 }
@@ -113,6 +117,8 @@ button[disabled] {
 }
 
 
+
+/* 付箋作成画面、モーダル */
 
 .add-sticky-container {
     text-align: center;
@@ -172,11 +178,13 @@ button[disabled] {
     margin: 0 10x;
     cursor: pointer;
 }
-.title-selected {
+.selected-title {
     color: rgb(190, 190, 190);
 }
 
 
+
+/* 自作付箋 */
 
 .new-sticky-container {
 }
@@ -277,28 +285,28 @@ button[disabled] {
     top: 0;
 }
 .change-color-left-blue::before {
-    border-right:60px solid #aff;
+    border-right: 60px solid #aff;
 }
 .change-color-left-red::before {
-    border-right:60px solid #faa;
+    border-right: 60px solid #faa;
 }
 .change-color-left-yellow::before {
-    border-right:60px solid #ffa;
+    border-right: 60px solid #ffa;
 }
 .change-color-left-green::before {
-    border-right:60px solid #afa;
+    border-right: 60px solid #afa;
 }
 .change-color-right-blue::before {
-    border-left:60px solid #aff;
+    border-left: 60px solid #aff;
 }
 .change-color-right-red::before {
-    border-left:60px solid #faa;
+    border-left: 60px solid #faa;
 }
 .change-color-right-yellow::before {
-    border-left:60px solid #ffa;
+    border-left: 60px solid #ffa;
 }
 .change-color-right-green::before {
-    border-left:60px solid #afa;
+    border-left: 60px solid #afa;
 }
 
 
@@ -462,6 +470,8 @@ button[disabled] {
 
 
 
+/* テンプレート付箋 */
+
 .template-sticky-container {
 
 }
@@ -476,8 +486,51 @@ button[disabled] {
 }
 [class^="template-sticky-model-"] {
     margin: 20px 20px;
+    cursor: pointer;
+}
+.template-sticky-text {
+    color: rgb(182, 182, 182);
 }
 
+.selected-template[data-color=light-blue] {
+    background-color: #aff;
+    box-shadow: 3px 3px 5px #9d9592;
+}
+.selected-template[data-color=light-blue]::before {
+    border-right: 60px solid #aff;
+    box-shadow: 10px 0 5px -9px #9d9592;
+}
+.selected-template[data-color=light-blue]::after {
+    background-color: #aff;
+}
+
+.selected-template[data-color=light-red] {
+    background-color: #faa;
+    box-shadow: 3px 3px 5px #9d9592;
+}
+.selected-template[data-color=light-red]::before {
+    border-left: 60px solid #faa;
+    box-shadow: -10px 0 5px -9px #9d9592;
+}
+.selected-template[data-color=light-red]::after {
+    background-color: #faa;
+}
+
+.selected-template[data-color=light-yellow] {
+    background-color: #ffa;
+    box-shadow: 3px 3px 5px #9d9592;
+}
+.selected-template[data-color=light-green] {
+    background-color: #afa;
+    box-shadow: 3px 3px 5px #9d9592;
+}
+.selected-template > .template-sticky-text {
+    color: #000;
+}
+
+
+
+/* 各種カラー */
 
 [data-color=blue],
 .change-color-left-blue::after,
@@ -506,4 +559,35 @@ button[disabled] {
 .new-sticky-color-green,
 .new-sticky-color-green::before {
     background-color: #afa;
+}
+
+[data-color=light-blue] {
+    background-color: rgb(230, 253, 253);
+    box-shadow: 3px 3px 5px #d1cbc9;
+}
+[data-color=light-blue]::before {
+    border-right: 60px solid rgb(230, 253, 253);
+    box-shadow: 10px 0 5px -9px #d1cbc9;
+}
+[data-color=light-blue]::after {
+    background-color: rgb(230, 253, 253)
+}
+[data-color=light-red] {
+    background-color: rgb(255, 235, 235);
+    box-shadow: 3px 3px 5px #d1cbc9;
+}
+[data-color=light-red]::before {
+    border-left: 60px solid rgb(255, 235, 235);
+    box-shadow: -10px 0 5px -9px #d1cbc9;
+}
+[data-color=light-red]::after {
+    background-color: rgb(255, 235, 235);
+}
+[data-color=light-yellow] {
+    background-color: rgb(255, 255, 223);
+    box-shadow: 3px 3px 5px #d1cbc9;
+}
+[data-color=light-green] {
+    background-color: rgb(219, 253, 219);
+    box-shadow: 3px 3px 5px #d1cbc9;
 }
