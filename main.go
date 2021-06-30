@@ -40,7 +40,7 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	log.Println("Webサーバーを開始します...")
 	server := http.Server{
-		Addr: ":80",
+		Addr: ":8080",
 	}
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("/go/src/app/static"))))
 	http.HandleFunc("/home", templateHandler)

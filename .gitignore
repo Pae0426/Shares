@@ -47,3 +47,5 @@ home
 .github/
 AWSCLIV2.pkg
 .vscode
+.env
+mysql/

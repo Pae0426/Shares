@@ -65,6 +65,31 @@ $(function() {
         $('.sticky-page' + page_now).show();
     }
 
+    //付箋モデルの形を変更した際に、テキストエリアとモデル内の文字をその形に合った文字数に変更
+    function changeTextAreaSize(shape) {
+        let input_text = $('.new-sticky-textarea').val();
+        let textarea_size;
+        switch(shape) {
+            case 'square':
+                textarea_size = 33;
+                break;
+            case 'rectangle':
+                textarea_size = 121;
+                break;
+            case 'left':
+            case 'right':
+                textarea_size = 24;
+                break;
+        }
+        if (input_text.length >= textarea_size) {
+            input_text = input_text.slice(0, textarea_size);
+        }
+        $('.new-sticky-textarea').val(input_text);
+        $('.new-sticky-model-text').html(input_text);
+        $('.new-sticky-textarea').attr('maxlength', '' + textarea_size);
+    }
+
+
 
     //スライドの遷移操作
     $('.slide-button-next').on('click', function() {
@@ -143,10 +168,14 @@ $(function() {
         if(/square$/.test(shape)) {
             $(this).addClass('selected-shape');
             $('.new-sticky-model').attr('data-shape', 'square');
+
+            changeTextAreaSize('square');
         }
         else if(/rectangle$/.test(shape)) {
             $(this).addClass('selected-shape');
             $('.new-sticky-model').attr('data-shape', 'rectangle');
+
+            changeTextAreaSize('rectangle');
         }
         else if(/left$/.test(shape)) {
             $('.new-sticky-shape-left').addClass('selected-shape selected-shape-left');
@@ -154,6 +183,8 @@ $(function() {
 
             $('.new-sticky-model').attr('data-shape', 'left');
             $('.new-sticky-model').addClass('change-color-left-' + color);
+
+            changeTextAreaSize('left');
         }
         else if(/right$/.test(shape)) {
             $('.new-sticky-shape-right').addClass('selected-shape selected-shape-right');
@@ -161,11 +192,13 @@ $(function() {
 
             $('.new-sticky-model').attr('data-shape', 'right');
             $('.new-sticky-model').addClass('change-color-right-' + color);
+
+            changeTextAreaSize('right');
         }
     });
 
-    $(document).on('input', '#new-sticky-textarea', function() {
-        $('.new-sticky-model-text').text($('#new-sticky-textarea').val());
+    $(document).on('input', '.new-sticky-textarea', function() {
+        $('.new-sticky-model-text').text($('.new-sticky-textarea').val());
     });
 
     $('.template-sticky-title').on('click', function() {
