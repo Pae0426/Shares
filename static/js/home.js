@@ -67,7 +67,7 @@ $(function() {
 
     //付箋モデルの形を変更した際に、テキストエリアとモデル内の文字をその形に合った文字数に変更
     function changeTextAreaSize(shape) {
-        let input_text = $('.new-sticky-textarea').val();
+        let input_text = $('.create-sticky-textarea').val();
         let textarea_size;
         switch(shape) {
             case 'square':
@@ -84,9 +84,9 @@ $(function() {
         if (input_text.length >= textarea_size) {
             input_text = input_text.slice(0, textarea_size);
         }
-        $('.new-sticky-textarea').val(input_text);
-        $('.new-sticky-model-text').html(input_text);
-        $('.new-sticky-textarea').attr('maxlength', '' + textarea_size);
+        $('.create-sticky-textarea').val(input_text);
+        $('.create-sticky-model-text').html(input_text);
+        $('.create-sticky-textarea').attr('maxlength', '' + textarea_size);
     }
 
 
@@ -102,10 +102,10 @@ $(function() {
 
     //付箋作成モーダルの表示・非表示
     $('.add-sticky-btn').on('click', function() {
-        $('.add-sticky-modal-item').fadeIn();
+        $('.new-sticky-modal-item').fadeIn();
     });
-    $('.add-sticky-modal-bg').on('click', function() {
-        $('.add-sticky-modal-item').fadeOut();
+    $('.new-sticky-modal-bg').on('click', function() {
+        $('.new-sticky-modal-item').fadeOut();
     });
 
     $('.create-sticky-title').on('click', function() {
@@ -119,40 +119,40 @@ $(function() {
     });
 
     //色の変更
-    $('[class^=new-sticky-color-]').on('click', function() {
+    $('[class^=create-sticky-color-]').on('click', function() {
         if($(this).hasClass("selected-color")) {
             return;
         }
 
-        let new_color = $(this).attr('class').replace('new-sticky-color-', '');
-        let old_color = $('.new-sticky-model').attr('data-color');
-        let shape = $('.new-sticky-model').attr('data-shape');
+        let new_color = $(this).attr('class').replace('create-sticky-color-', '');
+        let old_color = $('.create-sticky-model').attr('data-color');
+        let shape = $('.create-sticky-model').attr('data-shape');
 
-        $('.new-sticky-model').attr('data-color', new_color);
+        $('.create-sticky-model').attr('data-color', new_color);
 
         //選択表示の切り替え
         $('.selected-color').removeClass('selected-color');
         $(this).addClass('selected-color');
 
         //矢印付箋の三角形とbeforeをリセット
-        $('.new-sticky-model').removeClass('change-color-left-' + old_color);
-        $('.new-sticky-model').removeClass('change-color-right-' + old_color);
+        $('.create-sticky-model').removeClass('change-color-left-' + old_color);
+        $('.create-sticky-model').removeClass('change-color-right-' + old_color);
 
         if(shape == 'left') {
-            $('.new-sticky-model').addClass('change-color-left-' + new_color);
+            $('.create-sticky-model').addClass('change-color-left-' + new_color);
         }
         else if(shape == 'right') {
-            $('.new-sticky-model').addClass('change-color-right-' + new_color);
+            $('.create-sticky-model').addClass('change-color-right-' + new_color);
         }
     });
 
     //形の変更
-    $('[class^=new-sticky-shape-]').on('click', function() {
+    $('[class^=create-sticky-shape-]').on('click', function() {
         if($(this).hasClass("selected-shape") || $(this).hasClass("selected-shape-left") || $(this).hasClass("selected-shape-right")) {
             return;
         }
-        let shape = $(this).attr('class').replace('new-sticky-shape-', '');
-        let color = $('.new-sticky-model').attr('data-color');
+        let shape = $(this).attr('class').replace('create-sticky-shape-', '');
+        let color = $('.create-sticky-model').attr('data-color');
 
         //選択表示を消去
         $('.selected-shape').removeClass('selected-shape');
@@ -162,43 +162,43 @@ $(function() {
         $('.selected-shape-triangle-right').removeClass('selected-shape-triangle-right');
 
         //矢印付箋の三角形とbeforeをリセット
-        $('.new-sticky-model').removeClass('change-color-left-' + color);
-        $('.new-sticky-model').removeClass('change-color-right-' + color);
+        $('.create-sticky-model').removeClass('change-color-left-' + color);
+        $('.create-sticky-model').removeClass('change-color-right-' + color);
 
         if(/square$/.test(shape)) {
             $(this).addClass('selected-shape');
-            $('.new-sticky-model').attr('data-shape', 'square');
+            $('.create-sticky-model').attr('data-shape', 'square');
 
             changeTextAreaSize('square');
         }
         else if(/rectangle$/.test(shape)) {
             $(this).addClass('selected-shape');
-            $('.new-sticky-model').attr('data-shape', 'rectangle');
+            $('.create-sticky-model').attr('data-shape', 'rectangle');
 
             changeTextAreaSize('rectangle');
         }
         else if(/left$/.test(shape)) {
-            $('.new-sticky-shape-left').addClass('selected-shape selected-shape-left');
-            $('.new-sticky-shape-triangle-left').addClass('selected-shape-triangle-left');
+            $('.create-sticky-shape-left').addClass('selected-shape selected-shape-left');
+            $('.create-sticky-shape-triangle-left').addClass('selected-shape-triangle-left');
 
-            $('.new-sticky-model').attr('data-shape', 'left');
-            $('.new-sticky-model').addClass('change-color-left-' + color);
+            $('.create-sticky-model').attr('data-shape', 'left');
+            $('.create-sticky-model').addClass('change-color-left-' + color);
 
             changeTextAreaSize('left');
         }
         else if(/right$/.test(shape)) {
-            $('.new-sticky-shape-right').addClass('selected-shape selected-shape-right');
-            $('.new-sticky-shape-triangle-right').addClass('selected-shape-triangle-right');
+            $('.create-sticky-shape-right').addClass('selected-shape selected-shape-right');
+            $('.create-sticky-shape-triangle-right').addClass('selected-shape-triangle-right');
 
-            $('.new-sticky-model').attr('data-shape', 'right');
-            $('.new-sticky-model').addClass('change-color-right-' + color);
+            $('.create-sticky-model').attr('data-shape', 'right');
+            $('.create-sticky-model').addClass('change-color-right-' + color);
 
             changeTextAreaSize('right');
         }
     });
 
-    $(document).on('input', '.new-sticky-textarea', function() {
-        $('.new-sticky-model-text').text($('.new-sticky-textarea').val());
+    $(document).on('input', '.create-sticky-textarea', function() {
+        $('.create-sticky-model-text').text($('.create-sticky-textarea').val());
     });
 
     $('.template-sticky-title').on('click', function() {
@@ -218,9 +218,9 @@ $(function() {
     //新しい付箋の作成
     $('.new-sticky-btn').on('click', function() {
         if($(this).hasClass('create-mode')) {
-            let color = $('.new-sticky-model').attr('data-color');
-            let shape = $('.new-sticky-model').attr('data-shape');
-            let text = $('.new-sticky-model-text').text();
+            let color = $('.create-sticky-model').attr('data-color');
+            let shape = $('.create-sticky-model').attr('data-shape');
+            let text = $('.create-sticky-model-text').text();
             let sticky = newSticky(color, shape, text);
             $('.slide').append(sticky);
         }
@@ -235,7 +235,7 @@ $(function() {
         $('.sticky').draggable({
             containment: '.slide',
         });
-        $('.add-sticky-modal-item').fadeOut();
+        $('.new-sticky-modal-item').fadeOut();
     });
 
     $("[class^='template-sticky-model-']").on('click', function() {

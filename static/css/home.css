@@ -153,20 +153,20 @@ button[disabled] {
 .add-sticky-btn {
     margin: 30px 0;
 }
-.add-sticky-modal-item {
+.new-sticky-modal-item {
     display: none;
     height: 100vh;
     position: fixed;
     top: 0;
     width: 100%;
 }
-.add-sticky-modal-bg {
+.new-sticky-modal-bg {
     background-color: rgba(83, 83, 83, 0.8);
     height: 100vh;
     position: absolute;
     width: 100%;
 }
-.add-sticky-modal-container {
+.new-sticky-modal-container {
     background-color: #fff;
     position: absolute;
     left: 50%;
@@ -177,7 +177,7 @@ button[disabled] {
     height: 60%;
     border-radius: 10px;
 }
-.add-sticky-title-container {
+.new-sticky-title-container {
     padding: 30px 100px;
     display: flex;
     justify-content: center;
@@ -213,7 +213,7 @@ button[disabled] {
     color: rgb(190, 190, 190);
     padding-bottom: 10px;
 }
-.new-sticky-model-container {
+.create-sticky-model-container {
     margin: auto 0;
 }
 .new-sticky-design-text {
@@ -325,22 +325,22 @@ button[disabled] {
 }
 
 
-.new-sticky-color,
-.new-sticky-text,
-.new-sticky-shape {
+.create-sticky-color,
+.create-sticky-text,
+.create-sticky-shape {
     padding: 0 50px 30px;
 }
-.new-sticky-color {
+.create-sticky-color {
     padding-bottom: 50px;
 }
-.new-sticky-color li {
+.create-sticky-color li {
     float: left;
     margin-left: 10px;
     list-style-type: none;
     position: relative;
     cursor: pointer;
 }
-.new-sticky-color li::before {
+.create-sticky-color li::before {
     border-radius: 50%;
     width: 25px;
     height: 25px;
@@ -350,16 +350,16 @@ button[disabled] {
     border: 1px solid rgba(201, 201, 201);
 }
 
-.new-sticky-color-blue::before {
+.create-sticky-color-blue::before {
     left: 0;
 }
-.new-sticky-color-red::before {
+.create-sticky-color-red::before {
     left: 40px;
 }
-.new-sticky-color-yellow::before {
+.create-sticky-color-yellow::before {
     left: 80px;
 }
-.new-sticky-color-green::before {
+.create-sticky-color-green::before {
     left: 120px;
 }
 .selected-color::before {
@@ -371,7 +371,7 @@ button[disabled] {
     display: flex;
     height: 45px;
 }
-.new-sticky-shape-square {
+.create-sticky-shape-square {
     border-radius: 3px;
     width: 40px;
     height: 16px;
@@ -380,7 +380,7 @@ button[disabled] {
     border: 1px solid rgba(201, 201, 201);
     cursor: pointer;
 }
-.new-sticky-shape-rectangle {
+.create-sticky-shape-rectangle {
     border-radius: 3px;
     width: 40px;
     height: 40px;
@@ -388,8 +388,8 @@ button[disabled] {
     border: 1px solid rgba(201, 201, 201);
     cursor: pointer;
 }
-.new-sticky-shape-left,
-.new-sticky-shape-right {
+.create-sticky-shape-left,
+.create-sticky-shape-right {
     position: relative;
     height: 16px;
     width: 25px;
@@ -398,31 +398,31 @@ button[disabled] {
     z-index: 1;
     cursor: pointer;
 }
-.new-sticky-shape-left {
+.create-sticky-shape-left {
     margin: 10px 10px 0 0;
 }
-.new-sticky-shape-right {
+.create-sticky-shape-right {
     margin: 10px 0 0 10px;
 }
-.new-sticky-shape-triangle-left,
-.new-sticky-shape-triangle-right {
+.create-sticky-shape-triangle-left,
+.create-sticky-shape-triangle-right {
     height: 0;
     border-top: 16px solid transparent;
     border-bottom: 16px solid transparent;
     z-index: -1;
     cursor: pointer;
 }
-.new-sticky-shape-triangle-left {
+.create-sticky-shape-triangle-left {
     border-right: 16px solid rgba(201, 201, 201);
     margin: 4px 0 0 15px;
 }
-.new-sticky-shape-triangle-right {
+.create-sticky-shape-triangle-right {
     border-left: 16px solid rgba(201, 201, 201);
     margin-top: 4px;
 }
 
-.new-sticky-shape-left::before,
-.new-sticky-shape-right::before {
+.create-sticky-shape-left::before,
+.create-sticky-shape-right::before {
     position: absolute;
     content: "";
     width: 6px;
@@ -431,14 +431,14 @@ button[disabled] {
     top: 0;
     z-index: 2;
 }
-.new-sticky-shape-left::before {
+.create-sticky-shape-left::before {
     left: -4px;
 }
-.new-sticky-shape-right::before {
+.create-sticky-shape-right::before {
     left: 24px;
 }
 
-.new-sticky-shape-left::after,
+.create-sticky-shape-left::after,
 .selected-shape-left::after {
     position: absolute;
     content: "";
@@ -455,7 +455,7 @@ button[disabled] {
     left: -29px;
 }
 
-.new-sticky-shape-right::after,
+.create-sticky-shape-right::after,
 .selected-shape-right::after {
     position: absolute;
     content: "";
@@ -550,29 +550,29 @@ button[disabled] {
 [data-color=blue],
 .change-color-left-blue::after,
 .change-color-right-blue::after,
-.new-sticky-color-blue,
-.new-sticky-color-blue::before {
+.create-sticky-color-blue,
+.create-sticky-color-blue::before {
     background-color: #aff;
 }
 [data-color=red],
 .change-color-left-red::after,
 .change-color-right-red::after,
-.new-sticky-color-red,
-.new-sticky-color-red::before {
+.create-sticky-color-red,
+.create-sticky-color-red::before {
     background-color: #faa;
 }
 [data-color=yellow],
 .change-color-left-yellow::after,
 .change-color-right-yellow::after,
-.new-sticky-color-yellow,
-.new-sticky-color-yellow::before {
+.create-sticky-color-yellow,
+.create-sticky-color-yellow::before {
     background-color: #ffa;
 }
 [data-color=green],
 .change-color-left-green::after,
 .change-color-right-green::after,
-.new-sticky-color-green,
-.new-sticky-color-green::before {
+.create-sticky-color-green,
+.create-sticky-color-green::before {
     background-color: #afa;
 }
 
