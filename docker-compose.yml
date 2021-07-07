@@ -1,10 +1,33 @@
 version: "3"
 
 services:
+  shares-db:
+    build: ./mysql/
+    volumes:
+      - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./mysql/data:/var/lib/mysql
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    networks:
+      - shares-network
+
   shares-app:
     build: .
     tty: true
     ports:
-      - 9000:80
+      - "9000:80"
     volumes:
       - .:/go/src/app
+    depends_on:
+      - "shares-db"
+    networks:
+      - shares-network
+
+networks:
+  shares-network:

@@ -48,4 +48,4 @@ home
 AWSCLIV2.pkg
 .vscode
 .env
-mysql/
+mysql/data

@@ -2,9 +2,8 @@ FROM golang:latest
 
 WORKDIR /go/src/app
 
-#COPY go.mod .
-#COPY go.sum .
-#RUN go mod download
+RUN apt-get update -y && apt-get install -y git
+RUN go get github.com/go-sql-driver/mysql
 
 COPY main.go .
 COPY static/ ./static
