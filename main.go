@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"io/ioutil"
@@ -57,6 +58,47 @@ func countFiles() int {
 	return count
 }
 
+//付箋の情報をDBから取得しjson形式で表示
+func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
+	rows, e := Db.Query("select * from lecture1")
+	if e != nil {
+		log.Println(e.Error())
+	}
+
+	var stickies []Sticky
+
+	for rows.Next() {
+		sticky := Sticky{}
+		if er := rows.Scan(
+			&sticky.Id,
+			&sticky.Page,
+			&sticky.Color,
+			&sticky.Shape,
+			&sticky.Locate_x,
+			&sticky.Locate_y,
+			&sticky.Text,
+			&sticky.Empathy,
+		); er != nil {
+			log.Println(er)
+		}
+		stickies = append(stickies, sticky)
+	}
+
+	for _, s := range stickies {
+		log.Println("Locate_x:", s.Locate_x)
+	}
+
+	defer rows.Close()
+
+	result, err := json.Marshal(stickies)
+	if err != nil {
+		panic(err)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(result)
+}
+
 func templateHandler(w http.ResponseWriter, r *http.Request) {
 	data := map[string]int{
 		"pages": countFiles(),
@@ -81,5 +123,6 @@ func main() {
 	}
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("/go/src/app/static"))))
 	http.HandleFunc("/home", templateHandler)
+	http.HandleFunc("/stickies", getStickiesInfo)
 	server.ListenAndServe()
 }
