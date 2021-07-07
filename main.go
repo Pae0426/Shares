@@ -1,11 +1,48 @@
 package main
 
 import (
+	"database/sql"
+	"fmt"
 	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
 )
+
+type Sticky struct {
+	Id       int    `json:"id"`
+	Page     int    `json:"page"`
+	Color    string `json:"color"`
+	Shape    string `json:"shape"`
+	Locate_x int    `json:"x"`
+	Locate_y int    `json:"y"`
+	Text     string `json:"text"`
+	Empathy  int    `json:"empathy"`
+}
+
+var Db *sql.DB
+
+func init() {
+	var err error
+	err = godotenv.Load(fmt.Sprintf("./%s.env", os.Getenv("GO_ENV")))
+	if err != nil {
+		panic(err)
+	}
+
+	DB_NAME := os.Getenv("MYSQL_DATABASE")
+	DB_USER := os.Getenv("MYSQL_USER")
+	DB_PASS := os.Getenv("MYSQL_PASSWORD")
+	DB_PROTOCOL := "tcp(shares-db:3306)"
+	DB_CONNECT_INFO := DB_USER + ":" + DB_PASS + "@" + DB_PROTOCOL + "/" + DB_NAME
+	Db, err = sql.Open("mysql", DB_CONNECT_INFO)
+	if err != nil {
+		panic(err)
+	}
+}
 
 //指定ディレクトリ下のファイル数をカウントする
 func countFiles() int {
