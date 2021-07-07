@@ -44,6 +44,7 @@ CREATE TABLE `lecture1` (
 LOCK TABLES `lecture1` WRITE;
 /*!40000 ALTER TABLE `lecture1` DISABLE KEYS */;
 INSERT INTO `lecture1` VALUES (1,1,'green','square',300,200,'こんにちは！',0);
+INSERT INTO `lecture1` VALUES (2,1,'blue','square',100,250,'こんばんは。',0);
 /*!40000 ALTER TABLE `lecture1` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
