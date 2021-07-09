@@ -111,7 +111,6 @@
       "name": "shares-db-img"
     }
   ],
-  ],
   "placementConstraints": [],
   "memory": "512",
   "taskRoleArn": null,
