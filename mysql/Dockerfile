@@ -6,6 +6,7 @@ ARG MYSQL_PASSWORD=${MYSQL_PASSWORD}
 ARG MYSQL_DATABASE=${MYSQL_DATABASE}
 
 COPY ./my.cnf /etc/mysql/conf.d/my.cnf
+COPY .env .
 
 EXPOSE 3306
 
