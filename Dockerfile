@@ -10,7 +10,6 @@ COPY main.go .
 COPY static/ ./static
 #COPY package/ .
 COPY views/ ./views
-COPY .env .
 
 EXPOSE 9000
 CMD ["go", "run", "main.go"]
