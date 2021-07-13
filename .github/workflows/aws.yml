@@ -68,10 +68,6 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        echo "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}" >> $GITHUB_ENV
-        echo "MYSQL_DATABASE=${MYSQL_DATABASE}" >> $GITHUB_ENV
-        echo "MYSQL_USER=${MYSQL_USER}" >> $GITHUB_ENV
-        echo "MYSQL_PASSWORD=${MYSQL_PASSWORD}" >> $GITHUB_ENV
         docker-compose build
         docker tag $COMPOSE_APP $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
