@@ -84,7 +84,24 @@
       "command": null,
       "linuxParameters": null,
       "cpu": 0,
-      "environment": [],
+      "environment": [
+        {
+          "name":"MYSQL_DATABASE",
+          "value":"'${MYSQL_DATABASE}'"
+        },
+        {
+          "name":"MYSQL_PASSWORD",
+          "value":"'${MYSQL_PASSWORD}'"
+        },
+        {
+          "name":"MYSQL_ROOT_PASSWORD",
+          "value":"'${MYSQL_ROOT_PASSWORD}'"
+        },
+        {
+          "name":"MYSQL_USER",
+          "value":"'${MYSQL_USER}'"
+        }
+      ],
       "resourceRequirements": null,
       "ulimits": null,
       "dnsServers": null,
