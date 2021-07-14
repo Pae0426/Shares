@@ -58,7 +58,12 @@
     },
     {
       "dnsSearchDomains": null,
-      "environmentFiles": null,
+      "environmentFiles": [
+        {
+          "value": "arn:aws:s3:::shares0426/.env",
+          "type": "s3"
+        }
+      ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "secretOptions": null,
@@ -79,24 +84,7 @@
       "command": null,
       "linuxParameters": null,
       "cpu": 0,
-      "environment": [
-        {
-          "name":"MYSQL_DATABASE",
-          "value":"'${MYSQL_DATABASE}'"
-        },
-        {
-          "name":"MYSQL_PASSWORD",
-          "value":"'${MYSQL_PASSWORD}'"
-        },
-        {
-          "name":"MYSQL_ROOT_PASSWORD",
-          "value":"'${MYSQL_ROOT_PASSWORD}'"
-        },
-        {
-          "name":"MYSQL_USER",
-          "value":"'${MYSQL_USER}'"
-        }
-      ],
+      "environment": [],
       "resourceRequirements": null,
       "ulimits": null,
       "dnsServers": null,
