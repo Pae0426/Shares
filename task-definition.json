@@ -58,12 +58,7 @@
     },
     {
       "dnsSearchDomains": null,
-      "environmentFiles": [
-        {
-          "value": "arn:aws:s3:::shares0426/.env",
-          "type": "s3"
-        }
-      ],
+      "environmentFiles": [],
       "logConfiguration": {
         "logDriver": "awslogs",
         "secretOptions": null,
