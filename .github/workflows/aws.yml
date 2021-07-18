@@ -81,7 +81,7 @@ jobs:
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: |
-          aws ecs describe-task-definition --task-definition shares-task-definition:40 --query taskDefinition> task-definition.json
+          aws ecs describe-task-definition --task-definition shares-task-definition:40 > task-definition.json
         container-name: shares-app
         image: ${{ steps.build-image.outputs.image }}
 
