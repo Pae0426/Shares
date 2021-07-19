@@ -80,8 +80,7 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: |
-          aws ecs describe-task-definition --task-definition shares-task-definition:40 | jq 'del(.taskDefinition.compatibilities)' | jq 'del(.taskDefinition.taskDefinitionArn)' | jq 'del(.taskDefinition.requiresAttributes)' | jq 'del(.taskDefinition.revision)' | jq 'del(.taskDefinition.status)' > task-definition.json
+        task-definition: task-definition.json
         container-name: shares-app
         image: ${{ steps.build-image.outputs.image }}
 
