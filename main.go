@@ -3,7 +3,6 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -29,7 +28,7 @@ var Db *sql.DB
 
 func init() {
 	var err error
-	err = godotenv.Load(fmt.Sprintf("./%s.env", os.Getenv("GO_ENV")))
+	err = godotenv.Load(".env")
 	if err != nil {
 		panic(err)
 	}
@@ -37,7 +36,7 @@ func init() {
 	DB_NAME := os.Getenv("MYSQL_DATABASE")
 	DB_USER := os.Getenv("MYSQL_USER")
 	DB_PASS := os.Getenv("MYSQL_PASSWORD")
-	DB_PROTOCOL := "tcp(shares-db:3306)"
+	DB_PROTOCOL := "tcp(127.0.0.1:3306)"
 	DB_CONNECT_INFO := DB_USER + ":" + DB_PASS + "@" + DB_PROTOCOL + "/" + DB_NAME
 	Db, err = sql.Open("mysql", DB_CONNECT_INFO)
 	if err != nil {
@@ -104,9 +103,9 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 		"pages": countFiles(),
 	}
 	t, err := template.ParseFiles(
-		"/go/src/app/views/home.html",
-		"/go/src/app/views/header.html",
-		"/go/src/app/views/footer.html",
+		"views/home.html",
+		"views/header.html",
+		"views/footer.html",
 	)
 	if err != nil {
 		log.Fatalln("テンプレートファイルを読み込めません:", err.Error())
@@ -119,9 +118,9 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	log.Println("Webサーバーを開始します...")
 	server := http.Server{
-		Addr: ":80",
+		Addr: ":9000",
 	}
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("/go/src/app/static"))))
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/home", templateHandler)
 	http.HandleFunc("/stickies", getStickiesInfo)
 	server.ListenAndServe()

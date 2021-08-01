@@ -49,4 +49,5 @@ AWSCLIV2.pkg
 .vscode
 .env
 mysql/data
-#task-definition.json
+task-definition.json
+docker-fargate/
