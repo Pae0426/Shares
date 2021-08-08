@@ -8,17 +8,64 @@ $(function() {
     $('.template-sticky-container').hide();
 
     //スライド上に新しい付箋を追加
-    function newSticky(color, shape, text) {
-        let page_now = $('.page-now-text').html();
-        if(shape == 'left') {
-            return '<span class="sticky sticky-left sticky-page' + page_now + ' change-color-left-' + color + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
+    function newSticky(init, color, shape, text, page_now) {
+        if(init) {  //初期付箋
+            if(shape == 'left') {
+                return '<span class="init-sticky sticky sticky-left sticky-page' + page_now + ' change-color-left-' + color + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
+            }
+            else if(shape == 'right') {
+                return '<span class="init-sticky sticky sticky-right sticky-page' + page_now + ' change-color-right-' + color + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
+            }
+            else {
+                return '<span class="init-sticky sticky sticky-page' + page_now + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
+            }
         }
-        else if(shape == 'right') {
-            return '<span class="sticky sticky-right sticky-page' + page_now + ' change-color-right-' + color + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
-        }
-        else {
-            return '<span class="sticky sticky-page' + page_now + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
-        }
+        else {      //追加付箋
+            if(shape == 'left') {
+                return '<span class="sticky sticky-left sticky-page' + page_now + ' change-color-left-' + color + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
+            }
+            else if(shape == 'right') {
+                return '<span class="sticky sticky-right sticky-page' + page_now + ' change-color-right-' + color + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
+            }
+            else {
+                return '<span class="sticky sticky-page' + page_now + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
+            }
+        } 
+    }
+
+    //既に貼られている付箋をDBから取得して表示
+    function loadSticky() {
+        $.ajax({
+            dataType: 'json',
+            type: 'GET',
+            url: '/stickies',
+        }).done(function(stickies) {
+            console.log('通信成功');
+            console.log(stickies);
+            for(let id in stickies) {
+                let color = stickies[id]['color'];
+                let shape = stickies[id]['shape'];
+                let text = stickies[id]['text'];
+                let page_now = stickies[id]['page'];
+                let x = stickies[id]['location_x'];
+                let y = stickies[id]['location_y'];
+                let sticky = newSticky(true, color, shape, text, page_now);
+                $('.slide').append(sticky);
+                $('.sticky').draggable({
+                    containment: '.slide',
+                });
+                $('.init-sticky').css({
+                    left: x + 'px',
+                    top: y + 'px'
+                });
+                if(page_now != 1) {
+                    $('.init-sticky').hide();
+                }
+                $('.init-sticky').removeClass('init-sticky');
+            }
+        }).fail(function(){
+            console.log('通信失敗');
+        })
     }
 
     //スライドの遷移を制御
@@ -90,6 +137,9 @@ $(function() {
     }
 
 
+    
+    //初期付箋を読み込み
+    loadSticky();
 
     //スライドの遷移操作
     $('.slide-button-next').on('click', function() {
@@ -221,14 +271,16 @@ $(function() {
             let color = $('.create-sticky-model').attr('data-color');
             let shape = $('.create-sticky-model').attr('data-shape');
             let text = $('.create-sticky-model-text').text();
-            let sticky = newSticky(color, shape, text);
+            let page_now = $('.page-now-text').html();
+            let sticky = newSticky(false, color, shape, text, page_now);
             $('.slide').append(sticky);
         }
         else if($(this).hasClass('template-mode')) {
             let color = $('.selected-template').data('color').replace('light-', '');
             let shape = $('.selected-template').data('shape');
             let text = $('.selected-template > .template-sticky-text').text();
-            let sticky = newSticky(color, shape, text);
+            let page_now = $('.page-now-text').html();
+            let sticky = newSticky(false, color, shape, text, page_now);
             $('.slide').append(sticky);
         }
 

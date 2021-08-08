@@ -18,8 +18,8 @@ type Sticky struct {
 	Page     int    `json:"page"`
 	Color    string `json:"color"`
 	Shape    string `json:"shape"`
-	Locate_x int    `json:"x"`
-	Locate_y int    `json:"y"`
+	Locate_x int    `json:"location_x"`
+	Locate_y int    `json:"location_y"`
 	Text     string `json:"text"`
 	Empathy  int    `json:"empathy"`
 }
@@ -81,10 +81,6 @@ func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 			log.Println(er)
 		}
 		stickies = append(stickies, sticky)
-	}
-
-	for _, s := range stickies {
-		log.Println("Locate_x:", s.Locate_x)
 	}
 
 	defer rows.Close()
