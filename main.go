@@ -94,6 +94,30 @@ func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 	w.Write(result)
 }
 
+func loadStickyId(w http.ResponseWriter, r *http.Request) {
+	row, e := Db.Query("select max(id) from lecture1")
+	if e != nil {
+		log.Println(e.Error())
+	}
+
+	defer row.Close()
+
+	var id int
+	for row.Next() {
+		if er := row.Scan(&id); er != nil {
+			log.Println(er)
+		}
+	}
+
+	result, err := json.Marshal(id)
+	if err != nil {
+		panic(err)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(result)
+}
+
 func templateHandler(w http.ResponseWriter, r *http.Request) {
 	data := map[string]int{
 		"pages": countFiles(),
@@ -119,5 +143,6 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/home", templateHandler)
 	http.HandleFunc("/stickies", getStickiesInfo)
+	http.HandleFunc("/load-sticky-id", loadStickyId)
 	server.ListenAndServe()
 }
