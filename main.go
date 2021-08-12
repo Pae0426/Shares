@@ -14,7 +14,7 @@ import (
 )
 
 type Sticky struct {
-	Id       int    `json:"id"`
+	Id       int    `json:"id,omitempty"`
 	Page     int    `json:"page"`
 	Color    string `json:"color"`
 	Shape    string `json:"shape"`
@@ -118,6 +118,22 @@ func loadStickyId(w http.ResponseWriter, r *http.Request) {
 	w.Write(result)
 }
 
+func createSticky(w http.ResponseWriter, r *http.Request) {
+	var sticky Sticky
+	len := r.ContentLength
+	body := make([]byte, len)
+	r.Body.Read(body)
+	if err := json.Unmarshal(body[:len], &sticky); err != nil {
+		log.Fatalln("エラー")
+	}
+
+	sql, err := Db.Prepare("insert into lecture1(page, color, shape, location_x, location_y, text, empathy) values(?, ?, ?, ?, ?, ?, ?)")
+	if err != nil {
+		panic(err)
+	}
+	sql.Exec(sticky.Page, sticky.Color, sticky.Shape, sticky.Locate_x, sticky.Locate_y, sticky.Text, sticky.Empathy)
+}
+
 func templateHandler(w http.ResponseWriter, r *http.Request) {
 	data := map[string]int{
 		"pages": countFiles(),
@@ -144,5 +160,6 @@ func main() {
 	http.HandleFunc("/home", templateHandler)
 	http.HandleFunc("/stickies", getStickiesInfo)
 	http.HandleFunc("/load-sticky-id", loadStickyId)
+	http.HandleFunc("/create-sticky", createSticky)
 	server.ListenAndServe()
 }
