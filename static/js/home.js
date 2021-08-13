@@ -9,28 +9,15 @@ $(function() {
 
     //スライド上に新しい付箋を追加
     function newSticky(init, id, color, shape, text, page_now) {
-        if(init) {  //初期付箋
-            if(shape == 'left') {
-                return '<span class="init-sticky sticky sticky-left sticky-page' + page_now + ' change-color-left-' + color + '" data-sticky-id="' + id + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
-            }
-            else if(shape == 'right') {
-                return '<span class="init-sticky sticky sticky-right sticky-page' + page_now + ' change-color-right-' + color + '" data-sticky-id="' + id + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
-            }
-            else {
-                return '<span class="init-sticky sticky sticky-page' + page_now + '" data-sticky-id="' + id + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
-            }
+        if(shape == 'left') {
+            return '<span class="init-sticky sticky sticky-left sticky-page' + page_now + ' change-color-left-' + color + '" data-sticky-id="' + id + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
         }
-        else {      //追加付箋
-            if(shape == 'left') {
-                return '<span class="sticky sticky-left sticky-page' + page_now + ' change-color-left-' + color + '" data-sticky-id="' + id + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
-            }
-            else if(shape == 'right') {
-                return '<span class="sticky sticky-right sticky-page' + page_now + ' change-color-right-' + color + '" data-sticky-id="' + id + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
-            }
-            else {
-                return '<span class="sticky sticky-page' + page_now + '" data-sticky-id="' + id + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
-            }
-        } 
+        else if(shape == 'right') {
+            return '<span class="init-sticky sticky sticky-right sticky-page' + page_now + ' change-color-right-' + color + '" data-sticky-id="' + id + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
+        }
+        else {
+            return '<span class="init-sticky sticky sticky-page' + page_now + '" data-sticky-id="' + id + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
+        }
     }
 
     //既に貼られている付箋をDBから取得して表示
@@ -148,6 +135,29 @@ $(function() {
         }).fail(function() {
             console.log('通信失敗');
             callback(-1);
+        });
+    }
+
+    function createSticky(page_now, color, shape, text) {
+        $.ajax({
+            dataType: 'json',
+            contentType: 'application/json',
+            type: 'POST',
+            url: '/create-sticky',
+            data : JSON.stringify({
+                page: parseInt(page_now),
+                color: color,
+                shape: shape,
+                location_x: 0,
+                location_y: 0,
+                text: text,
+                empathy: 0
+            })
+        }).done(function() {
+            console.log('通信成功');
+
+        }).fail(function() {
+            console.log('通信失敗');
         });
     }
 
@@ -294,6 +304,7 @@ $(function() {
                 let page_now = $('.page-now-text').html();
                 let sticky = newSticky(false, id+1, color, shape, text, page_now);
                 $('.slide').append(sticky);
+                createSticky(page_now, color, shape, text);
             }
             else if($('.new-sticky-btn').hasClass('template-mode')) {
                 let color = $('.selected-template').data('color').replace('light-', '');
@@ -302,11 +313,18 @@ $(function() {
                 let page_now = $('.page-now-text').html();
                 let sticky = newSticky(false, id+1, color, shape, text, page_now);
                 $('.slide').append(sticky);
+                createSticky(page_now, color, shape, text);
             }
     
             $('.sticky').draggable({
                 containment: '.slide',
             });
+            $('.init-sticky').css({
+                left: 0,
+                top: 0
+            });
+            $('.init-sticky').removeClass('init-sticky');
+
             $('.new-sticky-modal-item').fadeOut();
         }
         loadStikyId(callback);
