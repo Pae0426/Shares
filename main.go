@@ -15,13 +15,13 @@ import (
 
 type Sticky struct {
 	Id       int    `json:"id,omitempty"`
-	Page     int    `json:"page"`
-	Color    string `json:"color"`
-	Shape    string `json:"shape"`
-	Locate_x int    `json:"location_x"`
-	Locate_y int    `json:"location_y"`
-	Text     string `json:"text"`
-	Empathy  int    `json:"empathy"`
+	Page     int    `json:"page,omitempty"`
+	Color    string `json:"color,omitempty"`
+	Shape    string `json:"shape,omitempty"`
+	Locate_x int    `json:"location_x,omitempty"`
+	Locate_y int    `json:"location_y,omitempty"`
+	Text     string `json:"text,omitempty"`
+	Empathy  int    `json:"empathy,omitempty"`
 }
 
 var Db *sql.DB
@@ -134,6 +134,23 @@ func createSticky(w http.ResponseWriter, r *http.Request) {
 	sql.Exec(sticky.Page, sticky.Color, sticky.Shape, sticky.Locate_x, sticky.Locate_y, sticky.Text, sticky.Empathy)
 }
 
+func updateSticky(w http.ResponseWriter, r *http.Request) {
+	var sticky Sticky
+	len := r.ContentLength
+	body := make([]byte, len)
+	r.Body.Read(body)
+	if err := json.Unmarshal(body[:len], &sticky); err != nil {
+		log.Fatalln("エラー")
+	}
+
+	sql, err := Db.Prepare("update lecture1 set location_x=?, location_y=? where id=?")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	sql.Exec(sticky.Locate_x, sticky.Locate_y, sticky.Id)
+}
+
 func templateHandler(w http.ResponseWriter, r *http.Request) {
 	data := map[string]int{
 		"pages": countFiles(),
@@ -161,5 +178,6 @@ func main() {
 	http.HandleFunc("/stickies", getStickiesInfo)
 	http.HandleFunc("/load-sticky-id", loadStickyId)
 	http.HandleFunc("/create-sticky", createSticky)
+	http.HandleFunc(("/update-sticky"), updateSticky)
 	server.ListenAndServe()
 }
