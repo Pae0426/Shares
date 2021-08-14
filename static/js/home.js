@@ -28,7 +28,6 @@ $(function() {
             url: '/stickies',
         }).done(function(stickies) {
             console.log('通信成功');
-            console.log(stickies);
             for(let i in stickies) {
                 let id = stickies[i]['id'];
                 let color = stickies[i]['color'];
@@ -152,6 +151,25 @@ $(function() {
                 location_y: 0,
                 text: text,
                 empathy: 0
+            })
+        }).done(function() {
+            console.log('通信成功');
+
+        }).fail(function() {
+            console.log('通信失敗');
+        });
+    }
+
+    function updateSticy(id, location_x, location_y) {
+        $.ajax({
+            dataType: 'json',
+            contentType: 'application/json',
+            type: 'POST',
+            url: '/create-sticky',
+            data : JSON.stringify({
+                id: parseInt(id),
+                location_x: parseInt(location_x),
+                location_y: parseInt(location_y),
             })
         }).done(function() {
             console.log('通信成功');
