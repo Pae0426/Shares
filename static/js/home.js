@@ -154,7 +154,6 @@ $(function() {
             })
         }).done(function() {
             console.log('通信成功');
-
         }).fail(function() {
             console.log('通信失敗');
         });
@@ -165,15 +164,14 @@ $(function() {
             dataType: 'json',
             contentType: 'application/json',
             type: 'POST',
-            url: '/create-sticky',
+            url: '/update-sticky',
             data : JSON.stringify({
-                id: parseInt(id),
-                location_x: parseInt(location_x),
-                location_y: parseInt(location_y),
+                "id": id,
+                "location_x": parseInt(location_x),
+                "location_y": parseInt(location_y)
             })
         }).done(function() {
             console.log('通信成功');
-
         }).fail(function() {
             console.log('通信失敗');
         });
@@ -346,6 +344,15 @@ $(function() {
             $('.new-sticky-modal-item').fadeOut();
         }
         loadStikyId(callback);
+    });
+
+    $(document).on('mouseup', '.sticky', function() {
+        let id = $(this).data('sticky-id');
+        let style_str = $(this).attr('style');
+        let style_list = style_str.match(/[0-9]+/g);
+        let location_x = style_list[0];
+        let location_y = style_list[1];
+        updateSticy(id, location_x, location_y);
     });
 
     $("[class^='template-sticky-model-']").on('click', function() {
