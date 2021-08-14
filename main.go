@@ -147,8 +147,14 @@ func updateSticky(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-
 	sql.Exec(sticky.Locate_x, sticky.Locate_y, sticky.Id)
+
+	res, err := json.Marshal("{200, \"ok\"}")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(res)
 }
 
 func templateHandler(w http.ResponseWriter, r *http.Request) {
