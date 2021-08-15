@@ -26,9 +26,7 @@ jobs:
         echo "${{ secrets.GIT_PRIVATE_KEY }}" > private_key
         chmod 600 private_key
         ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER_NAME }}@${{ secrets.EC2_HOST_NAME }} -i private_key "
-        cd /home/ec2-user/go/src/shares &&
-        git fetch --prune &&
-        git checkout mster &&
+        cd /home/ec2-user/go/src/Shares &&
         git pull origin master
         "
 
