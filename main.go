@@ -132,6 +132,13 @@ func createSticky(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	sql.Exec(sticky.Page, sticky.Color, sticky.Shape, sticky.Locate_x, sticky.Locate_y, sticky.Text, sticky.Empathy)
+
+	res, err := json.Marshal("{200, \"ok\"}")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(res)
 }
 
 func updateSticky(w http.ResponseWriter, r *http.Request) {
