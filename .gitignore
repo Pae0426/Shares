@@ -41,8 +41,6 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,vscode
 
-go.mod
-go.sum
 home
 .github/
 AWSCLIV2.pkg
