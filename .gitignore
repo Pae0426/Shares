@@ -41,10 +41,7 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,vscode
 
-home
 AWSCLIV2.pkg
 .vscode
 .env
-mysql/data
-task-definition.json
 docker-fargate/
