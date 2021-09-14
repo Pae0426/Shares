@@ -45,3 +45,4 @@ AWSCLIV2.pkg
 .vscode
 .env
 docker-fargate/
+.github
