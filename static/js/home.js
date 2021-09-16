@@ -7,6 +7,26 @@ $(function() {
     $('.progressbar').css('width', 'calc(1 / ' + page_total + ' * 100%)');
     $('.template-sticky-container').hide();
 
+    //WebSocketデータ取得
+    if(!window["WebSocket"]) {
+        alert("エラー: WebSocketに対応していないブラウザです。");
+    } else {
+        socket = new WebSocket("ws://localhost:9000/room")
+        socket.onclose = function() {
+            alert("接続が終了しました。");
+        }
+        socket.onmessage = function(e) {
+            let socket_slice = e.data.split(',');
+            let socket_id = socket_slice[0];
+            let socket_x = socket_slice[1];
+            let socket_y = socket_slice[2];
+            $('[data-sticky-id="'+ socket_id +'"]').animate({
+                'left': socket_x + 'px',
+                'top': socket_y + 'px'
+            })
+        }
+    }
+
     //スライド上に新しい付箋を追加
     function newSticky(init, id, color, shape, text, page_now) {
         if(shape == 'left') {
@@ -27,7 +47,6 @@ $(function() {
             type: 'GET',
             url: '/stickies',
         }).done(function(stickies) {
-            console.log('通信成功');
             for(let i in stickies) {
                 let id = stickies[i]['id'];
                 let color = stickies[i]['color'];
@@ -129,7 +148,6 @@ $(function() {
             type: 'GET',
             url: '/load-sticky-id',
         }).done(function(id) {
-            console.log('通信成功!');
             callback(id);
         }).fail(function() {
             console.log('通信失敗');
@@ -153,7 +171,6 @@ $(function() {
                 empathy: 0
             })
         }).done(function() {
-            console.log('通信成功');
         }).fail(function() {
             console.log('通信失敗');
         });
@@ -171,7 +188,6 @@ $(function() {
                 "location_y": parseInt(location_y)
             })
         }).done(function() {
-            console.log('通信成功');
         }).fail(function() {
             console.log('通信失敗');
         });
@@ -353,6 +369,12 @@ $(function() {
         let location_x = style_list[0];
         let location_y = style_list[1];
         updateSticy(id, location_x, location_y);
+
+        if(!socket) {
+            alert("エラー: WebSocket通信が行われていません。");
+            return false;
+        }
+        socket.send(id + "," + location_x + "," + location_y);
     });
 
     $("[class^='template-sticky-model-']").on('click', function() {
