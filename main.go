@@ -30,7 +30,7 @@ func init() {
 	var err error
 	err = godotenv.Load(".env")
 	if err != nil {
-		panic(err)
+		log.Println("エラー:", err)
 	}
 
 	DB_NAME := os.Getenv("MYSQL_DATABASE")
@@ -40,7 +40,7 @@ func init() {
 	DB_CONNECT_INFO := DB_USER + ":" + DB_PASS + "@" + DB_PROTOCOL + "/" + DB_NAME
 	Db, err = sql.Open("mysql", DB_CONNECT_INFO)
 	if err != nil {
-		panic(err)
+		log.Println("エラー:", err)
 	}
 }
 
@@ -61,7 +61,7 @@ func countFiles() int {
 func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 	rows, e := Db.Query("select * from lecture1")
 	if e != nil {
-		log.Println(e.Error())
+		log.Println("エラー:", e.Error())
 	}
 
 	var stickies []Sticky
@@ -87,7 +87,7 @@ func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 
 	result, err := json.Marshal(stickies)
 	if err != nil {
-		panic(err)
+		log.Println("エラー:", err)
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -97,7 +97,7 @@ func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 func loadStickyId(w http.ResponseWriter, r *http.Request) {
 	row, e := Db.Query("select max(id) from lecture1")
 	if e != nil {
-		log.Println(e.Error())
+		log.Println("エラー:", e.Error())
 	}
 
 	defer row.Close()
@@ -111,7 +111,7 @@ func loadStickyId(w http.ResponseWriter, r *http.Request) {
 
 	result, err := json.Marshal(id)
 	if err != nil {
-		panic(err)
+		log.Println("エラー:", err)
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -129,13 +129,13 @@ func createSticky(w http.ResponseWriter, r *http.Request) {
 
 	sql, err := Db.Prepare("insert into lecture1(page, color, shape, location_x, location_y, text, empathy) values(?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {
-		panic(err)
+		log.Println("エラー:", err)
 	}
 	sql.Exec(sticky.Page, sticky.Color, sticky.Shape, sticky.Locate_x, sticky.Locate_y, sticky.Text, sticky.Empathy)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
-		log.Fatalln(err)
+		log.Println("エラー:", err)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(res)
@@ -147,18 +147,18 @@ func updateSticky(w http.ResponseWriter, r *http.Request) {
 	body := make([]byte, len)
 	r.Body.Read(body)
 	if err := json.Unmarshal(body[:len], &sticky); err != nil {
-		log.Fatalln("エラー")
+		log.Println("エラー:", err)
 	}
 
 	sql, err := Db.Prepare("update lecture1 set location_x=?, location_y=? where id=?")
 	if err != nil {
-		log.Fatalln(err)
+		log.Println("エラー:", err)
 	}
 	sql.Exec(sticky.Locate_x, sticky.Locate_y, sticky.Id)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
-		log.Fatalln(err)
+		log.Println("エラー:", err)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(res)
@@ -177,7 +177,7 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln("テンプレートファイルを読み込めません:", err.Error())
 	}
 	if err := t.Execute(w, data); err != nil {
-		log.Fatalln("エラー!:", err.Error())
+		log.Println("エラー:", err.Error())
 	}
 }
 
