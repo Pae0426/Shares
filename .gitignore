@@ -46,3 +46,4 @@ AWSCLIV2.pkg
 .env
 docker-fargate/
 .github
+shares.log

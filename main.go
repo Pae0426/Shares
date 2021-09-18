@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"html/template"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -42,6 +43,14 @@ func init() {
 	if err != nil {
 		log.Println("エラー:", err)
 	}
+}
+
+//ログをファイルに出力
+func loggingSettings(filename string) {
+	logfile, _ := os.OpenFile(filename, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	multiLogFile := io.MultiWriter(os.Stdout, logfile)
+	log.SetFlags(log.Ldate | log.Ltime | log.Llongfile)
+	log.SetOutput(multiLogFile)
 }
 
 //指定ディレクトリ下のファイル数をカウントする
@@ -182,6 +191,8 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	loggingSettings("shares.log")
+
 	log.Println("Webサーバーを開始します...")
 	r := newRoom()
 	http.Handle("/room", r)
