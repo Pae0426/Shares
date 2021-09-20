@@ -181,29 +181,37 @@ button[disabled] {
     font-weight: 800;
     margin-bottom: 30px;
 }
-.new-sticky-modal-item {
+.new-sticky-modal-item,
+.vote-page-modal-item {
     display: none;
     height: 100vh;
     position: fixed;
     top: 0;
     width: 100%;
 }
-.new-sticky-modal-bg {
+.new-sticky-modal-bg,
+.vote-page-modal-bg {
     background-color: rgba(83, 83, 83, 0.8);
     height: 100vh;
     position: absolute;
     width: 100%;
 }
-.new-sticky-modal-container {
+.new-sticky-modal-container,
+.vote-page-modal-container {
     background-color: #fff;
     position: absolute;
     left: 50%;
     padding: 40px;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 60%;
     height: 70%;
     border-radius: 10px;
+}
+.new-sticky-modal-container {
+    width: 60%;
+}
+.vote-page-modal-container {
+    width: 80%;
 }
 .new-sticky-title-container {
     padding: 30px 100px;
