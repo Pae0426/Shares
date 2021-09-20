@@ -67,6 +67,20 @@ footer {
     padding: 5px 0;
     text-align: center;
     vertical-align: middle;
+    display: flex;
+    justify-content: space-between;
+}
+.slide-control-left {
+    position: relative;
+    width: 100%;
+}
+.slide-control-center {
+    position: relative;
+    width: 100%;
+}
+.slide-control-right {
+    position: relative;
+    width: 100%;
 }
 .slide-button-prev,
 .slide-button-next {
@@ -139,7 +153,6 @@ button[disabled] {
     text-align: center;
 }
 
-.add-sticky-btn,
 .new-sticky-btn {
     border: none;
     border-radius: 5px;
@@ -151,7 +164,11 @@ button[disabled] {
     font-weight: 800;
 }
 .add-sticky-btn {
-    margin: 30px 0;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translateY(-50%) translateX(-50%);
 }
 .new-sticky-modal-item {
     display: none;
