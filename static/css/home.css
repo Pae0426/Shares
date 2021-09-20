@@ -71,19 +71,17 @@ footer {
     justify-content: space-between;
 }
 .slide-control-left {
-    position: relative;
     width: 100%;
 }
 .slide-control-center {
-    position: relative;
     width: 100%;
 }
 .slide-control-right {
-    position: relative;
     width: 100%;
 }
 .slide-button-prev,
-.slide-button-next {
+.slide-button-next,
+.add-sticky-btn {
     border: none;
     background-color: #3d424a;
     width: 40px;
@@ -92,7 +90,8 @@ footer {
     border-radius: .15rem;
 }
 .slide-button-prev:hover,
-.slide-button-next:hover {
+.slide-button-next:hover,
+.add-sticky-btn:hover {
     background-color: #22a7da;
 }
 button[disabled] {
@@ -100,7 +99,6 @@ button[disabled] {
 }
 .fa-chevron-left,
 .fa-chevron-right {
-    size: 30px;
     color: #fff;
     stroke-width: 3px;
 }
@@ -114,6 +112,16 @@ button[disabled] {
 .page-now-text,
 .page-total-text {
     color: #fff;
+}
+.add-sticky-btn {
+    color: #fff;
+    /* position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translateY(-50%) translateX(-50%); */
+}
+.add-sticky-btn:before {
+    size: 30px;
 }
 
 
@@ -145,6 +153,10 @@ button[disabled] {
     overflow-wrap: break-word;
 }
 
+.faaa {
+    size: 50px;
+}
+
 
 
 /* 付箋作成画面、モーダル */
@@ -162,13 +174,7 @@ button[disabled] {
     color: #fff;
     font-size: 20px;
     font-weight: 800;
-}
-.add-sticky-btn {
-    color: #fff;
-    position: absolute;
-    top: 50%;
-    left: 80%;
-    transform: translateY(-50%) translateX(-50%);
+    margin-bottom: 30px;
 }
 .new-sticky-modal-item {
     display: none;
@@ -191,7 +197,7 @@ button[disabled] {
     top: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
-    height: 60%;
+    height: 70%;
     border-radius: 10px;
 }
 .new-sticky-title-container {
