@@ -79,8 +79,8 @@ footer {
 .slide-control-right {
     width: 100%;
 }
-.slide-button-prev,
-.slide-button-next,
+.prev-slide-btn,
+.next-slide-btn,
 .add-sticky-btn {
     border: none;
     background-color: #3d424a;
@@ -89,8 +89,8 @@ footer {
     cursor: pointer;
     border-radius: .15rem;
 }
-.slide-button-prev:hover,
-.slide-button-next:hover,
+.prev-slide-btn:hover,
+.next-slide-btn:hover,
 .add-sticky-btn:hover {
     background-color: #22a7da;
 }

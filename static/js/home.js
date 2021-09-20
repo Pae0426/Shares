@@ -82,15 +82,15 @@ $(function() {
             //最終ページか否かで処理を分岐
             if (page_now == PAGE_TOTAL) {
                 $('.fa-chevron-right').css('color', '#C0C0C0');
-                $('.slide-button-next').prop('disabled', true);
+                $('.next-slide-btn').prop('disabled', true);
                 return;
             }else if(page_now + 1 == PAGE_TOTAL) {
                 $('.fa-chevron-right').css('color', '#C0C0C0');
-                $('.slide-button-next').prop('disabled', true);
+                $('.next-slide-btn').prop('disabled', true);
                 $('.sticky-page' + page_now).hide();
             } else {
                 $('.fa-chevron-left').css('color', '#fff');
-                $('.slide-button-prev').prop('disabled', false);
+                $('.prev-slide-btn').prop('disabled', false);
                 $('.sticky-page' + page_now).hide();
             }
             page_now += 1;
@@ -98,15 +98,15 @@ $(function() {
             //初期ページか否かで処理を分岐
             if (page_now == 1) {
                 $('.fa-chevron-left').css('color', '#C0C0C0');
-                $('.slide-button-prev').prop('disabled', true);
+                $('.prev-slide-btn').prop('disabled', true);
                 return;
             } else if(page_now - 1 == 1) {
                 $('.fa-chevron-left').css('color', '#C0C0C0');
-                $('.slide-button-prev').prop('disabled', true);
+                $('.prev-slide-btn').prop('disabled', true);
                 $('.sticky-page' + page_now).hide();
             } else {
                 $('.fa-chevron-right').css('color', '#fff');
-                $('.slide-button-next').prop('disabled', false);
+                $('.next-slide-btn').prop('disabled', false);
                 $('.sticky-page' + page_now).hide();
             }
             page_now -= 1;
@@ -198,10 +198,10 @@ $(function() {
     loadSticky();
 
     //スライドの遷移操作
-    $('.slide-button-next').on('click', function() {
+    $('.next-slide-btn').on('click', function() {
         pageControl('next');
     });
-    $('.slide-button-prev').on('click', function() {
+    $('.prev-slide-btn').on('click', function() {
         pageControl('prev');
     });
 
