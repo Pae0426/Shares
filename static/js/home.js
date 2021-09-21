@@ -232,7 +232,14 @@ $(function() {
                     },
                 }],
                 yAxes: [{
-                    display: false,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'ページ',
+                        fontFamily: "sans-serif",
+                        fontColor: "blue",             // 文字の色
+                        fontFamily: "sans-serif",
+                        fontSize: 14,
+                    },
                     ticks: {
                         min: 0,
                         max: 100,
