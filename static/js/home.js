@@ -124,16 +124,17 @@ $(function() {
         let textarea_size;
         switch(shape) {
             case 'square':
-                textarea_size = 33;
+                textarea_size = 22;
                 break;
             case 'rectangle':
-                textarea_size = 121;
+                textarea_size = 110;
                 break;
             case 'left':
             case 'right':
-                textarea_size = 24;
+                textarea_size = 16;
                 break;
         }
+        console.log(textarea_size);
         if (input_text.length >= textarea_size) {
             input_text = input_text.slice(0, textarea_size);
         }
@@ -253,9 +254,6 @@ $(function() {
         }
     });
 
-    $(document).on('click', function(e) {
-        console.log(e.target.className);
-    });
     //いいね機能
     $(document).on('click', '.empathy-false', function(e) {
         console.log(e.target.className);
