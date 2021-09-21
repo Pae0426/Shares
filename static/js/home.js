@@ -36,7 +36,7 @@ $(function() {
             return '<span class="init-sticky sticky sticky-right sticky-page' + page_now + ' change-color-right-' + color + '" data-sticky-id="' + id + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
         }
         else {
-            return '<span class="init-sticky sticky sticky-page' + page_now + '" data-sticky-id="' + id + '" data-color="' + color + '" data-shape="' + shape + '">' + '<span class="sticky-text">' + text +'</span></span>';
+            return '<span class="init-sticky sticky sticky-page' + page_now + '" data-sticky-id="' + id + '" data-color="' + color + '" data-shape="' + shape + '">' + '<div class="sticky-text">' + text +'</div><div class="empathy"><i class="fas fa-heart empathy-false"></i></div></span>';
         }
     }
 
@@ -244,6 +244,24 @@ $(function() {
                 mode: 'single'
             },
         }
+    });
+
+    $(document).on('click', function(e) {
+        console.log(e.target.className);
+    });
+    //いいね機能
+    $(document).on('click', '.empathy-false', function(e) {
+        console.log(e.target.className);
+        $(this).addClass('empathy-true');
+        $(this).removeClass('empathy-false');
+    });
+    $(document).on('click', '.empathy-true', function(e) {
+        console.log(e.target.className);
+        $(this).addClass('empathy-false');
+        $(this).removeClass('empathy-true');
+    });
+    $('.empathy').on('click', function(e) {
+        console.log(e.target.className);
     });
 
     //付箋作成モーダルの表示・非表示

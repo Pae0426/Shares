@@ -161,9 +161,18 @@ button[disabled] {
 .sticky-text {
     overflow-wrap: break-word;
 }
-
-.faaa {
-    size: 50px;
+.empathy {
+    text-align: right;
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    cursor: pointer;
+}
+.empathy-false {
+    color: #93a5b1;
+}
+.empathy-true {
+    color: #f76685;
 }
 
 
@@ -237,6 +246,11 @@ button[disabled] {
     color: rgb(190, 190, 190);
 }
 
+/* ページ投票画面 */
+
+.chart-container {
+    margin: 0 auto;
+}
 
 
 /* 自作付箋 */
