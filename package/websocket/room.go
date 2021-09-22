@@ -1,4 +1,4 @@
-package main
+package websocket
 
 import (
 	"log"
@@ -7,23 +7,23 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-type room struct {
+type Room struct {
 	forward chan []byte
-	join    chan *user
-	leave   chan *user
-	users   map[*user]bool
+	join    chan *User
+	leave   chan *User
+	users   map[*User]bool
 }
 
-func newRoom() *room {
-	return &room{
+func NewRoom() *Room {
+	return &Room{
 		forward: make(chan []byte),
-		join:    make(chan *user),
-		leave:   make(chan *user),
-		users:   make(map[*user]bool),
+		join:    make(chan *User),
+		leave:   make(chan *User),
+		users:   make(map[*User]bool),
 	}
 }
 
-func (r *room) run() {
+func (r *Room) Run() {
 	for {
 		select {
 		case user := <-r.join:
@@ -51,13 +51,13 @@ const (
 
 var upgrader = &websocket.Upgrader{ReadBufferSize: socketBufferSize, WriteBufferSize: socketBufferSize}
 
-func (r *room) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+func (r *Room) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	socket, err := upgrader.Upgrade(w, req, nil)
 	if err != nil {
 		log.Println("ServeHTTP:", err)
 		return
 	}
-	user := &user{
+	user := &User{
 		socket: socket,
 		send:   make(chan []byte, messageBufferSize),
 		room:   r,
@@ -68,6 +68,6 @@ func (r *room) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		r.leave <- user
 		log.Println("leave")
 	}()
-	go user.write()
-	user.read()
+	go user.Write()
+	user.Read()
 }

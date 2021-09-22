@@ -1,16 +1,16 @@
-package main
+package websocket
 
 import (
 	"github.com/gorilla/websocket"
 )
 
-type user struct {
+type User struct {
 	socket *websocket.Conn
 	send   chan []byte
-	room   *room
+	room   *Room
 }
 
-func (u *user) read() {
+func (u *User) Read() {
 	for {
 		if _, msg, err := u.socket.ReadMessage(); err == nil {
 			u.room.forward <- msg
@@ -19,7 +19,7 @@ func (u *user) read() {
 		}
 	}
 }
-func (u *user) write() {
+func (u *User) Write() {
 	for msg := range u.send {
 		if err := u.socket.WriteMessage(websocket.TextMessage, msg); err != nil {
 			break
