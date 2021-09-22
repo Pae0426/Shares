@@ -190,6 +190,32 @@ func incrementEmpathy(w http.ResponseWriter, r *http.Request) {
 	w.Write(res)
 }
 
+func decrementEmpathy(w http.ResponseWriter, r *http.Request) {
+	type TargetId struct {
+		Id int `json:"id"`
+	}
+	var targetId TargetId
+	len := r.ContentLength
+	body := make([]byte, len)
+	r.Body.Read(body)
+	if err := json.Unmarshal(body[:len], &targetId); err != nil {
+		log.Println("エラー:", err)
+	}
+
+	sql, err := Db.Prepare("update lecture1 set empathy=empathy-1 where id=?")
+	if err != nil {
+		log.Println("エラー:", err)
+	}
+	sql.Exec(targetId.Id)
+
+	res, err := json.Marshal("{200, \"ok\"}")
+	if err != nil {
+		log.Println("エラー:", err)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(res)
+}
+
 func templateHandler(w http.ResponseWriter, r *http.Request) {
 	data := map[string]int{
 		"pages": countFiles(),
@@ -222,5 +248,6 @@ func main() {
 	http.HandleFunc("/create-sticky", createSticky)
 	http.HandleFunc("/update-sticky", updateSticky)
 	http.HandleFunc("/increment-empathy", incrementEmpathy)
+	http.HandleFunc("/decrement-empathy", decrementEmpathy)
 	server.ListenAndServe()
 }

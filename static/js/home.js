@@ -297,6 +297,20 @@ $(function() {
     $(document).on('click', '.empathy-true', function(e) {
         $(this).addClass('empathy-false');
         $(this).removeClass('empathy-true');
+        let id = $(this).data("empathy-id");
+
+        $.ajax({
+            dataType: 'json',
+            contentType: 'application/json',
+            type: 'POST',
+            url: '/decrement-empathy',
+            data : JSON.stringify({
+                id: id,
+            })
+        }).done(function() {
+        }).fail(function() {
+            console.log('通信失敗');
+        });
     });
 
     //付箋作成モーダルの表示・非表示
