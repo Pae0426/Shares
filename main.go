@@ -235,9 +235,9 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	log.Println("Webサーバーを開始します...")
-	r := newRoom()
+	r := NewRoom()
 	http.Handle("/room", r)
-	go r.run()
+	go r.Run()
 	server := http.Server{
 		Addr: ":9000",
 	}
