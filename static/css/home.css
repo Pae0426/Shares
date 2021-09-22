@@ -255,8 +255,6 @@ button[disabled] {
 
 /* 自作付箋 */
 
-.new-sticky-container {
-}
 .create-sticky-container {
     display: flex;
     justify-content: center;
@@ -541,9 +539,6 @@ button[disabled] {
 
 /* テンプレート付箋 */
 
-.template-sticky-container {
-
-}
 .template-sticky-models {
     display: flex;
     flex-wrap: wrap;
