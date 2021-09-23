@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
@@ -46,6 +47,34 @@ func countFiles() int {
 }
 
 func templateHandler(w http.ResponseWriter, r *http.Request) {
+	row, e := Db.Query("select max(id) from user_cookie_info")
+	if e != nil {
+		log.Println("エラー:", e.Error())
+	}
+
+	defer row.Close()
+
+	var user_cookie_id int
+	for row.Next() {
+		if er := row.Scan(&user_cookie_id); er != nil {
+			log.Println(er)
+		}
+	}
+
+	user_cookie := "user" + strconv.Itoa(user_cookie_id+1)
+	cookie := &http.Cookie{
+		Name:  "user-id",
+		Value: user_cookie,
+	}
+	http.SetCookie(w, cookie)
+	log.Println("Cookie設定完了")
+
+	sql, err := Db.Prepare("insert into user_cookie_info(user_cookie) values(?)")
+	if err != nil {
+		log.Println("エラー:", err)
+	}
+	sql.Exec(user_cookie)
+
 	data := map[string]int{
 		"pages": countFiles(),
 	}
@@ -62,6 +91,30 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// func setCookie(w http.ResponseWriter, r *http.Request) {
+// 	row, e := Db.Query("select max(id) from lecture1")
+// 	if e != nil {
+// 		log.Println("エラー:", e.Error())
+// 	}
+
+// 	defer row.Close()
+
+// 	var id int
+// 	for row.Next() {
+// 		if er := row.Scan(&id); er != nil {
+// 			log.Println(er)
+// 		}
+// 	}
+
+// 	user_cookie := "user" + strconv.Itoa(id+1)
+// 	cookie := &http.Cookie{
+// 		Name:  "user-id",
+// 		Value: user_cookie,
+// 	}
+// 	http.SetCookie(w, cookie)
+// 	log.Println("Cookie設定完了")
+// }
+
 func main() {
 	log.Println("Webサーバーを開始します...")
 	r := NewRoom()
@@ -72,6 +125,7 @@ func main() {
 	}
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/home", templateHandler)
+	// http.HandleFunc("/set-cookie", setCookie)
 	http.HandleFunc("/stickies", getStickiesInfo)
 	http.HandleFunc("/load-sticky-id", loadStickyId)
 	http.HandleFunc("/create-sticky", createSticky)
