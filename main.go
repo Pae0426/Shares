@@ -75,7 +75,6 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 
 	cookies := r.Cookies()
 	lastCookie := "user" + strconv.Itoa(lastId)
-	log.Println(len(cookies))
 
 	for i, c := range cookies {
 		if c.Value == lastCookie {
@@ -97,7 +96,6 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 			sql.Exec(newCookie)
 		}
 	}
-	log.Println("eeeeeeeeeeeeeeee")
 
 	data := map[string]int{
 		"pages": countFiles(),

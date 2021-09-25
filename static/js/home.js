@@ -70,14 +70,10 @@ $(function() {
     }
 
     function getEmpathyInfo() {
-        //let max_id_empathy_info = 38;
         return $.ajax({
             dataType: 'json',
-            type: 'POST',
+            type: 'GET',
             url: '/get-empathy-info',
-            data : JSON.stringify({
-                id: 38,
-            })
         })
     }
 

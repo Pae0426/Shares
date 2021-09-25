@@ -7,29 +7,28 @@ import (
 )
 
 func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
-	type MaxId struct {
-		Id int `json:"id"`
+	row, e := Db.Query("select max(id) from lecture1")
+	if e != nil {
+		log.Println("エラー:", e.Error())
 	}
-	var maxId MaxId
-	len := r.ContentLength
-	body := make([]byte, len)
-	r.Body.Read(body)
-	if err := json.Unmarshal(body[:len], &maxId); err != nil {
-		log.Fatalln("エラー:", err)
+	var maxId int
+	for row.Next() {
+		row.Scan(&maxId)
 	}
+	log.Println(maxId)
 
 	cookie, err := r.Cookie("user-id")
 	if err != nil {
 		log.Fatalln("エラー2: ", err)
 	}
 
-	row, e := Db.Query("select sticky_id from empathy_info where user_cookie=?", cookie.Value)
+	row, e = Db.Query("select sticky_id from empathy_info where user_cookie=?", cookie.Value)
 	if e != nil {
 		log.Println("エラー3:", e.Error())
 	}
 	defer row.Close()
 
-	empathySlice := make([]bool, maxId.Id)
+	empathySlice := make([]bool, maxId)
 	for row.Next() {
 		var stickyId int
 		e := row.Scan(&stickyId)
