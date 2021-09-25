@@ -28,13 +28,13 @@ $(function() {
     }
 
     //スライド上に新しい付箋を追加
-    function newSticky(init, id, color, shape, text, page_now) {
+    function newSticky(id, color, shape, text, page_now, isEmpathy) {
         if(shape == 'left') {
             return `
                 <span class="init-sticky sticky sticky-left sticky-page` + page_now + ` change-color-left-` + color + `" data-sticky-id="` + id + `" data-color="` + color + `" data-shape="` + shape + `">
                     <div class="sticky-text">` + text + `</div>
                     <div class="empathy">
-                        <i class="fas fa-heart empathy-false" data-empathy-id="` + id + `"></i>
+                        <i class="fas fa-heart empathy-`+ isEmpathy +`" data-empathy-id="` + id + `"></i>
                     </div>
                 </span>
             `
@@ -44,7 +44,7 @@ $(function() {
                 <span class="init-sticky sticky sticky-right sticky-page` + page_now + ` change-color-right-` + color + `" data-sticky-id="` + id + `" data-color="` + color + `" data-shape="` + shape + `">
                     <div class="sticky-text">` + text + `</div>
                     <div class="empathy">
-                        <i class="fas fa-heart empathy-false" data-empathy-id="` + id + `"></i>
+                        <i class="fas fa-heart empathy-`+ isEmpathy +`" data-empathy-id="` + id + `"></i>
                     </div>
                 </span>
             `
@@ -54,11 +54,31 @@ $(function() {
                 <span class="init-sticky sticky sticky-page` + page_now + `" data-sticky-id="` + id + `" data-color="` + color + `" data-shape="` + shape + `">
                     <div class="sticky-text">` + text + `</div>
                     <div class="empathy">
-                        <i class="fas fa-heart empathy-false" data-empathy-id="` + id + `"></i>
+                        <i class="fas fa-heart empathy-`+ isEmpathy +`" data-empathy-id="` + id + `"></i>
                     </div>
                 </span>
             `
         }
+    }
+
+    function loadStikyId() {
+        return $.ajax({
+            dataType: 'json',
+            type: 'GET',
+            url: '/load-sticky-id',
+        });
+    }
+
+    function getEmpathyInfo() {
+        //let max_id_empathy_info = 38;
+        return $.ajax({
+            dataType: 'json',
+            type: 'POST',
+            url: '/get-empathy-info',
+            data : JSON.stringify({
+                id: 38,
+            })
+        })
     }
 
     //既に貼られている付箋をDBから取得して表示
@@ -76,22 +96,26 @@ $(function() {
                 let page_now = stickies[i]['page'];
                 let x = stickies[i]['location_x'];
                 let y = stickies[i]['location_y'];
-                let sticky = newSticky(true, id, color, shape, text, page_now);
-                $('.slide').append(sticky);
-                $('.sticky').draggable({
-                    containment: '.slide',
+                getEmpathyInfo().done(function(empathyInfo) {
+                    let sticky = newSticky(id, color, shape, text, page_now, empathyInfo[id]);
+                    $('.slide').append(sticky);
+                    $('.sticky').draggable({
+                        containment: '.slide',
+                    });
+                    $('.init-sticky').css({
+                        left: x + 'px',
+                        top: y + 'px'
+                    });
+                    if(page_now != 1) {
+                        $('.init-sticky').hide();
+                    }
+                    $('.init-sticky').removeClass('init-sticky');
+                }).fail(function() {
+                    console.log('通信失敗...');
                 });
-                $('.init-sticky').css({
-                    left: x + 'px',
-                    top: y + 'px'
-                });
-                if(page_now != 1) {
-                    $('.init-sticky').hide();
-                }
-                $('.init-sticky').removeClass('init-sticky');
             }
         }).fail(function(){
-            console.log('通信失敗');
+            console.log('通信失敗!!!');
         })
     }
 
@@ -164,7 +188,7 @@ $(function() {
         $('.create-sticky-textarea').attr('maxlength', '' + textarea_size);
     }
 
-    function loadStikyId(callback) {
+    function loadStikyIdCallBack(callback) {
         $.ajax({
             dataType: 'json',
             type: 'GET',
@@ -448,7 +472,7 @@ $(function() {
                 let shape = $('.create-sticky-model').attr('data-shape');
                 let text = $('.create-sticky-model-text').text();
                 let page_now = $('.page-now-text').html();
-                let sticky = newSticky(false, id+1, color, shape, text, page_now);
+                let sticky = newSticky(id+1, color, shape, text, page_now, false);
                 $('.slide').append(sticky);
                 createSticky(page_now, color, shape, text);
             }
@@ -457,7 +481,7 @@ $(function() {
                 let shape = $('.selected-template').data('shape');
                 let text = $('.selected-template > .template-sticky-text').text();
                 let page_now = $('.page-now-text').html();
-                let sticky = newSticky(false, id+1, color, shape, text, page_now);
+                let sticky = newSticky(id+1, color, shape, text, page_now, false);
                 $('.slide').append(sticky);
                 createSticky(page_now, color, shape, text);
             }
@@ -473,7 +497,7 @@ $(function() {
 
             $('.new-sticky-modal-item').fadeOut();
         }
-        loadStikyId(callback);
+        loadStikyIdCallBack(callback);
     });
 
     $(document).on('mouseup', '.sticky', function() {

@@ -46,6 +46,16 @@ func countFiles() int {
 	return count
 }
 
+func setDummyCookie(w http.ResponseWriter, r *http.Request) {
+	dummyCookie := &http.Cookie{ //Cookieが空によるエラーを回避するためのCookie
+		Name:  "dummyName1",
+		Value: "dummyValue1",
+	}
+	http.SetCookie(w, dummyCookie)
+
+	http.Redirect(w, r, "/home", 301)
+}
+
 func templateHandler(w http.ResponseWriter, r *http.Request) {
 	row, e := Db.Query("select max(id) from user_cookie_info")
 	if e != nil {
@@ -54,26 +64,40 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 
 	defer row.Close()
 
-	var user_cookie_id int
+	var lastId int
 	for row.Next() {
-		if er := row.Scan(&user_cookie_id); er != nil {
-			log.Println(er)
+		e = row.Scan(&lastId)
+	}
+
+	if e != nil {
+		log.Println("エラー:", e.Error())
+	}
+
+	cookies := r.Cookies()
+	lastCookie := "user" + strconv.Itoa(lastId)
+	log.Println(len(cookies))
+
+	for i, c := range cookies {
+		if c.Value == lastCookie {
+			break
+		}
+		if i == len(cookies)-1 { //Cookie作成
+			newCookie := "user" + strconv.Itoa(lastId+1)
+			cookie := &http.Cookie{
+				Name:  "user-id",
+				Value: newCookie,
+			}
+			http.SetCookie(w, cookie)
+			log.Println("Cookie設定完了")
+
+			sql, err := Db.Prepare("insert into user_cookie_info(user_cookie) values(?)")
+			if err != nil {
+				log.Println("エラー:", err)
+			}
+			sql.Exec(newCookie)
 		}
 	}
-
-	user_cookie := "user" + strconv.Itoa(user_cookie_id+1)
-	cookie := &http.Cookie{
-		Name:  "user-id",
-		Value: user_cookie,
-	}
-	http.SetCookie(w, cookie)
-	log.Println("Cookie設定完了")
-
-	sql, err := Db.Prepare("insert into user_cookie_info(user_cookie) values(?)")
-	if err != nil {
-		log.Println("エラー:", err)
-	}
-	sql.Exec(user_cookie)
+	log.Println("eeeeeeeeeeeeeeee")
 
 	data := map[string]int{
 		"pages": countFiles(),
@@ -91,30 +115,6 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// func setCookie(w http.ResponseWriter, r *http.Request) {
-// 	row, e := Db.Query("select max(id) from lecture1")
-// 	if e != nil {
-// 		log.Println("エラー:", e.Error())
-// 	}
-
-// 	defer row.Close()
-
-// 	var id int
-// 	for row.Next() {
-// 		if er := row.Scan(&id); er != nil {
-// 			log.Println(er)
-// 		}
-// 	}
-
-// 	user_cookie := "user" + strconv.Itoa(id+1)
-// 	cookie := &http.Cookie{
-// 		Name:  "user-id",
-// 		Value: user_cookie,
-// 	}
-// 	http.SetCookie(w, cookie)
-// 	log.Println("Cookie設定完了")
-// }
-
 func main() {
 	log.Println("Webサーバーを開始します...")
 	r := NewRoom()
@@ -126,10 +126,12 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/home", templateHandler)
 	// http.HandleFunc("/set-cookie", setCookie)
+	http.HandleFunc("/", setDummyCookie)
 	http.HandleFunc("/stickies", getStickiesInfo)
 	http.HandleFunc("/load-sticky-id", loadStickyId)
 	http.HandleFunc("/create-sticky", createSticky)
 	http.HandleFunc("/update-sticky", updateSticky)
+	http.HandleFunc("/get-empathy-info", getEmpathyInfo)
 	http.HandleFunc("/increment-empathy", incrementEmpathy)
 	http.HandleFunc("/decrement-empathy", decrementEmpathy)
 	server.ListenAndServe()
