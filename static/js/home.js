@@ -61,14 +61,7 @@ $(function() {
         }
     }
 
-    function loadStikyId() {
-        return $.ajax({
-            dataType: 'json',
-            type: 'GET',
-            url: '/load-sticky-id',
-        });
-    }
-
+    // いいね情報をbool型配列で取得
     function getEmpathyInfo() {
         return $.ajax({
             dataType: 'json',
@@ -84,15 +77,16 @@ $(function() {
             type: 'GET',
             url: '/stickies',
         }).done(function(stickies) {
-            for(let i in stickies) {
-                let id = stickies[i]['id'];
-                let color = stickies[i]['color'];
-                let shape = stickies[i]['shape'];
-                let text = stickies[i]['text'];
-                let page_now = stickies[i]['page'];
-                let x = stickies[i]['location_x'];
-                let y = stickies[i]['location_y'];
-                getEmpathyInfo().done(function(empathyInfo) {
+            getEmpathyInfo().done(function(empathyInfo) {
+                for(let i in stickies) {
+                    let id = stickies[i]['id'];
+                    let color = stickies[i]['color'];
+                    let shape = stickies[i]['shape'];
+                    let text = stickies[i]['text'];
+                    let page_now = stickies[i]['page'];
+                    let x = stickies[i]['location_x'];
+                    let y = stickies[i]['location_y'];
+                    
                     let sticky = newSticky(id, color, shape, text, page_now, empathyInfo[id]);
                     $('.slide').append(sticky);
                     $('.sticky').draggable({
@@ -106,12 +100,12 @@ $(function() {
                         $('.init-sticky').hide();
                     }
                     $('.init-sticky').removeClass('init-sticky');
-                }).fail(function() {
-                    console.log('通信失敗...');
-                });
-            }
+                }
+            }).fail(function() {
+                console.log('通信失敗');
+            });
         }).fail(function(){
-            console.log('通信失敗!!!');
+            console.log('通信失敗');
         })
     }
 
