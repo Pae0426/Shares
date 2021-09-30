@@ -4,9 +4,14 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
+	log.Println("--------getEmpathyInfo--------")
+	h := r.Header
+	log.Println(h)
+	log.Println("--------------------------")
 	row, e := Db.Query("select max(id) from lecture1")
 	if e != nil {
 		log.Println("エラー:", e.Error())
@@ -15,7 +20,7 @@ func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 	for row.Next() {
 		row.Scan(&maxId)
 	}
-	log.Println(maxId)
+	log.Println("maxId:" + strconv.Itoa(maxId))
 
 	cookie, err := r.Cookie("user-id")
 	if err != nil {
@@ -28,17 +33,20 @@ func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 	}
 	defer row.Close()
 
-	empathySlice := make([]bool, maxId)
+	//var empathySlice map[string][]int
+
+	userEmpathy := make([]int, maxId)
 	for row.Next() {
 		var stickyId int
 		e := row.Scan(&stickyId)
 		if e != nil {
 			log.Println("エラー4", e)
 		}
-		empathySlice[stickyId] = true
+		log.Println("stickyId:" + strconv.Itoa(stickyId))
+		userEmpathy[stickyId] = 1
 	}
 
-	result, err := json.Marshal(empathySlice)
+	result, err := json.Marshal(userEmpathy)
 	if err != nil {
 		log.Println("エラー5:", err)
 	}

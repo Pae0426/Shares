@@ -12,6 +12,10 @@ $(function() {
         alert("エラー: WebSocketに対応していないブラウザです。");
     } else {
         socket = new WebSocket("ws://localhost:9000/room")
+        console.log(socket);
+        socket.onopen = function() {
+            alert("接続しました。");
+        }
         socket.onclose = function() {
             alert("接続が終了しました。");
         }
@@ -86,8 +90,15 @@ $(function() {
                     let page_now = stickies[i]['page'];
                     let x = stickies[i]['location_x'];
                     let y = stickies[i]['location_y'];
-                    
-                    let sticky = newSticky(id, color, shape, text, page_now, empathyInfo[id]);
+                    console.log('empathy:' + empathyInfo);
+                    let isEmpathy;
+                    if (empathyInfo[id] == 1) {
+                        isEmpathy = true
+                    }
+                    else {
+                        isEmpathy = false
+                    }
+                    let sticky = newSticky(id, color, shape, text, page_now, isEmpathy);
                     $('.slide').append(sticky);
                     $('.sticky').draggable({
                         containment: '.slide',

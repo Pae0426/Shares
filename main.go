@@ -117,6 +117,8 @@ func main() {
 	log.Println("Webサーバーを開始します...")
 	r := NewRoom()
 	http.Handle("/room", r)
+	log.Println("r:")
+	log.Println(r)
 	go r.Run()
 	server := http.Server{
 		Addr: ":9000",
