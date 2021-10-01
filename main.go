@@ -125,7 +125,6 @@ func main() {
 	}
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/home", templateHandler)
-	// http.HandleFunc("/set-cookie", setCookie)
 	http.HandleFunc("/", setDummyCookie)
 	http.HandleFunc("/stickies", getStickiesInfo)
 	http.HandleFunc("/load-sticky-id", loadStickyId)

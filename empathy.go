@@ -8,10 +8,6 @@ import (
 )
 
 func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
-	log.Println("--------getEmpathyInfo--------")
-	h := r.Header
-	log.Println(h)
-	log.Println("--------------------------")
 	row, e := Db.Query("select max(id) from lecture1")
 	if e != nil {
 		log.Println("エラー:", e.Error())
@@ -53,7 +49,6 @@ func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(result)
-	//return empathySlice
 }
 
 func incrementEmpathy(w http.ResponseWriter, r *http.Request) {
