@@ -86,7 +86,9 @@ footer {
 .prev-slide-btn,
 .next-slide-btn,
 .add-sticky-btn,
-.vote-page-btn {
+.vote-page-btn,
+.visible-sticky-btn,
+.invisible-sticky-btn {
     border: none;
     background-color: #3d424a;
     width: 40px;
@@ -98,7 +100,9 @@ footer {
 .prev-slide-btn:hover,
 .next-slide-btn:hover,
 .add-sticky-btn:hover,
-.vote-page-btn:hover {
+.vote-page-btn:hover,
+.visible-sticky-btn:hover,
+.invisible-sticky-btn:hover {
     background-color: #22a7da;
 }
 button[disabled] {
@@ -122,12 +126,13 @@ button[disabled] {
     font-size: 1.3em;
 }
 .add-sticky-btn,
-.vote-page-btn {
+.vote-page-btn,
+.visible-sticky-btn,
+.invisible-sticky-btn {
     color: #fff;
-    /* position: absolute;
-    top: 50%;
-    left: 80%;
-    transform: translateY(-50%) translateX(-50%); */
+}
+.visible-sticky-btn {
+    transform: scale(-1, 1);
 }
 .add-sticky-btn:before {
     size: 30px;

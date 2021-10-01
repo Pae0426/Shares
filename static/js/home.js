@@ -1,11 +1,13 @@
 $(function() {
     let page_total = $('.progressbar').data('total-progress');
+    let isVisible = true;
     const PAGE_TOTAL = parseInt(page_total);
     $('.sticky').draggable({
         containment: '.slide',
     });
     $('.progressbar').css('width', 'calc(1 / ' + page_total + ' * 100%)');
     $('.template-sticky-container').hide();
+    $('.invisible-sticky-btn').hide();
 
     //WebSocketデータ取得
     if(!window["WebSocket"]) {
@@ -13,9 +15,6 @@ $(function() {
     } else {
         socket = new WebSocket("ws://localhost:9000/room")
         console.log(socket);
-        socket.onopen = function() {
-            alert("接続しました。");
-        }
         socket.onclose = function() {
             alert("接続が終了しました。");
         }
@@ -161,7 +160,9 @@ $(function() {
         $('.display-page').attr('src', next_jpeg_file_path);
         $('.progressbar').css('width', 'calc(' + page_now + ' / ' + PAGE_TOTAL + ' * 100%)');
         $('.page-now-text').html(page_now);
-        $('.sticky-page' + page_now).show();
+        if(isVisible) {
+            $('.sticky-page' + page_now).show();
+        }
     }
 
     //付箋モデルの形を変更した際に、テキストエリアとモデル内の文字をその形に合った文字数に変更
@@ -250,6 +251,24 @@ $(function() {
     });
     $('.prev-slide-btn').on('click', function() {
         pageControl('prev');
+    });
+
+    //付箋表示・非表示切り替え
+    $('.visible-sticky-btn').on('click', function() {
+        let page_now = $('.page-now-text').html();
+        page_now = parseInt(page_now);
+        $(this).hide();
+        $('.sticky-page' + page_now).hide();
+        $('.invisible-sticky-btn').show();
+        isVisible = false;
+    });
+    $('.invisible-sticky-btn').on('click', function() {
+        let page_now = $('.page-now-text').html();
+        page_now = parseInt(page_now);
+        $(this).hide();
+        $('.sticky-page' + page_now).show();
+        $('.visible-sticky-btn').show();
+        isVisible = true;
     });
 
     //ページ投票グラフ表示
