@@ -52,10 +52,6 @@ const (
 var upgrader = &websocket.Upgrader{ReadBufferSize: socketBufferSize, WriteBufferSize: socketBufferSize}
 
 func (r *Room) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	log.Println("--------r.ServeHTTP--------")
-	h := req.Header
-	log.Println(h)
-	log.Println("--------------------------")
 	socket, err := upgrader.Upgrade(w, req, nil)
 	if err != nil {
 		log.Println("ServeHTTP:", err)
