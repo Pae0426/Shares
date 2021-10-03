@@ -105,6 +105,16 @@ func decrementEmpathy(w http.ResponseWriter, r *http.Request) {
 	}
 	sql.Exec(targetId.Id)
 
+	cookie, err := r.Cookie("user-id")
+	if err != nil {
+		log.Println("エラー8: ", err)
+	}
+	sql, err = Db.Prepare("delete from empathy_info where sticky_id=? and user_cookie=?")
+	if err != nil {
+		log.Println("エラー9:", err)
+	}
+	sql.Exec(targetId.Id, cookie.Value)
+
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
 		log.Println("エラー13:", err)
