@@ -166,12 +166,11 @@ button[disabled] {
 .sticky-text {
     overflow-wrap: break-word;
 }
-.empathy {
+.empathy-container {
     text-align: right;
     position: absolute;
     right: 10px;
     bottom: 5px;
-    cursor: pointer;
 }
 .empathy-false {
     color: #93a5b1;
@@ -179,6 +178,13 @@ button[disabled] {
 .empathy-true {
     color: #f76685;
 }
+.fa-heart {
+    cursor: pointer;
+}
+.empathy-count {
+    left: 0;
+}
+
 
 
 

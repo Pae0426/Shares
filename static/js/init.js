@@ -49,7 +49,10 @@ function loadSticky() {
                 let page_now = stickies[i]['page'];
                 let x = stickies[i]['location_x'];
                 let y = stickies[i]['location_y'];
-                console.log('empathy:' + empathyInfo);
+                let empathy = stickies[i]['empathy'];
+                if (empathy == undefined) {
+                    empathy = 0;
+                }
                 let isEmpathy;
                 if (empathyInfo[id] == 1) {
                     isEmpathy = true
@@ -57,7 +60,7 @@ function loadSticky() {
                 else {
                     isEmpathy = false
                 }
-                let sticky = newSticky(id, color, shape, text, page_now, isEmpathy);
+                let sticky = newSticky(id, color, shape, text, page_now, empathy, isEmpathy);
                 $('.slide').append(sticky);
                 $('.sticky').draggable({
                     containment: '.slide',

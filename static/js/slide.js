@@ -90,8 +90,13 @@ $(document).on('mouseup', '.sticky', function() {
 $(document).on('click', '.empathy-false', function(e) {
     $(this).addClass('empathy-true');
     $(this).removeClass('empathy-false');
-    let id = $(this).data("empathy-id");
+    $(this).next('.empathy-count').addClass('empathy-true');
+    $(this).next('.empathy-count').removeClass('empathy-false');
+    let empathy_count = $(this).next('.empathy-count').text();
+    empathy_count = parseInt(empathy_count) + 1;
+    $(this).next('.empathy-count').text(empathy_count);
 
+    let id = $(this).data("empathy-id");
     $.ajax({
         dataType: 'json',
         contentType: 'application/json',
@@ -108,8 +113,13 @@ $(document).on('click', '.empathy-false', function(e) {
 $(document).on('click', '.empathy-true', function(e) {
     $(this).addClass('empathy-false');
     $(this).removeClass('empathy-true');
+    $(this).next('.empathy-count').addClass('empathy-false');
+    $(this).next('.empathy-count').removeClass('empathy-true');
+    let empathy_count = $(this).next('.empathy-count').text();
+    empathy_count = parseInt(empathy_count) - 1;
+    $(this).next('.empathy-count').text(empathy_count);
+    
     let id = $(this).data("empathy-id");
-
     $.ajax({
         dataType: 'json',
         contentType: 'application/json',

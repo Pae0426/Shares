@@ -4,13 +4,14 @@ $('.sticky').draggable({
 });
 
 //スライド上に新しい付箋を追加
-function newSticky(id, color, shape, text, page_now, isEmpathy) {
+function newSticky(id, color, shape, text, page_now, empathy, isEmpathy) {
     if(shape == 'left') {
         return `
             <span class="init-sticky sticky sticky-left sticky-page` + page_now + ` change-color-left-` + color + `" data-sticky-id="` + id + `" data-color="` + color + `" data-shape="` + shape + `">
                 <div class="sticky-text">` + text + `</div>
-                <div class="empathy">
+                <div class="empathy-container">
                     <i class="fas fa-heart empathy-`+ isEmpathy +`" data-empathy-id="` + id + `"></i>
+                    <span class="empathy-count empathy-`+ isEmpathy +`">` + empathy + `</span>
                 </div>
             </span>
         `
@@ -19,8 +20,9 @@ function newSticky(id, color, shape, text, page_now, isEmpathy) {
         return `
             <span class="init-sticky sticky sticky-right sticky-page` + page_now + ` change-color-right-` + color + `" data-sticky-id="` + id + `" data-color="` + color + `" data-shape="` + shape + `">
                 <div class="sticky-text">` + text + `</div>
-                <div class="empathy">
+                <div class="empathy-container">
                     <i class="fas fa-heart empathy-`+ isEmpathy +`" data-empathy-id="` + id + `"></i>
+                    <span class="empathy-count empathy-`+ isEmpathy +`">` + empathy + `</span>
                 </div>
             </span>
         `
@@ -29,8 +31,9 @@ function newSticky(id, color, shape, text, page_now, isEmpathy) {
         return `
             <span class="init-sticky sticky sticky-page` + page_now + `" data-sticky-id="` + id + `" data-color="` + color + `" data-shape="` + shape + `">
                 <div class="sticky-text">` + text + `</div>
-                <div class="empathy">
+                <div class="empathy-container">
                     <i class="fas fa-heart empathy-`+ isEmpathy +`" data-empathy-id="` + id + `"></i>
+                    <span class="empathy-count empathy-`+ isEmpathy +`">` + empathy + `</span>
                 </div>
             </span>
         `
