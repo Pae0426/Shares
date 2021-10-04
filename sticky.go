@@ -19,9 +19,9 @@ type Sticky struct {
 
 //付箋の情報をDBから取得しjson形式で表示
 func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
-	rows, e := Db.Query("select * from lecture1")
-	if e != nil {
-		log.Println("エラー:", e.Error())
+	rows, err := Db.Query("select * from lecture1")
+	if err != nil {
+		log.Println("エラー:", err.Error())
 	}
 
 	var stickies []Sticky
@@ -55,9 +55,9 @@ func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 }
 
 func loadStickyId(w http.ResponseWriter, r *http.Request) {
-	row, e := Db.Query("select max(id) from lecture1")
-	if e != nil {
-		log.Println("エラー:", e.Error())
+	row, err := Db.Query("select max(id) from lecture1")
+	if err != nil {
+		log.Println("エラー:", err.Error())
 	}
 
 	defer row.Close()

@@ -57,20 +57,20 @@ func setDummyCookie(w http.ResponseWriter, r *http.Request) {
 }
 
 func templateHandler(w http.ResponseWriter, r *http.Request) {
-	row, e := Db.Query("select max(id) from user_cookie_info")
-	if e != nil {
-		log.Println("エラー:", e.Error())
+	row, err := Db.Query("select max(id) from user_cookie_info")
+	if err != nil {
+		log.Println("エラー:", err.Error())
 	}
 
 	defer row.Close()
 
 	var lastId int
 	for row.Next() {
-		e = row.Scan(&lastId)
+		err = row.Scan(&lastId)
 	}
 
-	if e != nil {
-		log.Println("エラー:", e.Error())
+	if err != nil {
+		log.Println("エラー:", err.Error())
 	}
 
 	cookies := r.Cookies()

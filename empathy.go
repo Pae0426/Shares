@@ -8,9 +8,9 @@ import (
 )
 
 func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
-	row, e := Db.Query("select max(id) from lecture1")
-	if e != nil {
-		log.Println("エラー:", e.Error())
+	row, err := Db.Query("select max(id) from lecture1")
+	if err != nil {
+		log.Println("エラー:", err.Error())
 	}
 	var maxId int
 	for row.Next() {
@@ -20,12 +20,12 @@ func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 
 	cookie, err := r.Cookie("user-id")
 	if err != nil {
-		log.Fatalln("エラー2: ", err)
+		log.Fatalln("エラー: ", err)
 	}
 
-	row, e = Db.Query("select sticky_id from empathy_info where user_cookie=?", cookie.Value)
-	if e != nil {
-		log.Println("エラー3:", e.Error())
+	row, err = Db.Query("select sticky_id from empathy_info where user_cookie=?", cookie.Value)
+	if err != nil {
+		log.Println("エラー:", err.Error())
 	}
 	defer row.Close()
 
@@ -34,9 +34,9 @@ func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 	userEmpathy := make([]int, maxId)
 	for row.Next() {
 		var stickyId int
-		e := row.Scan(&stickyId)
-		if e != nil {
-			log.Println("エラー4", e)
+		err = row.Scan(&stickyId)
+		if err != nil {
+			log.Println("エラー", err)
 		}
 		log.Println("stickyId:" + strconv.Itoa(stickyId))
 		userEmpathy[stickyId] = 1
@@ -44,7 +44,7 @@ func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 
 	result, err := json.Marshal(userEmpathy)
 	if err != nil {
-		log.Println("エラー5:", err)
+		log.Println("エラー:", err)
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -60,28 +60,28 @@ func incrementEmpathy(w http.ResponseWriter, r *http.Request) {
 	body := make([]byte, len)
 	r.Body.Read(body)
 	if err := json.Unmarshal(body[:len], &targetId); err != nil {
-		log.Println("エラー6:", err)
+		log.Println("エラー:", err)
 	}
 
 	sql, err := Db.Prepare("update lecture1 set empathy=empathy+1 where id=?")
 	if err != nil {
-		log.Println("エラー7:", err)
+		log.Println("エラー:", err)
 	}
 	sql.Exec(targetId.Id)
 
 	cookie, err := r.Cookie("user-id")
 	if err != nil {
-		log.Println("エラー8: ", err)
+		log.Println("エラー: ", err)
 	}
 	sql, err = Db.Prepare("insert into empathy_info(sticky_id, user_cookie) values(?, ?)")
 	if err != nil {
-		log.Println("エラー9:", err)
+		log.Println("エラー:", err)
 	}
 	sql.Exec(targetId.Id, cookie.Value)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
-		log.Println("エラー10:", err)
+		log.Println("エラー:", err)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(res)
@@ -96,28 +96,28 @@ func decrementEmpathy(w http.ResponseWriter, r *http.Request) {
 	body := make([]byte, len)
 	r.Body.Read(body)
 	if err := json.Unmarshal(body[:len], &targetId); err != nil {
-		log.Println("エラー11:", err)
+		log.Println("エラー:", err)
 	}
 
 	sql, err := Db.Prepare("update lecture1 set empathy=empathy-1 where id=?")
 	if err != nil {
-		log.Println("エラー12:", err)
+		log.Println("エラー:", err)
 	}
 	sql.Exec(targetId.Id)
 
 	cookie, err := r.Cookie("user-id")
 	if err != nil {
-		log.Println("エラー8: ", err)
+		log.Println("エラー: ", err)
 	}
 	sql, err = Db.Prepare("delete from empathy_info where sticky_id=? and user_cookie=?")
 	if err != nil {
-		log.Println("エラー9:", err)
+		log.Println("エラー:", err)
 	}
 	sql.Exec(targetId.Id, cookie.Value)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
-		log.Println("エラー13:", err)
+		log.Println("エラー:", err)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(res)
