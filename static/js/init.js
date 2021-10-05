@@ -7,7 +7,7 @@ $('.invisible-sticky-btn').hide();
 if(!window["WebSocket"]) {
     alert("エラー: WebSocketに対応していないブラウザです。");
 } else {
-    socket = new WebSocket("ws://localhost:9000/room")
+    socket = new WebSocket("ws://localhost:9000/room");
     console.log(socket);
     socket.onclose = function() {
         alert("接続が終了しました。");

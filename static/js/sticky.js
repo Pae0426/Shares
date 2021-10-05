@@ -104,6 +104,9 @@ function changeTextAreaSize(shape) {
 }
 
 //付箋作成モーダルの表示・非表示
+$('.close-modal-btn').on('click', function() {
+    $('.new-sticky-modal-item').fadeOut();
+});
 $('.add-sticky-btn').on('click', function() {
     $('.new-sticky-modal-item').fadeIn();
 });

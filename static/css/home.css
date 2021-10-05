@@ -225,7 +225,7 @@ button[disabled] {
     background-color: #fff;
     position: absolute;
     left: 50%;
-    padding: 40px;
+    padding: 30px 40px;
     top: 50%;
     transform: translate(-50%, -50%);
     height: 70%;
@@ -241,6 +241,12 @@ button[disabled] {
     padding: 30px 100px;
     display: flex;
     justify-content: center;
+}
+.close-modal-btn {
+    float: right;
+    color: rgb(190, 190, 190);
+    font-size: 1.5em;
+    cursor: pointer;
 }
 .create-sticky-title,
 .template-sticky-title {
