@@ -88,7 +88,8 @@ footer {
 .add-sticky-btn,
 .vote-page-btn,
 .visible-sticky-btn,
-.invisible-sticky-btn {
+.invisible-sticky-btn,
+.question-btn {
     border: none;
     background-color: #3d424a;
     width: 40px;
@@ -102,7 +103,8 @@ footer {
 .add-sticky-btn:hover,
 .vote-page-btn:hover,
 .visible-sticky-btn:hover,
-.invisible-sticky-btn:hover {
+.invisible-sticky-btn:hover,
+.question-btn:hover {
     background-color: #22a7da;
 }
 button[disabled] {
@@ -128,7 +130,8 @@ button[disabled] {
 .add-sticky-btn,
 .vote-page-btn,
 .visible-sticky-btn,
-.invisible-sticky-btn {
+.invisible-sticky-btn,
+.question-btn {
     color: #fff;
 }
 .visible-sticky-btn {
@@ -206,7 +209,8 @@ button[disabled] {
     margin-bottom: 30px;
 }
 .new-sticky-modal-item,
-.vote-page-modal-item {
+.vote-page-modal-item,
+.explain-modal-item {
     display: none;
     height: 100vh;
     position: fixed;
@@ -214,14 +218,16 @@ button[disabled] {
     width: 100%;
 }
 .new-sticky-modal-bg,
-.vote-page-modal-bg {
+.vote-page-modal-bg,
+.explain-modal-bg {
     background-color: rgba(83, 83, 83, 0.8);
     height: 100vh;
     position: absolute;
     width: 100%;
 }
 .new-sticky-modal-container,
-.vote-page-modal-container {
+.vote-page-modal-container,
+.explain-modal-container {
     background-color: #fff;
     position: absolute;
     left: 50%;
@@ -234,7 +240,8 @@ button[disabled] {
 .new-sticky-modal-container {
     width: 60%;
 }
-.vote-page-modal-container {
+.vote-page-modal-container,
+.explain-modal-container {
     width: 80%;
 }
 .new-sticky-title-container {

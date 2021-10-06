@@ -266,3 +266,11 @@ $("[class^='template-sticky-model-']").on('click', function() {
     $('.selected-template').removeClass('selected-template');
     $(this).addClass('selected-template');
 });
+
+//説明モーダルの表示・非表示
+$('.question-btn').on('click', function() {
+    $('.explain-modal-item').fadeIn();
+});
+$('.explain-modal-bg').on('click', function() {
+    $('.explain-modal-item').fadeOut();
+});
