@@ -1,25 +1,27 @@
 {{template "header"}}
 
-<div class="slide">
-    <img class="display-page" src="/static/pdf/1/1.jpeg" width="100%">
-    <div class="progressbar-background">
-        <span class="progressbar" data-total-progress={{.pages}}></span>
-    </div>
-    <div class="slide-control-content">
-        <div class="slide-control-left"></div>
-        <div class="slide-control-center">
-            <button class="prev-slide-btn" type="image" disabled><i class="fas fa-chevron-left"></i></button>
-            <span class="page-info">
-                <span class="page-now-text">1</span><span class="page-total-text"> / {{ .pages }}</span>
-            </span>
-            <button class="next-slide-btn" type="image"><i class="fas fa-chevron-right"></i></button>
+<div class="slide-container">
+    <div class="slide">
+        <img class="display-page" src="/static/pdf/1/1.jpeg" width="100%">
+        <div class="progressbar-background">
+            <span class="progressbar" data-total-progress={{.pages}}></span>
         </div>
-        <div class="slide-control-right">
-            <button class="add-sticky-btn" type="image"><i class="far fa-sticky-note"></i></button>
-            <button class="vote-page-btn" type="image"><i class="fas fa-chart-bar"></i></button>
-            <button class="visible-sticky-btn" type="image"><i class="far fa-eye"></i></button>
-            <button class="invisible-sticky-btn" type="image"><i class="far fa-eye-slash"></i></button>
-            <button class="question-btn"><i class="fas fa-question"></i></button>
+        <div class="slide-control-content">
+            <div class="slide-control-left"></div>
+            <div class="slide-control-center">
+                <button class="prev-slide-btn" type="image" disabled><i class="fas fa-chevron-left"></i></button>
+                <span class="page-info">
+                    <span class="page-now-text">1</span><span class="page-total-text"> / {{ .pages }}</span>
+                </span>
+                <button class="next-slide-btn" type="image"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="slide-control-right">
+                <button class="add-sticky-btn" type="image"><i class="far fa-sticky-note"></i></button>
+                <button class="vote-page-btn" type="image"><i class="fas fa-chart-bar"></i></button>
+                <button class="visible-sticky-btn" type="image"><i class="far fa-eye"></i></button>
+                <button class="invisible-sticky-btn" type="image"><i class="far fa-eye-slash"></i></button>
+                <button class="question-btn"><i class="fas fa-question"></i></button>
+            </div>
         </div>
     </div>
 </div>

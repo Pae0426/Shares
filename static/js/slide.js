@@ -83,7 +83,7 @@ $(document).on('mouseup', '.sticky', function() {
         alert("エラー: WebSocket通信が行われていません。");
         return false;
     }
-    socket.send(id + "," + location_x + "," + location_y);
+    socket.send("move," + id + "," + location_x + "," + location_y);
 });
 
 //いいね機能

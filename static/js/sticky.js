@@ -234,16 +234,17 @@ $('.new-sticky-btn').on('click', function() {
             let shape = $('.create-sticky-model').attr('data-shape');
             let text = $('.create-sticky-model-text').text();
             let page_now = $('.page-now-text').html();
-            let sticky = newSticky(id+1, color, shape, text, page_now, false);
+            let sticky = newSticky(id+1, color, shape, text, page_now, 0, false);
             $('.slide').append(sticky);
             createSticky(page_now, color, shape, text);
+            socket.send("create," + id + "," + color + "," + shape + "," + text + "," + page_now);
         }
         else if($('.new-sticky-btn').hasClass('template-mode')) {
             let color = $('.selected-template').data('color').replace('light-', '');
             let shape = $('.selected-template').data('shape');
             let text = $('.selected-template > .template-sticky-text').text();
             let page_now = $('.page-now-text').html();
-            let sticky = newSticky(id+1, color, shape, text, page_now, false);
+            let sticky = newSticky(id+1, color, shape, text, page_now, 0, false);
             $('.slide').append(sticky);
             createSticky(page_now, color, shape, text);
         }

@@ -42,7 +42,7 @@ footer {
 
 /* スライド制御 */
 
-.slide {
+.slide-container {
     margin: 0 auto;
     width: 60%;
     position: relative;
