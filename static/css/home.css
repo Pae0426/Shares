@@ -141,6 +141,28 @@ button[disabled] {
     size: 30px;
 }
 
+.explain-add-sticky-container,
+.explain-vote-page-container,
+.explain-visible-sticky-container {
+    display: flex;
+    justify-content: flex-start;
+    margin: 30px 0;
+    align-items: center;
+}
+.explain-add-sticky-icon,
+.explain-vote-page-icon,
+.explain-visible-sticky-icon {
+    color: rgb(100, 100, 100);
+    font-size: 2.5em;
+    padding: 0 50px;
+}
+.explain-add-sticky-text,
+.explain-vote-page-text,
+.explain-visible-sticky-text {
+    font-size: 20px;
+    line-height: 150%;
+}
+
 
 
 /* スライド上の付箋 */
@@ -244,7 +266,8 @@ button[disabled] {
 .explain-modal-container {
     width: 80%;
 }
-.new-sticky-title-container {
+.new-sticky-title-container,
+.explain-title-container {
     padding: 30px 100px;
     display: flex;
     justify-content: center;
@@ -268,6 +291,15 @@ button[disabled] {
 }
 .selected-title {
     color: rgb(190, 190, 190);
+}
+.explain-title {
+    text-align: center;
+    font-size: 30px;
+    color: rgb(190, 190, 190);
+    padding-bottom: 10px;
+    border-bottom: solid;
+    width: 300px;
+    margin: 0 10x;
 }
 
 /* ページ投票画面 */
@@ -680,7 +712,10 @@ button[disabled] {
     box-shadow: 3px 3px 5px #d1cbc9;
 }
 
-
+.explain-modal-container {
+    display: flex;
+    flex-direction: column;
+}
 
 /* コピーライト */
 #copyright {
