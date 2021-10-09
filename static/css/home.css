@@ -197,13 +197,15 @@ button[disabled] {
     right: 10px;
     bottom: 5px;
 }
-.empathy-false {
+.empathy-false,
+.trash-btn {
     color: #93a5b1;
 }
 .empathy-true {
     color: #f76685;
 }
-.fa-heart {
+.fa-heart,
+.trash-btn {
     cursor: pointer;
 }
 .empathy-count {

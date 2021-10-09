@@ -131,5 +131,6 @@ func main() {
 	http.HandleFunc("/get-empathy-info", getEmpathyInfo)
 	http.HandleFunc("/increment-empathy", incrementEmpathy)
 	http.HandleFunc("/decrement-empathy", decrementEmpathy)
+	http.HandleFunc("/remove-sticky", removeSticky)
 	server.ListenAndServe()
 }

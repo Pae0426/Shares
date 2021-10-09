@@ -36,7 +36,7 @@ function pageControl(action) {
         }
         page_now -= 1;
     }
-    let next_jpeg_file_path = '/static/pdf/1/' + page_now + '.jpeg';
+    let next_jpeg_file_path = '/static/pdf/4/' + page_now + '.jpeg';
     $('.display-page').attr('src', next_jpeg_file_path);
     $('.progressbar').css('width', 'calc(' + page_now + ' / ' + PAGE_TOTAL + ' * 100%)');
     $('.page-now-text').html(page_now);
@@ -102,7 +102,7 @@ $(document).on('click', '.empathy-false', function(e) {
         contentType: 'application/json',
         type: 'POST',
         url: '/increment-empathy',
-        data : JSON.stringify({
+        data: JSON.stringify({
             id: id,
         })
     }).done(function() {
@@ -125,10 +125,27 @@ $(document).on('click', '.empathy-true', function(e) {
         contentType: 'application/json',
         type: 'POST',
         url: '/decrement-empathy',
-        data : JSON.stringify({
+        data: JSON.stringify({
             id: id,
         })
     }).done(function() {
+    }).fail(function() {
+        console.log('通信失敗');
+    });
+});
+
+$(document).on('click', '.trash-btn', function() {
+    let id = $(this).data("trash-id");
+    $.ajax({
+        dataType: 'json',
+        contentType: 'application/json',
+        type: 'POST',
+        url: '/remove-sticky',
+        data: JSON.stringify({
+            id: id,
+        })
+    }).done(function() {
+        $('[data-sticky-id="' + id + '"]').remove();
     }).fail(function() {
         console.log('通信失敗');
     });
