@@ -192,7 +192,8 @@ button[disabled] {
     overflow-wrap: break-word;
 }
 .empathy-container {
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
     position: absolute;
     right: 10px;
     bottom: 5px;
@@ -209,7 +210,11 @@ button[disabled] {
     cursor: pointer;
 }
 .empathy-count {
+    margin-left: 2px;
     left: 0;
+}
+.trash-btn {
+    margin-left: 10px;
 }
 
 

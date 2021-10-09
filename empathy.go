@@ -16,7 +16,6 @@ func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 	for row.Next() {
 		row.Scan(&maxId)
 	}
-	log.Println("maxId:" + strconv.Itoa(maxId))
 
 	cookie, err := r.Cookie("user-id")
 	if err != nil {
