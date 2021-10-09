@@ -1,4 +1,3 @@
-
 //スライドの遷移を制御
 function pageControl(action) {
     let page_now = $('.page-now-text').html();

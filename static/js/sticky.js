@@ -1,4 +1,3 @@
-
 $('.sticky').draggable({
     containment: '.slide',
 });
