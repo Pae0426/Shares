@@ -8,7 +8,7 @@ import (
 )
 
 func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
-	row, err := Db.Query("select max(id) from lecture1")
+	row, err := Db.Query("select max(id) from lecture4")
 	if err != nil {
 		log.Println("エラー:", err.Error())
 	}
@@ -23,7 +23,7 @@ func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln("エラー: ", err)
 	}
 
-	row, err = Db.Query("select sticky_id from empathy_info where user_cookie=?", cookie.Value)
+	row, err = Db.Query("select sticky_id from empathy_info4 where user_cookie=?", cookie.Value)
 	if err != nil {
 		log.Println("エラー:", err.Error())
 	}
@@ -31,7 +31,7 @@ func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 
 	//var empathySlice map[string][]int
 
-	userEmpathy := make([]int, maxId)
+	userEmpathy := make([]int, maxId+1)
 	for row.Next() {
 		var stickyId int
 		err = row.Scan(&stickyId)
@@ -63,7 +63,7 @@ func incrementEmpathy(w http.ResponseWriter, r *http.Request) {
 		log.Println("エラー:", err)
 	}
 
-	sql, err := Db.Prepare("update lecture1 set empathy=empathy+1 where id=?")
+	sql, err := Db.Prepare("update lecture4 set empathy=empathy+1 where id=?")
 	if err != nil {
 		log.Println("エラー:", err)
 	}
@@ -73,7 +73,7 @@ func incrementEmpathy(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println("エラー: ", err)
 	}
-	sql, err = Db.Prepare("insert into empathy_info(sticky_id, user_cookie) values(?, ?)")
+	sql, err = Db.Prepare("insert into empathy_info4(sticky_id, user_cookie) values(?, ?)")
 	if err != nil {
 		log.Println("エラー:", err)
 	}
@@ -99,7 +99,7 @@ func decrementEmpathy(w http.ResponseWriter, r *http.Request) {
 		log.Println("エラー:", err)
 	}
 
-	sql, err := Db.Prepare("update lecture1 set empathy=empathy-1 where id=?")
+	sql, err := Db.Prepare("update lecture4 set empathy=empathy-1 where id=?")
 	if err != nil {
 		log.Println("エラー:", err)
 	}
@@ -109,7 +109,7 @@ func decrementEmpathy(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println("エラー: ", err)
 	}
-	sql, err = Db.Prepare("delete from empathy_info where sticky_id=? and user_cookie=?")
+	sql, err = Db.Prepare("delete from empathy_info4 where sticky_id=? and user_cookie=?")
 	if err != nil {
 		log.Println("エラー:", err)
 	}

@@ -19,7 +19,7 @@ type Sticky struct {
 
 //付箋の情報をDBから取得しjson形式で表示
 func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
-	rows, err := Db.Query("select * from lecture1")
+	rows, err := Db.Query("select * from lecture4")
 	if err != nil {
 		log.Println("エラー:", err.Error())
 	}
@@ -55,7 +55,7 @@ func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 }
 
 func loadStickyId(w http.ResponseWriter, r *http.Request) {
-	row, err := Db.Query("select max(id) from lecture1")
+	row, err := Db.Query("select max(id) from lecture4")
 	if err != nil {
 		log.Println("エラー:", err.Error())
 	}
@@ -87,7 +87,7 @@ func createSticky(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln("エラー")
 	}
 
-	sql, err := Db.Prepare("insert into lecture1(page, color, shape, location_x, location_y, text, empathy) values(?, ?, ?, ?, ?, ?, ?)")
+	sql, err := Db.Prepare("insert into lecture4(page, color, shape, location_x, location_y, text, empathy) values(?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {
 		log.Println("エラー:", err)
 	}
@@ -110,7 +110,7 @@ func updateSticky(w http.ResponseWriter, r *http.Request) {
 		log.Println("エラー:", err)
 	}
 
-	sql, err := Db.Prepare("update lecture1 set location_x=?, location_y=? where id=?")
+	sql, err := Db.Prepare("update lecture4 set location_x=?, location_y=? where id=?")
 	if err != nil {
 		log.Println("エラー:", err)
 	}
