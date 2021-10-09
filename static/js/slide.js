@@ -146,6 +146,7 @@ $(document).on('click', '.trash-btn', function() {
         })
     }).done(function() {
         $('[data-sticky-id="' + id + '"]').remove();
+        socket.send("remove," + id);
     }).fail(function() {
         console.log('通信失敗');
     });

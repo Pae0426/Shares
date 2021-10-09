@@ -14,8 +14,8 @@ if(!window["WebSocket"]) {
     }
     socket.onmessage = function(e) {
         let socket_slice = e.data.split(',');
-        let move_or_create = socket_slice[0];
-        if (move_or_create == 'move') {
+        let socket_action = socket_slice[0];
+        if (socket_action == 'move') {
             let socket_id = socket_slice[1];
             let socket_x = socket_slice[2];
             let socket_y = socket_slice[3];
@@ -24,7 +24,7 @@ if(!window["WebSocket"]) {
                 'top': socket_y + 'px'
             })
         }
-        else if (move_or_create == 'create') {
+        else if (socket_action == 'create') {
             let id = parseInt(socket_slice[1]);
             let color = socket_slice[2];
             let shape = socket_slice[3];
@@ -44,6 +44,10 @@ if(!window["WebSocket"]) {
                 top: 0
             });
             $('.init-sticky').removeClass('init-sticky');
+        }
+        else if (socket_action == 'remove') {
+            let id = parseInt(socket_slice[1]);
+            $('[data-sticky-id="' + id + '"]').remove();
         }
     }
 }
