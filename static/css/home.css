@@ -159,6 +159,7 @@ button[disabled] {
 .explain-add-sticky-text,
 .explain-vote-page-text,
 .explain-visible-sticky-text {
+    color: rgb(100, 100, 100);
     font-size: 20px;
     line-height: 150%;
 }
@@ -274,7 +275,8 @@ button[disabled] {
     width: 80%;
 }
 .new-sticky-title-container,
-.explain-title-container {
+.explain-title-container,
+.explain-unavailable-title-container {
     padding: 30px 100px;
     display: flex;
     justify-content: center;
@@ -299,7 +301,8 @@ button[disabled] {
 .selected-title {
     color: rgb(190, 190, 190);
 }
-.explain-title {
+.explain-title,
+.explain-unavailable-title {
     text-align: center;
     font-size: 30px;
     color: rgb(190, 190, 190);
@@ -722,6 +725,19 @@ button[disabled] {
 .explain-modal-container {
     display: flex;
     flex-direction: column;
+    overflow-y: scroll; 
+}
+.unavailable-element {
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
+.unavailable-title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.unavailable-explain {
+    color: rgb(100, 100, 100);
 }
 
 /* コピーライト */
