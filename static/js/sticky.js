@@ -105,15 +105,35 @@ function changeTextAreaSize(shape) {
     $('.create-sticky-textarea').attr('maxlength', '' + textarea_size);
 }
 
+function resetDesign() {
+    let color = $('.create-sticky-model').attr('data-color');
+    $('.selected-color').removeClass('selected-color');
+    $('.create-sticky-color-blue').addClass('selected-color');
+    $('.selected-shape').removeClass('selected-shape');
+    $('.selected-shape-left').removeClass('selected-shape-left');
+    $('.selected-shape-triangle-left').removeClass('selected-shape-triangle-left');
+    $('.selected-shape-right').removeClass('selected-shape-right');
+    $('.selected-shape-triangle-right').removeClass('selected-shape-triangle-right');
+    $('.create-sticky-shape-square').addClass('selected-shape');
+    $('.create-sticky-textarea').val('');
+    $('.create-sticky-model').attr('data-color', 'blue');
+    $('.create-sticky-model').attr('data-shape', 'square');
+    $('.create-sticky-model').removeClass('change-color-left-' + color);
+    $('.create-sticky-model').removeClass('change-color-right-' + color);
+    $('.create-sticky-model-text').text('');
+}
+
 //付箋作成モーダルの表示・非表示
 $('.close-modal-btn').on('click', function() {
     $('.new-sticky-modal-item').fadeOut();
+    resetDesign();
 });
 $('.add-sticky-btn').on('click', function() {
     $('.new-sticky-modal-item').fadeIn();
 });
 $('.new-sticky-modal-bg').on('click', function() {
     $('.new-sticky-modal-item').fadeOut();
+    resetDesign();
 });
 
 $('.create-sticky-title').on('click', function() {
@@ -261,6 +281,7 @@ $('.new-sticky-btn').on('click', function() {
         $('.init-sticky').removeClass('init-sticky');
 
         $('.new-sticky-modal-item').fadeOut();
+        resetDesign();
     }
     loadStikyIdCallBack(callback);
 });
