@@ -15,6 +15,9 @@ import (
 
 var Db *sql.DB
 
+const TABLE_NAME = "nishikata"
+const PDF_DIR = "nishikata2"
+
 func init() {
 	var err error
 	err = godotenv.Load(".env")
@@ -35,7 +38,7 @@ func init() {
 
 //指定ディレクトリ下のファイル数をカウントする
 func countFiles() int {
-	files, _ := ioutil.ReadDir("./static/pdf/4/")
+	files, _ := ioutil.ReadDir("./static/pdf/" + PDF_DIR + "/")
 	var count int
 	for _, f := range files {
 		if f.Name() == ".DS_Store" {
@@ -57,7 +60,7 @@ func setDummyCookie(w http.ResponseWriter, r *http.Request) {
 }
 
 func templateHandler(w http.ResponseWriter, r *http.Request) {
-	row, err := Db.Query("select max(id) from user_cookie_info4")
+	row, err := Db.Query("select max(id) from user_cookie_info_" + TABLE_NAME)
 	if err != nil {
 		log.Println("エラー:", err.Error())
 	}
@@ -89,7 +92,7 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 			http.SetCookie(w, cookie)
 			log.Println("Cookie設定完了")
 
-			sql, err := Db.Prepare("insert into user_cookie_info4(user_cookie) values(?)")
+			sql, err := Db.Prepare("insert into user_cookie_info_" + TABLE_NAME + "(user_cookie) values(?)")
 			if err != nil {
 				log.Println("エラー:", err)
 			}

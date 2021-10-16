@@ -18,13 +18,13 @@ func removeSticky(w http.ResponseWriter, r *http.Request) {
 		log.Println("エラー:", err)
 	}
 
-	sql, err := Db.Prepare("delete from lecture4 where id=?")
+	sql, err := Db.Prepare("delete from lecture_" + TABLE_NAME + " where id=?")
 	if err != nil {
 		log.Println("エラー:", err)
 	}
 	sql.Exec(targetId.Id)
 
-	sql, err = Db.Prepare("delete from empathy_info4 where sticky_id=?")
+	sql, err = Db.Prepare("delete from empathy_info_" + TABLE_NAME + " where sticky_id=?")
 	if err != nil {
 		log.Println("エラー:", err)
 	}

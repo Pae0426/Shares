@@ -22,7 +22,7 @@ func Pdf_to_image() {
 	}
 
 	// 変換元のPDFを読み込む。
-	err = mw.ReadImage("static/pdf/4.pdf")
+	err = mw.ReadImage("static/pdf/" + PDF_DIR + ".pdf")
 	if err != nil {
 		log.Fatal("failed at ReadImage", err)
 	}
@@ -45,7 +45,7 @@ func Pdf_to_image() {
 		}
 
 		// 画像を出力する。
-		err = mw.WriteImage(fmt.Sprintf("static/pdf/4/%d.jpeg", i+1))
+		err = mw.WriteImage(fmt.Sprintf("static/pdf/"+PDF_DIR+"/%d.jpeg", i+1))
 		if err != nil {
 			log.Fatal("failed at WriteImage")
 		}

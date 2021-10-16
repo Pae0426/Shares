@@ -8,7 +8,7 @@ import (
 )
 
 func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
-	row, err := Db.Query("select max(id) from lecture4")
+	row, err := Db.Query("select max(id) from lecture_" + TABLE_NAME)
 	if err != nil {
 		log.Println("エラー:", err.Error())
 	}
@@ -22,7 +22,7 @@ func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln("エラー: ", err)
 	}
 
-	row, err = Db.Query("select sticky_id from empathy_info4 where user_cookie=?", cookie.Value)
+	row, err = Db.Query("select sticky_id from empathy_info_"+TABLE_NAME+" where user_cookie=?", cookie.Value)
 	if err != nil {
 		log.Println("エラー:", err.Error())
 	}
@@ -62,7 +62,7 @@ func incrementEmpathy(w http.ResponseWriter, r *http.Request) {
 		log.Println("エラー:", err)
 	}
 
-	sql, err := Db.Prepare("update lecture4 set empathy=empathy+1 where id=?")
+	sql, err := Db.Prepare("update lecture_" + TABLE_NAME + " set empathy=empathy+1 where id=?")
 	if err != nil {
 		log.Println("エラー:", err)
 	}
@@ -72,7 +72,7 @@ func incrementEmpathy(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println("エラー: ", err)
 	}
-	sql, err = Db.Prepare("insert into empathy_info4(sticky_id, user_cookie) values(?, ?)")
+	sql, err = Db.Prepare("insert into empathy_info_" + TABLE_NAME + "(sticky_id, user_cookie) values(?, ?)")
 	if err != nil {
 		log.Println("エラー:", err)
 	}
@@ -98,7 +98,7 @@ func decrementEmpathy(w http.ResponseWriter, r *http.Request) {
 		log.Println("エラー:", err)
 	}
 
-	sql, err := Db.Prepare("update lecture4 set empathy=empathy-1 where id=?")
+	sql, err := Db.Prepare("update lecture_" + TABLE_NAME + " set empathy=empathy-1 where id=?")
 	if err != nil {
 		log.Println("エラー:", err)
 	}
@@ -108,7 +108,7 @@ func decrementEmpathy(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println("エラー: ", err)
 	}
-	sql, err = Db.Prepare("delete from empathy_info4 where sticky_id=? and user_cookie=?")
+	sql, err = Db.Prepare("delete from empathy_info_" + TABLE_NAME + " where sticky_id=? and user_cookie=?")
 	if err != nil {
 		log.Println("エラー:", err)
 	}
