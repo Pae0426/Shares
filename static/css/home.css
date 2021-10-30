@@ -86,6 +86,7 @@ footer {
 .prev-slide-btn,
 .next-slide-btn,
 .add-sticky-btn,
+.vote-word-btn,
 .vote-page-btn,
 .visible-sticky-btn,
 .invisible-sticky-btn,
@@ -101,6 +102,7 @@ footer {
 .prev-slide-btn:hover,
 .next-slide-btn:hover,
 .add-sticky-btn:hover,
+.vote-word-btn:hover,
 .vote-page-btn:hover,
 .visible-sticky-btn:hover,
 .invisible-sticky-btn:hover,
@@ -128,6 +130,7 @@ button[disabled] {
     font-size: 1.3em;
 }
 .add-sticky-btn,
+.vote-word-btn,
 .vote-page-btn,
 .visible-sticky-btn,
 .invisible-sticky-btn,
