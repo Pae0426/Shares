@@ -18,10 +18,19 @@ let myChart = new Chart(ctx, {
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
         scales: {
             xAxes: [{
                 ticks: {
                     stepSize: 1,
+                    autoSkip: false,
+                    maxRotation: 0,
+                    minRotation: 0,
                 },
             }],
             yAxes: [{

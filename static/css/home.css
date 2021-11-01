@@ -230,7 +230,8 @@ button[disabled] {
     text-align: center;
 }
 
-.new-sticky-btn {
+.new-sticky-btn,
+.vote-btn {
     border: none;
     border-radius: 5px;
     width: 300px;
@@ -240,6 +241,10 @@ button[disabled] {
     font-size: 20px;
     font-weight: 800;
     margin-bottom: 30px;
+}
+.vote-btn {
+    /* margin-top: 70px; */
+    margin-bottom: 0;
 }
 .new-sticky-modal-item,
 .vote-page-modal-item,
@@ -277,7 +282,11 @@ button[disabled] {
 .explain-modal-container {
     width: 80%;
 }
+.vote-page-modal-container {
+    height: 85%;
+}
 .new-sticky-title-container,
+.vote-page-title-container,
 .explain-app-title-container,
 .explain-function-title-container,
 .explain-unavailable-title-container {
@@ -305,6 +314,7 @@ button[disabled] {
 .selected-title {
     color: rgb(190, 190, 190);
 }
+.vote-page-title,
 .explain-app-title,
 .explain-function-title,
 .explain-unavailable-title {
@@ -321,6 +331,11 @@ button[disabled] {
 
 .chart-container {
     margin: 0 auto;
+    padding-bottom: 60px;
+}
+#chart {
+    width: 100% !important;
+    height: 400px !important;
 }
 
 
@@ -726,6 +741,7 @@ button[disabled] {
     background-color: rgb(219, 253, 219);
     box-shadow: 3px 3px 5px #d1cbc9;
 }
+
 
 .explain-modal-container {
     /* display: flex;
