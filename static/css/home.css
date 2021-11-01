@@ -85,9 +85,9 @@ footer {
 }
 .prev-slide-btn,
 .next-slide-btn,
-.add-sticky-btn,
-.vote-word-btn,
-.vote-page-btn,
+.add-sticky-modal-btn,
+.vote-word-modal-btn,
+.vote-page-modal-btn,
 .visible-sticky-btn,
 .invisible-sticky-btn,
 .question-btn {
@@ -101,9 +101,9 @@ footer {
 }
 .prev-slide-btn:hover,
 .next-slide-btn:hover,
-.add-sticky-btn:hover,
-.vote-word-btn:hover,
-.vote-page-btn:hover,
+.add-sticky-modal-btn:hover,
+.vote-word-modal-btn:hover,
+.vote-page-modal-btn:hover,
 .visible-sticky-btn:hover,
 .invisible-sticky-btn:hover,
 .question-btn:hover {
@@ -129,9 +129,9 @@ button[disabled] {
     color: #fff;
     font-size: 1.3em;
 }
-.add-sticky-btn,
-.vote-word-btn,
-.vote-page-btn,
+.add-sticky-modal-btn,
+.vote-word-modal-btn,
+.vote-page-modal-btn,
 .visible-sticky-btn,
 .invisible-sticky-btn,
 .question-btn {
@@ -140,7 +140,7 @@ button[disabled] {
 .visible-sticky-btn {
     transform: scale(-1, 1);
 }
-.add-sticky-btn:before {
+.add-sticky-modal-btn:before {
     size: 30px;
 }
 
@@ -230,8 +230,8 @@ button[disabled] {
     text-align: center;
 }
 
-.new-sticky-btn,
-.vote-btn {
+.add-sticky-btn,
+.vote-page-btn {
     border: none;
     border-radius: 5px;
     width: 300px;
@@ -242,7 +242,7 @@ button[disabled] {
     font-weight: 800;
     margin-bottom: 30px;
 }
-.vote-btn {
+.vote-page-btn {
     /* margin-top: 70px; */
     margin-bottom: 0;
 }

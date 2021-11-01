@@ -128,7 +128,7 @@ $('.close-modal-btn').on('click', function() {
     $('.new-sticky-modal-item').fadeOut();
     resetDesign();
 });
-$('.add-sticky-btn').on('click', function() {
+$('.add-sticky-modal-btn').on('click', function() {
     $('.new-sticky-modal-item').fadeIn();
 });
 $('.new-sticky-modal-bg').on('click', function() {
@@ -232,26 +232,26 @@ $(document).on('input', '.create-sticky-textarea', function() {
 $('.template-sticky-title').on('click', function() {
     $(this).addClass('selected-title');
     $('.create-sticky-title').removeClass('selected-title');
-    $('.new-sticky-btn').removeClass('create-mode');
-    $('.new-sticky-btn').addClass('template-mode');
+    $('.add-sticky-btn').removeClass('create-mode');
+    $('.add-sticky-btn').addClass('template-mode');
 });
 
 $('.create-sticky-title').on('click', function() {
     $(this).addClass('selected-title');
     $('.template-sticky-title').removeClass('selected-title');
-    $('.new-sticky-btn').removeClass('template-mode');
-    $('.new-sticky-btn').addClass('create-mode');
+    $('.add-sticky-btn').removeClass('template-mode');
+    $('.add-sticky-btn').addClass('create-mode');
 });
 
 //新しい付箋の作成
-$('.new-sticky-btn').on('click', function() {
+$('.add-sticky-btn').on('click', function() {
     let id;
     let callback = function(result) {
         console.log('result:' + result);
         id = result;
         console.log(id);
 
-        if($('.new-sticky-btn').hasClass('create-mode')) {
+        if($('.add-sticky-btn').hasClass('create-mode')) {
             let color = $('.create-sticky-model').attr('data-color');
             let shape = $('.create-sticky-model').attr('data-shape');
             let text = $('.create-sticky-model-text').text();
@@ -261,7 +261,7 @@ $('.new-sticky-btn').on('click', function() {
             createSticky(page_now, color, shape, text);
             socket.send("create," + id + "," + color + "," + shape + "," + text + "," + page_now);
         }
-        else if($('.new-sticky-btn').hasClass('template-mode')) {
+        else if($('.add-sticky-btn').hasClass('template-mode')) {
             let color = $('.selected-template').data('color').replace('light-', '');
             let shape = $('.selected-template').data('shape');
             let text = $('.selected-template > .template-sticky-text').text();
