@@ -124,14 +124,10 @@ function resetDesign() {
 }
 
 //付箋作成モーダルの表示・非表示
-$('.close-modal-btn').on('click', function() {
-    $('.new-sticky-modal-item').fadeOut();
-    resetDesign();
-});
 $('.add-sticky-modal-btn').on('click', function() {
     $('.new-sticky-modal-item').fadeIn();
 });
-$('.new-sticky-modal-bg').on('click', function() {
+$('.new-sticky-modal-close-btn, .new-sticky-modal-bg').on('click', function() {
     $('.new-sticky-modal-item').fadeOut();
     resetDesign();
 });
@@ -295,6 +291,6 @@ $("[class^='template-sticky-model-']").on('click', function() {
 $('.question-btn').on('click', function() {
     $('.explain-modal-item').fadeIn();
 });
-$('.explain-modal-bg').on('click', function() {
+$('.explain-modal-close-btn, .explain-modal-bg').on('click', function() {
     $('.explain-modal-item').fadeOut();
 });

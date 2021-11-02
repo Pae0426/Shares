@@ -51,6 +51,6 @@ let myChart = new Chart(ctx, {
 $('.vote-page-modal-btn').on('click', function() {
     $('.vote-page-modal-item').fadeIn();
 });
-$('.vote-page-modal-bg').on('click', function() {
+$('.vote-page-modal-close-btn, .vote-page-modal-bg').on('click', function() {
     $('.vote-page-modal-item').fadeOut();
 });
