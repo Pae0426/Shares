@@ -39,6 +39,7 @@ function pageControl(action) {
     $('.display-page').attr('src', next_jpeg_file_path);
     $('.progressbar').css('width', 'calc(' + page_now + ' / ' + PAGE_TOTAL + ' * 100%)');
     $('.page-now-text').html(page_now);
+    $('.page-now-vote').html(page_now);
     if(isVisible) {
         $('.sticky-page' + page_now).show();
     }
