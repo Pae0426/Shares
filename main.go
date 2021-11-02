@@ -49,6 +49,17 @@ func countFiles() int {
 	return count
 }
 
+func setTotalPage(w http.ResponseWriter, r *http.Request) {
+	total_page := countFiles()
+	for page := 1; page <= total_page; page++ {
+		sql, err := Db.Prepare("insert into vote_page_info_" + TABLE_NAME + "(page) values(?)")
+		if err != nil {
+			log.Println("エラー:", err)
+		}
+		sql.Exec(page)
+	}
+}
+
 func setDummyCookie(w http.ResponseWriter, r *http.Request) {
 	dummyCookie := &http.Cookie{ //Cookieが空によるエラーを回避するためのCookie
 		Name:  "dummyName1",
@@ -135,5 +146,6 @@ func main() {
 	http.HandleFunc("/increment-empathy", incrementEmpathy)
 	http.HandleFunc("/decrement-empathy", decrementEmpathy)
 	http.HandleFunc("/remove-sticky", removeSticky)
+	http.HandleFunc("/set-total-page", setTotalPage)
 	server.ListenAndServe()
 }
