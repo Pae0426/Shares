@@ -147,5 +147,6 @@ func main() {
 	http.HandleFunc("/decrement-empathy", decrementEmpathy)
 	http.HandleFunc("/remove-sticky", removeSticky)
 	http.HandleFunc("/set-total-page", setTotalPage)
+	http.HandleFunc("/get-vote-page-info", getVotePageInfo)
 	server.ListenAndServe()
 }
