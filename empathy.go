@@ -28,8 +28,6 @@ func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 	}
 	defer row.Close()
 
-	//var empathySlice map[string][]int
-
 	userEmpathy := make([]int, maxId+1)
 	for row.Next() {
 		var stickyId int
