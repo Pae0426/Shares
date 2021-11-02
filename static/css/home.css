@@ -223,7 +223,6 @@ button[disabled] {
 
 
 
-
 /* 付箋作成画面、モーダル */
 
 .add-sticky-container {
@@ -243,7 +242,6 @@ button[disabled] {
     margin-bottom: 30px;
 }
 .vote-page-btn {
-    /* margin-top: 70px; */
     margin-bottom: 0;
 }
 .new-sticky-modal-item,
@@ -681,7 +679,6 @@ button[disabled] {
 }
 
 
-
 /* 各種カラー */
 
 [data-color=blue],
@@ -746,8 +743,6 @@ button[disabled] {
 
 
 .explain-modal-container {
-    /* display: flex;
-    flex-direction: column; */
     overflow-y: scroll; 
 }
 .explain-app-text,

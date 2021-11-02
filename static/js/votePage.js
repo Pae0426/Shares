@@ -4,7 +4,7 @@ $('.vote-page-modal-btn').on('click', function() {
         contentType: 'application/json',
         type: 'GET',
         url: '/get-vote-page-info',
-    }).done(function(data) {
+    }).done(function(vote_data) {
         //ページ投票グラフ表示
         let data_label = [];
         for(let i=1;i<=page_total;i++) {
@@ -18,7 +18,7 @@ $('.vote-page-modal-btn').on('click', function() {
                 datasets: [
                     {
                         label: "投票数",
-                        data: data,
+                        data: vote_data,
                         backgroundColor: "blue",
                     },
                 ]
@@ -49,7 +49,6 @@ $('.vote-page-modal-btn').on('click', function() {
                     }],
                 },
                 hover: {
-                    //ホバー時の動作（single, label, dataset）
                     mode: 'single'
                 },
             }

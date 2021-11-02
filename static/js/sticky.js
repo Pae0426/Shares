@@ -243,9 +243,7 @@ $('.create-sticky-title').on('click', function() {
 $('.add-sticky-btn').on('click', function() {
     let id;
     let callback = function(result) {
-        console.log('result:' + result);
         id = result;
-        console.log(id);
 
         if($('.add-sticky-btn').hasClass('create-mode')) {
             let color = $('.create-sticky-model').attr('data-color');
