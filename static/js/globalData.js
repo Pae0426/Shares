@@ -1,4 +1,4 @@
-const PDF_DIR = 'nishikata2';
+const PDF_DIR = '4';
 let page_total = $('.progressbar').data('total-progress');
 const PAGE_TOTAL = parseInt(page_total);
 let isVisible = true;
