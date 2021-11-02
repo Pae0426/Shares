@@ -1,4 +1,5 @@
 $('.vote-page-modal-btn').on('click', function() {
+    $('.vote-page-modal-item').fadeIn();
     $.ajax({
         dataType: 'json',
         contentType: 'application/json',
@@ -53,7 +54,6 @@ $('.vote-page-modal-btn').on('click', function() {
                 },
             }
         });
-        $('.vote-page-modal-item').fadeIn();
     }).fail(function() {
         console.log('通信失敗');
     });
