@@ -44,6 +44,7 @@ Temporary Items
 AWSCLIV2.pkg
 .vscode
 .env
+shares
 docker-fargate/
 .github
 shares.log
