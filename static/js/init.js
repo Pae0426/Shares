@@ -1,6 +1,7 @@
 $('.progressbar').css('width', 'calc(1 / ' + page_total + ' * 100%)');
 $('.template-sticky-container').hide();
 $('.invisible-sticky-btn').hide();
+$('.remove-vote-page-container').hide();
 
 //WebSocketデータ取得
 if(!window["WebSocket"]) {

@@ -221,14 +221,17 @@ button[disabled] {
 
 
 
-/* 付箋作成画面、モーダル */
+/* モーダル */
 
-.add-sticky-container {
+.add-sticky-container,
+.vote-page-container,
+.remove-vote-page-container {
     text-align: center;
 }
 
 .add-sticky-btn,
-.vote-page-btn {
+.vote-page-btn,
+.remove-vote-page-btn {
     border: none;
     border-radius: 5px;
     width: 300px;
@@ -239,7 +242,8 @@ button[disabled] {
     font-weight: 800;
     margin-bottom: 30px;
 }
-.vote-page-btn {
+.vote-page-btn,
+.remove-vote-page-btn {
     margin-bottom: 0;
 }
 .new-sticky-modal-item,

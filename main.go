@@ -149,5 +149,6 @@ func main() {
 	http.HandleFunc("/set-total-page", setTotalPage)
 	http.HandleFunc("/get-vote-page-info", getVotePageInfo)
 	http.HandleFunc("/vote-page", votePage)
+	http.HandleFunc("/remove-vote-page", removeVotePage)
 	server.ListenAndServe()
 }

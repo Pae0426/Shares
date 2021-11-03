@@ -77,6 +77,26 @@ $('.vote-page-btn').on('click', function() {
             page: parseInt(page_now),
         })
     }).done(function() {
+        $('.vote-page-container').hide();
+        $('.remove-vote-page-container').show();
+    }).fail(function() {
+        console.log('通信失敗');
+    });
+});
+
+$('.remove-vote-page-btn').on('click', function() {
+    let page_now = $('.page-now-text').html();
+    $.ajax({
+        dataType: 'json',
+        contentType: 'application/json',
+        type: 'POST',
+        url: '/remove-vote-page',
+        data: JSON.stringify({
+            page: parseInt(page_now),
+        })
+    }).done(function() {
+        $('.remove-vote-page-container').hide();
+        $('.vote-page-container').show();
     }).fail(function() {
         console.log('通信失敗');
     });
