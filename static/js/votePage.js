@@ -58,9 +58,26 @@ $('.vote-page-modal-btn').on('click', function() {
         console.log('通信失敗');
     });
 });
+
 $('.vote-page-modal-close-btn, .vote-page-modal-bg').on('click', function() {
     if (myChart) {
         myChart.destroy();
     }
     $('.vote-page-modal-item').fadeOut();
+});
+
+$('.vote-page-btn').on('click', function() {
+    let page_now = $('.page-now-text').html();
+    $.ajax({
+        dataType: 'json',
+        contentType: 'application/json',
+        type: 'POST',
+        url: '/vote-page',
+        data: JSON.stringify({
+            page: parseInt(page_now),
+        })
+    }).done(function() {
+    }).fail(function() {
+        console.log('通信失敗');
+    });
 });
