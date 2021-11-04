@@ -20,7 +20,7 @@ $('.vote-page-modal-btn').on('click', function() {
                     {
                         label: "投票数",
                         data: vote_data,
-                        backgroundColor: "blue",
+                        backgroundColor: ["#9eceff"],
                     },
                 ]
             },
@@ -68,17 +68,20 @@ $('.vote-page-modal-close-btn, .vote-page-modal-bg').on('click', function() {
 
 $('.vote-page-btn').on('click', function() {
     let page_now = $('.page-now-text').html();
+    page_now = parseInt(page_now);
     $.ajax({
         dataType: 'json',
         contentType: 'application/json',
         type: 'POST',
         url: '/vote-page',
         data: JSON.stringify({
-            page: parseInt(page_now),
+            page: page_now,
         })
     }).done(function() {
         $('.vote-page-container').hide();
         $('.remove-vote-page-container').show();
+        myChart.data.datasets[0].data[page_now-1]++;
+        myChart.update();
     }).fail(function() {
         console.log('通信失敗');
     });
@@ -97,6 +100,8 @@ $('.remove-vote-page-btn').on('click', function() {
     }).done(function() {
         $('.remove-vote-page-container').hide();
         $('.vote-page-container').show();
+        myChart.data.datasets[0].data[page_now-1]--;
+        myChart.update();
     }).fail(function() {
         console.log('通信失敗');
     });
