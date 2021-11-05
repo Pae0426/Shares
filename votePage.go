@@ -6,6 +6,11 @@ import (
 	"net/http"
 )
 
+type VoteInfo struct {
+	VoteCount    []int `json:"voteCount"`
+	UserVotePage []int `json:"userVotePage"`
+}
+
 func getVotePageInfo(w http.ResponseWriter, r *http.Request) {
 	row, err := Db.Query("select max(id) from vote_page_info_" + TABLE_NAME)
 	if err != nil {
@@ -34,7 +39,33 @@ func getVotePageInfo(w http.ResponseWriter, r *http.Request) {
 		voteCount = append(voteCount, count)
 	}
 
-	result, err := json.Marshal(voteCount)
+	cookie, err := r.Cookie("user-id")
+	if err != nil {
+		log.Println("エラー: ", err)
+	}
+
+	row, err = Db.Query("select page from user_voted_page_"+TABLE_NAME+" where user_cookie=?", cookie.Value)
+	if err != nil {
+		log.Println("エラー:", err.Error())
+	}
+	defer row.Close()
+
+	userVotePage := make([]int, maxPage+1)
+	for row.Next() {
+		var page int
+		err = row.Scan(&page)
+		if err != nil {
+			log.Println("エラー", err)
+		}
+		userVotePage[page-1] = 1
+	}
+
+	voteInfo := VoteInfo{
+		VoteCount:    voteCount,
+		UserVotePage: userVotePage,
+	}
+
+	result, err := json.Marshal(voteInfo)
 	if err != nil {
 		log.Println("エラー:", err)
 	}

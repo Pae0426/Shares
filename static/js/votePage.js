@@ -5,12 +5,16 @@ $('.vote-page-modal-btn').on('click', function() {
         contentType: 'application/json',
         type: 'GET',
         url: '/get-vote-page-info',
-    }).done(function(vote_data) {
+    }).done(function(vote_info) {
         //ページ投票グラフ表示
         let data_label = [];
         let data_color = [];
         for(let i=0;i<=page_total;i++) {
-            data_color[i] = '#9eceff';
+            if(vote_info.userVotePage[i] == 1) {
+                data_color[i] = '#9eff9e';
+            } else {
+                data_color[i] = '#9eceff';
+            }
         }
         for(let i=1;i<=page_total;i++) {
             data_label.push(i.toString());
@@ -23,7 +27,7 @@ $('.vote-page-modal-btn').on('click', function() {
                 datasets: [
                     {
                         label: "投票数",
-                        data: vote_data,
+                        data: vote_info.voteCount,
                         backgroundColor: data_color,
                     },
                 ]
@@ -58,6 +62,16 @@ $('.vote-page-modal-btn').on('click', function() {
                 },
             }
         });
+
+        let page_now = $('.page-now-text').html();
+        console.log(vote_info.userVotePage[page_now-1]);
+        if(vote_info.userVotePage[page_now-1] == 1) {
+            $('.vote-page-container').hide();
+            $('.remove-vote-page-container').show();
+        } else {
+            $('.remove-vote-page-container').hide();
+            $('.vote-page-container').show();
+        }
     }).fail(function() {
         console.log('通信失敗');
     });
