@@ -20,7 +20,7 @@ $('.vote-page-modal-btn').on('click', function() {
             data_label.push(i.toString());
         }
         let ctx = document.getElementById("chart").getContext('2d');
-        myChart = new Chart(ctx, {
+        pageChart = new Chart(ctx, {
             type: "bar",
             data: {
                 labels: data_label,
@@ -78,8 +78,8 @@ $('.vote-page-modal-btn').on('click', function() {
 });
 
 $('.vote-page-modal-close-btn, .vote-page-modal-bg').on('click', function() {
-    if (myChart) {
-        myChart.destroy();
+    if (pageChart) {
+        pageChart.destroy();
     }
     $('.vote-page-modal-item').fadeOut();
 });
@@ -98,9 +98,9 @@ $('.vote-page-btn').on('click', function() {
     }).done(function() {
         $('.vote-page-container').hide();
         $('.remove-vote-page-container').show();
-        myChart.data.datasets[0].data[page_now-1]++;
-        myChart.data.datasets[0].backgroundColor[page_now-1] = '#9eff9e';
-        myChart.update();
+        pageChart.data.datasets[0].data[page_now-1]++;
+        pageChart.data.datasets[0].backgroundColor[page_now-1] = '#9eff9e';
+        pageChart.update();
     }).fail(function() {
         console.log('通信失敗');
     });
@@ -119,9 +119,9 @@ $('.remove-vote-page-btn').on('click', function() {
     }).done(function() {
         $('.remove-vote-page-container').hide();
         $('.vote-page-container').show();
-        myChart.data.datasets[0].data[page_now-1]--;
-        myChart.data.datasets[0].backgroundColor[page_now-1] = '#9eceff';
-        myChart.update();
+        pageChart.data.datasets[0].data[page_now-1]--;
+        pageChart.data.datasets[0].backgroundColor[page_now-1] = '#9eceff';
+        pageChart.update();
     }).fail(function() {
         console.log('通信失敗');
     });
