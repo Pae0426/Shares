@@ -751,7 +751,7 @@ button[disabled] {
     box-shadow: 3px 3px 5px #d1cbc9;
 }
 
-
+.vote-word-modal-container,
 .explain-modal-container {
     overflow-y: scroll; 
 }
