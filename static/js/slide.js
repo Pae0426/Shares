@@ -52,6 +52,19 @@ $('.next-slide-btn').on('click', function() {
 $('.prev-slide-btn').on('click', function() {
     pageControl('prev');
 });
+$('html').keyup(function(e) {
+    console.log('keyup!');
+    switch(e.which) {
+        case 39:
+            console.log('right!');
+            pageControl('next');
+        break;
+        case 37:
+            console.log('left!');
+            pageControl('prev');
+        break;
+    }
+});
 
 //付箋表示・非表示切り替え
 $('.visible-sticky-btn').on('click', function() {
