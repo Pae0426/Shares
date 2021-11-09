@@ -83,28 +83,28 @@ func votePage(w http.ResponseWriter, r *http.Request) {
 	body := make([]byte, len)
 	r.Body.Read(body)
 	if err := json.Unmarshal(body[:len], &targetPage); err != nil {
-		log.Println("エラー1:", err)
+		log.Println("エラー:", err)
 	}
 
 	sql, err := Db.Prepare("update vote_page_info_" + TABLE_NAME + " set vote_num=vote_num+1 where page=?")
 	if err != nil {
-		log.Println("エラー2:", err)
+		log.Println("エラー:", err)
 	}
 	sql.Exec(targetPage.Page)
 
 	cookie, err := r.Cookie("user-id")
 	if err != nil {
-		log.Println("エラー3: ", err)
+		log.Println("エラー: ", err)
 	}
 	sql, err = Db.Prepare("insert into user_voted_page_" + TABLE_NAME + "(page, user_cookie) values(?, ?)")
 	if err != nil {
-		log.Println("エラー4:", err)
+		log.Println("エラー:", err)
 	}
 	sql.Exec(targetPage.Page, cookie.Value)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
-		log.Println("エラー5:", err)
+		log.Println("エラー:", err)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(res)

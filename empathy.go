@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"strconv"
 )
 
 func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
@@ -35,7 +34,6 @@ func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println("エラー", err)
 		}
-		log.Println("stickyId:" + strconv.Itoa(stickyId))
 		userEmpathy[stickyId] = 1
 	}
 

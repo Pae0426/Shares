@@ -64,7 +64,6 @@ $('.vote-page-modal-btn').on('click', function() {
         });
 
         let page_now = $('.page-now-text').html();
-        console.log(vote_info.userVotePage[page_now-1]);
         if(vote_info.userVotePage[page_now-1] == 1) {
             $('.vote-page-container').hide();
             $('.remove-vote-page-container').show();

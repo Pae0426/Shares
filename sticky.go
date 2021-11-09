@@ -38,7 +38,7 @@ func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 			&sticky.Text,
 			&sticky.Empathy,
 		); er != nil {
-			log.Println(er)
+			log.Println("エラー:", er)
 		}
 		stickies = append(stickies, sticky)
 	}
@@ -65,7 +65,7 @@ func loadStickyId(w http.ResponseWriter, r *http.Request) {
 	var id int
 	for row.Next() {
 		if er := row.Scan(&id); er != nil {
-			log.Println(er)
+			log.Println("エラー:", er)
 		}
 	}
 
@@ -84,7 +84,7 @@ func createSticky(w http.ResponseWriter, r *http.Request) {
 	body := make([]byte, len)
 	r.Body.Read(body)
 	if err := json.Unmarshal(body[:len], &sticky); err != nil {
-		log.Fatalln("エラー")
+		log.Println("エラー")
 	}
 
 	sql, err := Db.Prepare("insert into lecture_" + TABLE_NAME + "(page, color, shape, location_x, location_y, text, empathy) values(?, ?, ?, ?, ?, ?, ?)")
