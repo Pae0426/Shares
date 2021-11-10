@@ -19,6 +19,7 @@ function loadSticky() {
         url: '/stickies',
     }).done(function(stickies) {
         getEmpathyInfo().done(function(empathyInfo) {
+            $('.sticky').remove();
             for(let i in stickies) {
                 let id = stickies[i]['id'];
                 let color = stickies[i]['color'];

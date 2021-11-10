@@ -1,3 +1,10 @@
+$(function() {
+    setInterval(function() {
+        loadSticky();
+        console.log('reflesh!');
+    }, 10000);
+})
+
 //スライドの遷移を制御
 function pageControl(action) {
     let page_now = $('.page-now-text').html();
