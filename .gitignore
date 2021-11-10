@@ -49,3 +49,5 @@ docker-fargate/
 .github
 shares.log
 pdf/
+room.go
+user.go

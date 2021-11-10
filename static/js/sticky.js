@@ -253,7 +253,6 @@ $('.add-sticky-btn').on('click', function() {
             let sticky = newSticky(id+1, color, shape, text, page_now, 0, false);
             $('.slide').append(sticky);
             createSticky(page_now, color, shape, text);
-            socket.send("create," + id + "," + color + "," + shape + "," + text + "," + page_now);
         }
         else if($('.add-sticky-btn').hasClass('template-mode')) {
             let color = $('.selected-template').data('color').replace('light-', '');

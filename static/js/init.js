@@ -2,54 +2,6 @@ $('.progressbar').css('width', 'calc(1 / ' + page_total + ' * 100%)');
 $('.template-sticky-container').hide();
 $('.invisible-sticky-btn').hide();
 
-//WebSocketデータ取得
-if(!window["WebSocket"]) {
-    alert("エラー: WebSocketに対応していないブラウザです。");
-} else {
-    socket = new WebSocket("ws://" + location.host + "/room");
-    socket.onclose = function() {
-        alert("接続が終了しました。");
-    }
-    socket.onmessage = function(e) {
-        let socket_slice = e.data.split(',');
-        let socket_action = socket_slice[0];
-        if (socket_action == 'move') {
-            let socket_id = socket_slice[1];
-            let socket_x = socket_slice[2];
-            let socket_y = socket_slice[3];
-            $('[data-sticky-id="'+ socket_id +'"]').animate({
-                'left': socket_x + 'px',
-                'top': socket_y + 'px'
-            })
-        }
-        else if (socket_action == 'create') {
-            let id = parseInt(socket_slice[1]);
-            let color = socket_slice[2];
-            let shape = socket_slice[3];
-            let text = socket_slice[4];
-            let new_sticky_page = socket_slice[5];
-            let page_now = $('.page-now-text').html();
-            let sticky = newSticky(id+1, color, shape, text, new_sticky_page, 0, false);
-            $('.slide').append(sticky);
-            $('.sticky').draggable({
-                containment: '.slide',
-            });
-            if (new_sticky_page != page_now) {
-                $('.init-sticky').hide();
-            }
-            $('.init-sticky').css({
-                left: 0,
-                top: 0
-            });
-            $('.init-sticky').removeClass('init-sticky');
-        }
-        else if (socket_action == 'remove') {
-            let id = parseInt(socket_slice[1]);
-            $('[data-sticky-id="' + id + '"]').remove();
-        }
-    }
-}
-
 // いいね情報をbool型配列で取得
 function getEmpathyInfo() {
     return $.ajax({

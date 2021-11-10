@@ -88,12 +88,6 @@ $(document).on('mouseup', '.sticky', function() {
     let location_x = style_list[0];
     let location_y = style_list[1];
     updateSticy(id, location_x, location_y);
-
-    if(!socket) {
-        alert("エラー: WebSocket通信が行われていません。");
-        return false;
-    }
-    socket.send("move," + id + "," + location_x + "," + location_y);
 });
 
 //いいね機能
@@ -156,7 +150,6 @@ $(document).on('click', '.trash-btn', function() {
         })
     }).done(function() {
         $('[data-sticky-id="' + id + '"]').remove();
-        socket.send("remove," + id);
     }).fail(function() {
         console.log('通信失敗');
     });
