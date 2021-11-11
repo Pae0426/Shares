@@ -19,15 +19,28 @@ function loadSticky() {
         url: '/stickies',
     }).done(function(stickies) {
         getEmpathyInfo().done(function(empathyInfo) {
-            $('.sticky').remove();
+            let exist_id = $('.sticky').map(function() {
+                return $(this).data('sticky-id');
+            }).toArray();
+            
             for(let i in stickies) {
                 let id = stickies[i]['id'];
+                let x = stickies[i]['location_x'];
+                let y = stickies[i]['location_y'];
+                if(exist_id.includes(id)) {
+                    $('[data-sticky-id="'+ id +'"]').animate({
+                        'left': x + 'px',
+                        'top': y + 'px'
+                    });
+                    exist_id[$.inArray(id, exist_id)] = -1;
+                    continue;
+                }
+
                 let color = stickies[i]['color'];
                 let shape = stickies[i]['shape'];
                 let text = stickies[i]['text'];
-                let page_now = stickies[i]['page'];
-                let x = stickies[i]['location_x'];
-                let y = stickies[i]['location_y'];
+                let page = stickies[i]['page'];
+                let page_now = parseInt($('.page-now-text').html());
                 let empathy = stickies[i]['empathy'];
                 if (empathy == undefined) {
                     empathy = 0;
@@ -35,11 +48,11 @@ function loadSticky() {
                 let isEmpathy;
                 if (empathyInfo[id] == 1) {
                     isEmpathy = true
-                }
-                else {
+                } else {
                     isEmpathy = false
                 }
-                let sticky = newSticky(id, color, shape, text, page_now, empathy, isEmpathy);
+
+                let sticky = newSticky(id, color, shape, text, page, empathy, isEmpathy);
                 $('.slide').append(sticky);
                 $('.sticky').draggable({
                     containment: '.slide',
@@ -48,10 +61,16 @@ function loadSticky() {
                     left: x + 'px',
                     top: y + 'px'
                 });
-                if(page_now != 1) {
+                if(page != page_now) {
                     $('.init-sticky').hide();
                 }
                 $('.init-sticky').removeClass('init-sticky');
+            }
+
+            for(i in exist_id) {
+                if(exist_id[i] >= 0) {
+                    $('[data-sticky-id="' + exist_id[i] + '"]').remove();
+                }
             }
         }).fail(function() {
             console.log('通信失敗');
