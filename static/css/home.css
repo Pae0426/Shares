@@ -278,11 +278,11 @@ button[disabled] {
     height: 70%;
     border-radius: 10px;
 }
-.new-sticky-modal-container {
+.new-sticky-modal-container,
+.vote-word-modal-container {
     width: 60%;
 }
 .vote-page-modal-container,
-.vote-word-modal-container,
 .explain-modal-container {
     width: 80%;
 }
@@ -323,8 +323,8 @@ button[disabled] {
 .selected-title {
     color: rgb(190, 190, 190);
 }
-.vote-page-title,
 .vote-word-title,
+.vote-page-title,
 .explain-app-title,
 .explain-function-title,
 .explain-unavailable-title {
@@ -346,6 +346,21 @@ button[disabled] {
 #chart {
     width: 100% !important;
     height: 400px !important;
+}
+
+/* 単語投票画面 */
+.voted-word-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+.voted-word {
+    width: 28%;
+    height: 100px;
+    background-color: rgb(245, 243, 243);
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px #9d9592;
+    margin: 0 2.5% 30px;
 }
 
 
