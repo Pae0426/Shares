@@ -224,12 +224,14 @@ button[disabled] {
 /* モーダル */
 
 .add-sticky-container,
+.vote-word-btn-container,
 .vote-page-container,
 .remove-vote-page-container {
     text-align: center;
 }
 
 .add-sticky-btn,
+.vote-word-btn,
 .vote-page-btn,
 .remove-vote-page-btn {
     border: none;
@@ -353,14 +355,23 @@ button[disabled] {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
+    height: 65%;
+    overflow-y: scroll;
 }
 .voted-word {
     width: 28%;
     height: 100px;
-    background-color: rgb(245, 243, 243);
+    background-color: rgb(247, 247, 247);
     border-radius: 5px;
     box-shadow: 3px 3px 5px #9d9592;
     margin: 0 2.5% 30px;
+}
+.vote-word-input-container {
+    text-align: center;
+    margin: 30px 0;
+}
+.vote-word-input {
+    line-height: 2em;
 }
 
 
@@ -766,9 +777,8 @@ button[disabled] {
     box-shadow: 3px 3px 5px #d1cbc9;
 }
 
-.vote-word-modal-container,
 .explain-modal-container {
-    overflow-y: scroll; 
+    overflow-y: scroll;
 }
 .explain-app-text,
 .unavailable-element {
