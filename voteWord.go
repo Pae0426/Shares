@@ -8,8 +8,39 @@ import (
 	"net/http"
 )
 
-type VotePageInfo struct {
-	Text string `json:"text"`
+type VoteWordInfo struct {
+	Id      int    `json:"id"`
+	Word    string `json:"word"`
+	Empathy int    `json:"empathy"`
+}
+
+func getVoteWordInfo(w http.ResponseWriter, r *http.Request) {
+	row, err := Db.Query("select * from vote_word_info_" + TABLE_NAME)
+	if err != nil {
+		fmt.Println("エラー:", err)
+	}
+
+	var voteWords []VoteWordInfo
+	for row.Next() {
+		voteWord := VoteWordInfo{}
+		err = row.Scan(
+			&voteWord.Id,
+			&voteWord.Word,
+			&voteWord.Empathy,
+		)
+		if err != nil {
+			fmt.Println("エラー:", err)
+		}
+		voteWords = append(voteWords, voteWord)
+	}
+
+	result, err := json.Marshal(voteWords)
+	if err != nil {
+		log.Println("エラー:", err)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(result)
 }
 
 func voteWord(w http.ResponseWriter, r *http.Request) {
@@ -26,14 +57,14 @@ func voteWord(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	type VoteWordInfo struct {
+	type VoteWord struct {
 		Word string `json:"word"`
 	}
-	var voteWordInfo VoteWordInfo
+	var voteWord VoteWord
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
-	if err := json.Unmarshal(body[:len], &voteWordInfo); err != nil {
+	if err := json.Unmarshal(body[:len], &voteWord); err != nil {
 		log.Println("エラー:", err)
 	}
 
@@ -41,7 +72,7 @@ func voteWord(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	sql.Exec(voteWordInfo.Word)
+	sql.Exec(voteWord.Word)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
