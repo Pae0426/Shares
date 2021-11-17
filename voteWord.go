@@ -44,7 +44,7 @@ func getVoteWordInfo(w http.ResponseWriter, r *http.Request) {
 }
 
 func getWordEmpathyInfo(w http.ResponseWriter, r *http.Request) {
-	row, err := Db.Query("select max(id) from user_voted_word_" + TABLE_NAME)
+	row, err := Db.Query("select max(id) from vote_word_info_" + TABLE_NAME)
 	if err != nil {
 		log.Println("エラー:", err.Error())
 	}

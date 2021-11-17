@@ -32,7 +32,7 @@ $('.vote-word-modal-btn').on('click', function() {
                 let word = voteWords[i]['word'];
                 let empathy = voteWords[i]['empathy'];
                 let isEmpathy;
-                if(wordEmpathyInfo[i] == 1) {
+                if(wordEmpathyInfo[id] == 1) {
                     isEmpathy = true;
                 } else {
                     isEmpathy = false;
