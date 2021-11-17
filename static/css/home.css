@@ -200,18 +200,28 @@ button[disabled] {
     right: 10px;
     bottom: 5px;
 }
+.word-empathy-container {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+}
 .empathy-false,
+.word-empathy-false,
 .trash-btn {
     color: #93a5b1;
 }
-.empathy-true {
+.empathy-true,
+.word-empathy-true {
     color: #f76685;
 }
 .fa-heart,
 .trash-btn {
     cursor: pointer;
 }
-.empathy-count {
+.empathy-count,
+.word-empathy-count {
     margin-left: 2px;
     left: 0;
 }
@@ -365,6 +375,7 @@ button[disabled] {
     border-radius: 5px;
     box-shadow: 3px 3px 5px #9d9592;
     margin: 0 2.5% 30px;
+    position: relative;
 }
 .vote-word-input-container {
     text-align: center;
