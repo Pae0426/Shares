@@ -101,8 +101,8 @@ $(document).on('mouseup', '.sticky', function() {
 $(document).on('click', '.empathy-false', function(e) {
     $(this).addClass('empathy-true');
     $(this).removeClass('empathy-false');
-    $(this).next('.empathy-count').addClass('empathy-true');
-    $(this).next('.empathy-count').removeClass('empathy-false');
+    $(this).next('.empathy-count').addClass('empathy-count-true');
+    $(this).next('.empathy-count').removeClass('empathy-count-false');
     let empathy_count = $(this).next('.empathy-count').text();
     empathy_count = parseInt(empathy_count) + 1;
     $(this).next('.empathy-count').text(empathy_count);
@@ -124,8 +124,8 @@ $(document).on('click', '.empathy-false', function(e) {
 $(document).on('click', '.empathy-true', function(e) {
     $(this).addClass('empathy-false');
     $(this).removeClass('empathy-true');
-    $(this).next('.empathy-count').addClass('empathy-false');
-    $(this).next('.empathy-count').removeClass('empathy-true');
+    $(this).next('.empathy-count').addClass('empathy-count-false');
+    $(this).next('.empathy-count').removeClass('empathy-count-true');
     let empathy_count = $(this).next('.empathy-count').text();
     empathy_count = parseInt(empathy_count) - 1;
     $(this).next('.empathy-count').text(empathy_count);

@@ -208,11 +208,13 @@ button[disabled] {
     bottom: 5px;
 }
 .empathy-false,
+.empathy-count-false,
 .word-empathy-false,
 .trash-btn {
     color: #93a5b1;
 }
 .empathy-true,
+.empathy-count-true,
 .word-empathy-true {
     color: #f76685;
 }
