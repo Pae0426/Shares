@@ -1,7 +1,9 @@
 function newVoteWord(id, word, empathy, isEmpathy) {
     return `
     <div class="voted-word" data-word-id=` + id + `>
-        <span class="word-text">` + word + `</span>
+        <div class="word-text-container">
+            <span class="word-text">` + word + `</span>
+        </div>
         <div class="word-empathy-container">
             <i class="fas fa-heart word-empathy-`+ isEmpathy +`" data-word-empathy-id="` + id + `"></i>
             <span class="word-empathy-count word-empathy-`+ isEmpathy +`">` + empathy + `</span>

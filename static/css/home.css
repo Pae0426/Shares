@@ -363,6 +363,14 @@ button[disabled] {
 }
 
 /* 単語投票画面 */
+.word-text-container {
+    width: 70%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
 .voted-word-container {
     display: flex;
     flex-wrap: wrap;
