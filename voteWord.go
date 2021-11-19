@@ -1,7 +1,6 @@
 package main
 
 import (
-	"database/sql"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -84,19 +83,6 @@ func getWordEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 }
 
 func voteWord(w http.ResponseWriter, r *http.Request) {
-	row, err := Db.Query("select max(id) from vote_word_info_" + TABLE_NAME)
-	if err != nil {
-		log.Println("エラー:", err.Error())
-	}
-	defer row.Close()
-
-	var id sql.NullInt64
-	for row.Next() {
-		if er := row.Scan(&id); er != nil {
-			log.Println("エラー:", er)
-		}
-	}
-
 	type VoteWord struct {
 		Word string `json:"word"`
 	}
@@ -114,7 +100,24 @@ func voteWord(w http.ResponseWriter, r *http.Request) {
 	}
 	sql.Exec(voteWord.Word)
 
-	res, err := json.Marshal("{200, \"ok\"}")
+	row, err := Db.Query("select max(id) from vote_word_info_" + TABLE_NAME)
+	if err != nil {
+		log.Println("エラー:", err.Error())
+	}
+	defer row.Close()
+
+	// type maxId struct {
+	// 	Id sql.NullInt64 `json:"id"`
+	// }
+	// var maxid maxId
+	var id int
+	for row.Next() {
+		if er := row.Scan(&id); er != nil {
+			log.Println("エラー:", er)
+		}
+	}
+
+	res, err := json.Marshal(id)
 	if err != nil {
 		log.Println("エラー:", err)
 	}

@@ -115,7 +115,10 @@ $('.vote-word-btn').on('click', function() {
         data: JSON.stringify({
             word: word,
         })
-    }).done(function() {
+    }).done(function(id) {
+        let voteWord = newVoteWord(id, word, 0, false);
+        $('.voted-word-container').append(voteWord);
+        $('.vote-word-input').val('');
         console.log('通信成功');
     }).fail(function() {
         console.log('通信失敗');
