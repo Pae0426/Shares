@@ -145,8 +145,8 @@ $(document).on('click', '.empathy-true', function(e) {
     });
 });
 
-$(document).on('click', '.trash-btn', function() {
-    let id = $(this).data("trash-id");
+$(document).on('click', '.sticky-trash-btn', function() {
+    let id = $(this).data("sticky-trash-id");
     $.ajax({
         dataType: 'json',
         contentType: 'application/json',

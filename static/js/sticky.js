@@ -11,7 +11,7 @@ function newSticky(id, color, shape, text, page_now, empathy, isEmpathy) {
                 <div class="empathy-container">
                     <i class="fas fa-heart empathy-`+ isEmpathy +`" data-empathy-id="` + id + `"></i>
                     <span class="empathy-count empathy-count-`+ isEmpathy +`">` + empathy + `</span>
-                    <i class="fas fa-trash-alt trash-btn" data-trash-id="` + id + `"></i>
+                    <i class="fas fa-trash-alt sticky-trash-btn" data-sticky-trash-id="` + id + `"></i>
                 </div>
             </span>
         `
@@ -23,7 +23,7 @@ function newSticky(id, color, shape, text, page_now, empathy, isEmpathy) {
                 <div class="empathy-container">
                     <i class="fas fa-heart empathy-`+ isEmpathy +`" data-empathy-id="` + id + `"></i>
                     <span class="empathy-count empathy-count-`+ isEmpathy +`">` + empathy + `</span>
-                    <i class="fas fa-trash-alt trash-btn" data-trash-id="` + id + `"></i>
+                    <i class="fas fa-trash-alt sticky-trash-btn" data-sticky-trash-id="` + id + `"></i>
                 </div>
             </span>
         `
@@ -35,7 +35,7 @@ function newSticky(id, color, shape, text, page_now, empathy, isEmpathy) {
                 <div class="empathy-container">
                     <i class="fas fa-heart empathy-`+ isEmpathy +`" data-empathy-id="` + id + `"></i>
                     <span class="empathy-count empathy-count-`+ isEmpathy +`">` + empathy + `</span>
-                    <i class="fas fa-trash-alt trash-btn" data-trash-id="` + id + `"></i>
+                    <i class="fas fa-trash-alt sticky-trash-btn" data-sticky-trash-id="` + id + `"></i>
                 </div>
             </span>
         `
