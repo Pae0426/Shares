@@ -28,7 +28,6 @@ $('.vote-word-modal-btn').on('click', function() {
         url: '/get-vote-word-info',
     }).done(function(voteWords) {
         getWordEmpathyInfo().done(function(wordEmpathyInfo) {
-            console.log(wordEmpathyInfo);
             for(let i in voteWords) {
                 let id = voteWords[i]['id'];
                 let word = voteWords[i]['word'];

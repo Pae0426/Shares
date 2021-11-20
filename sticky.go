@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 )
 
@@ -21,7 +21,7 @@ type Sticky struct {
 func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 	rows, err := Db.Query("select * from lecture_" + TABLE_NAME)
 	if err != nil {
-		log.Println("エラー:", err.Error())
+		fmt.Println("エラー:", err.Error())
 	}
 
 	var stickies []Sticky
@@ -38,7 +38,7 @@ func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 			&sticky.Text,
 			&sticky.Empathy,
 		); er != nil {
-			log.Println("エラー:", er)
+			fmt.Println("エラー:", er)
 		}
 		stickies = append(stickies, sticky)
 	}
@@ -47,7 +47,7 @@ func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 
 	result, err := json.Marshal(stickies)
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -57,7 +57,7 @@ func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 func loadStickyId(w http.ResponseWriter, r *http.Request) {
 	row, err := Db.Query("select max(id) from lecture_" + TABLE_NAME)
 	if err != nil {
-		log.Println("エラー:", err.Error())
+		fmt.Println("エラー:", err.Error())
 	}
 
 	defer row.Close()
@@ -65,13 +65,13 @@ func loadStickyId(w http.ResponseWriter, r *http.Request) {
 	var id int
 	for row.Next() {
 		if er := row.Scan(&id); er != nil {
-			log.Println("エラー:", er)
+			fmt.Println("エラー:", er)
 		}
 	}
 
 	result, err := json.Marshal(id)
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -84,18 +84,18 @@ func createSticky(w http.ResponseWriter, r *http.Request) {
 	body := make([]byte, len)
 	r.Body.Read(body)
 	if err := json.Unmarshal(body[:len], &sticky); err != nil {
-		log.Println("エラー")
+		fmt.Println("エラー")
 	}
 
 	sql, err := Db.Prepare("insert into lecture_" + TABLE_NAME + "(page, color, shape, location_x, location_y, text, empathy) values(?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 	sql.Exec(sticky.Page, sticky.Color, sticky.Shape, sticky.Locate_x, sticky.Locate_y, sticky.Text, sticky.Empathy)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(res)
@@ -107,18 +107,18 @@ func updateSticky(w http.ResponseWriter, r *http.Request) {
 	body := make([]byte, len)
 	r.Body.Read(body)
 	if err := json.Unmarshal(body[:len], &sticky); err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 
 	sql, err := Db.Prepare("update lecture_" + TABLE_NAME + " set location_x=?, location_y=? where id=?")
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 	sql.Exec(sticky.Locate_x, sticky.Locate_y, sticky.Id)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(res)
@@ -127,7 +127,7 @@ func updateSticky(w http.ResponseWriter, r *http.Request) {
 func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 	row, err := Db.Query("select max(id) from lecture_" + TABLE_NAME)
 	if err != nil {
-		log.Println("エラー:", err.Error())
+		fmt.Println("エラー:", err.Error())
 	}
 	var maxId int
 	for row.Next() {
@@ -136,12 +136,12 @@ func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 
 	cookie, err := r.Cookie("user-id")
 	if err != nil {
-		log.Fatalln("エラー: ", err)
+		fmt.Println("エラー: ", err)
 	}
 
 	row, err = Db.Query("select sticky_id from empathy_info_"+TABLE_NAME+" where user_cookie=?", cookie.Value)
 	if err != nil {
-		log.Println("エラー:", err.Error())
+		fmt.Println("エラー:", err.Error())
 	}
 	defer row.Close()
 
@@ -150,14 +150,14 @@ func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 		var stickyId int
 		err = row.Scan(&stickyId)
 		if err != nil {
-			log.Println("エラー", err)
+			fmt.Println("エラー", err)
 		}
 		userEmpathy[stickyId] = 1
 	}
 
 	result, err := json.Marshal(userEmpathy)
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -173,28 +173,28 @@ func incrementEmpathy(w http.ResponseWriter, r *http.Request) {
 	body := make([]byte, len)
 	r.Body.Read(body)
 	if err := json.Unmarshal(body[:len], &targetId); err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 
 	sql, err := Db.Prepare("update lecture_" + TABLE_NAME + " set empathy=empathy+1 where id=?")
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 	sql.Exec(targetId.Id)
 
 	cookie, err := r.Cookie("user-id")
 	if err != nil {
-		log.Println("エラー: ", err)
+		fmt.Println("エラー: ", err)
 	}
 	sql, err = Db.Prepare("insert into empathy_info_" + TABLE_NAME + "(sticky_id, user_cookie) values(?, ?)")
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 	sql.Exec(targetId.Id, cookie.Value)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(res)
@@ -209,28 +209,28 @@ func decrementEmpathy(w http.ResponseWriter, r *http.Request) {
 	body := make([]byte, len)
 	r.Body.Read(body)
 	if err := json.Unmarshal(body[:len], &targetId); err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 
 	sql, err := Db.Prepare("update lecture_" + TABLE_NAME + " set empathy=empathy-1 where id=?")
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 	sql.Exec(targetId.Id)
 
 	cookie, err := r.Cookie("user-id")
 	if err != nil {
-		log.Println("エラー: ", err)
+		fmt.Println("エラー: ", err)
 	}
 	sql, err = Db.Prepare("delete from empathy_info_" + TABLE_NAME + " where sticky_id=? and user_cookie=?")
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 	sql.Exec(targetId.Id, cookie.Value)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(res)
@@ -245,24 +245,24 @@ func removeSticky(w http.ResponseWriter, r *http.Request) {
 	body := make([]byte, len)
 	r.Body.Read(body)
 	if err := json.Unmarshal(body[:len], &targetId); err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 
 	sql, err := Db.Prepare("delete from lecture_" + TABLE_NAME + " where id=?")
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 	sql.Exec(targetId.Id)
 
 	sql, err = Db.Prepare("delete from empathy_info_" + TABLE_NAME + " where sticky_id=?")
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 	sql.Exec(targetId.Id)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
-		log.Println("エラー:", err)
+		fmt.Println("エラー:", err)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(res)

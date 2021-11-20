@@ -1,7 +1,6 @@
 $(function() {
     setInterval(function() {
         loadSticky();
-        console.log('reflesh!');
     }, 10000);
 })
 

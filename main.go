@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -120,10 +121,10 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 		"views/footer.html",
 	)
 	if err != nil {
-		log.Fatalln("テンプレートファイルを読み込めません:", err.Error())
+		fmt.Println("テンプレートファイルを読み込めません:", err.Error())
 	}
 	if err := t.Execute(w, data); err != nil {
-		log.Println("エラー:", err.Error())
+		fmt.Println("エラー:", err.Error())
 	}
 }
 
