@@ -148,6 +148,7 @@ func main() {
 	http.HandleFunc("/increment-word-empathy", incrementWordEmpathy)
 	http.HandleFunc("/decrement-word-empathy", decrementWordEmpathy)
 	http.HandleFunc("/vote-word", voteWord)
+	http.HandleFunc("/remove-vote-word", removeVoteWord)
 	http.HandleFunc("/set-total-page", setTotalPage)
 	http.HandleFunc("/get-vote-page-info", getVotePageInfo)
 	http.HandleFunc("/vote-page", votePage)

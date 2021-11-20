@@ -7,7 +7,7 @@ function newVoteWord(id, word, empathy, isEmpathy) {
         <div class="word-empathy-container">
             <i class="fas fa-heart word-empathy-`+ isEmpathy +`" data-word-empathy-id="` + id + `"></i>
             <span class="word-empathy-count word-empathy-`+ isEmpathy +`">` + empathy + `</span>
-            <i class="fas fa-trash-alt trash-btn" data-trash-id="` + id + `"></i>
+            <i class="fas fa-trash-alt word-trash-btn" data-word-trash-id="` + id + `"></i>
         </div>
     </div>`
 }
@@ -120,6 +120,23 @@ $('.vote-word-btn').on('click', function() {
         $('.voted-word-container').append(voteWord);
         $('.vote-word-input').val('');
         console.log('通信成功');
+    }).fail(function() {
+        console.log('通信失敗');
+    });
+});
+
+$(document).on('click', '.word-trash-btn', function() {
+    let id = $(this).data("word-trash-id");
+    $.ajax({
+        dataType: 'json',
+        contentType: 'application/json',
+        type: 'POST',
+        url: '/remove-vote-word',
+        data: JSON.stringify({
+            id: id,
+        })
+    }).done(function() {
+        $('[data-word-id="' + id + '"]').remove();
     }).fail(function() {
         console.log('通信失敗');
     });

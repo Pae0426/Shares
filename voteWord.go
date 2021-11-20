@@ -196,3 +196,35 @@ func decrementWordEmpathy(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(res)
 }
+
+func removeVoteWord(w http.ResponseWriter, r *http.Request) {
+	type TargetId struct {
+		Id int `json:"id"`
+	}
+	var targetId TargetId
+	len := r.ContentLength
+	body := make([]byte, len)
+	r.Body.Read(body)
+	if err := json.Unmarshal(body[:len], &targetId); err != nil {
+		log.Println("エラー:", err)
+	}
+
+	sql, err := Db.Prepare("delete from vote_word_info_" + TABLE_NAME + " where id=?")
+	if err != nil {
+		log.Println("エラー:", err)
+	}
+	sql.Exec(targetId.Id)
+
+	sql, err = Db.Prepare("delete from user_voted_word_" + TABLE_NAME + " where word_id=?")
+	if err != nil {
+		log.Println("エラー:", err)
+	}
+	sql.Exec(targetId.Id)
+
+	res, err := json.Marshal("{200, \"ok\"}")
+	if err != nil {
+		log.Println("エラー:", err)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(res)
+}

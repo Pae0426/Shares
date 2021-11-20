@@ -210,7 +210,8 @@ button[disabled] {
 .empathy-false,
 .empathy-count-false,
 .word-empathy-false,
-.trash-btn {
+.trash-btn,
+.word-trash-btn {
     color: #93a5b1;
 }
 .empathy-true,
@@ -219,7 +220,8 @@ button[disabled] {
     color: #f76685;
 }
 .fa-heart,
-.trash-btn {
+.trash-btn,
+.word-trash-btn {
     cursor: pointer;
 }
 .empathy-count,
@@ -227,7 +229,8 @@ button[disabled] {
     margin-left: 2px;
     left: 0;
 }
-.trash-btn {
+.trash-btn,
+.word-trash-btn {
     margin-left: 10px;
 }
 
