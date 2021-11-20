@@ -258,6 +258,7 @@ button[disabled] {
     font-size: 20px;
     font-weight: 800;
     margin-bottom: 30px;
+    cursor: pointer;
 }
 .vote-page-btn,
 .remove-vote-page-btn {
