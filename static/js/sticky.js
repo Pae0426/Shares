@@ -42,7 +42,7 @@ function newSticky(id, color, shape, text, page_now, empathy, isEmpathy) {
     }
 }
 
-function createSticky(page_now, color, shape, text) {
+function createSticky(page_now, color, shape, text, height) {
     $.ajax({
         dataType: 'json',
         contentType: 'application/json',
@@ -55,7 +55,8 @@ function createSticky(page_now, color, shape, text) {
             location_x: 0,
             location_y: 0,
             text: text,
-            empathy: 0
+            empathy: 0,
+            height: height
         })
     }).done(function() {
     }).fail(function() {
@@ -140,6 +141,26 @@ $('.create-sticky-title').on('click', function() {
 $('.template-sticky-title').on('click', function() {
     $('.create-sticky-container').hide();
     $('.template-sticky-container').show();
+});
+
+//付箋サイズを動的に変更
+$('.create-sticky-textarea').on('input', function() {
+    let count = $(this).val().length;
+    let maxlength = parseInt($(this).attr('maxlength'));
+    if(count > maxlength) {
+        maxlength += 11;
+        $(this).attr('maxlength', '' + maxlength);
+        $('.create-sticky-model').css({
+            'height': '+=16px'
+        });
+    }
+    if(maxlength > 22 && count <= maxlength-11) {
+        maxlength -= 11;
+        $(this).attr('maxlength', '' + maxlength);
+        $('.create-sticky-model').css({
+            'height': '-=16px'
+        });
+    }
 });
 
 //色の変更
@@ -250,9 +271,15 @@ $('.add-sticky-btn').on('click', function() {
             let shape = $('.create-sticky-model').attr('data-shape');
             let text = $('.create-sticky-model-text').text();
             let page_now = $('.page-now-text').html();
+            let height = $('.create-sticky-model').css('height');
             let sticky = newSticky(id+1, color, shape, text, page_now, 0, false);
             $('.slide').append(sticky);
-            createSticky(page_now, color, shape, text);
+            createSticky(page_now, color, shape, text, height);
+            $('.init-sticky').css({
+                left: 0,
+                top: 0,
+                height: height,
+            });
         }
         else if($('.add-sticky-btn').hasClass('template-mode')) {
             let color = $('.selected-template').data('color').replace('light-', '');
@@ -261,16 +288,17 @@ $('.add-sticky-btn').on('click', function() {
             let page_now = $('.page-now-text').html();
             let sticky = newSticky(id+1, color, shape, text, page_now, 0, false);
             $('.slide').append(sticky);
-            createSticky(page_now, color, shape, text);
+            createSticky(page_now, color, shape, text, "50px");
+            $('.init-sticky').css({
+                left: 0,
+                top: 0,
+            });
         }
-
+        
         $('.sticky').draggable({
             containment: '.slide',
         });
-        $('.init-sticky').css({
-            left: 0,
-            top: 0
-        });
+
         $('.init-sticky').removeClass('init-sticky');
 
         $('.new-sticky-modal-item').fadeOut();

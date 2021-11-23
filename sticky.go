@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -15,13 +16,15 @@ type Sticky struct {
 	Locate_y int    `json:"location_y,omitempty"`
 	Text     string `json:"text,omitempty"`
 	Empathy  int    `json:"empathy,omitempty"`
+	Height   string `json:"height,omitempty"`
 }
 
 //付箋の情報をDBから取得しjson形式で表示
 func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 	rows, err := Db.Query("select * from lecture_" + TABLE_NAME)
 	if err != nil {
-		fmt.Println("エラー:", err.Error())
+		log.SetFlags(log.Lshortfile)
+		log.Println("エラー:", err.Error())
 	}
 
 	var stickies []Sticky
@@ -37,6 +40,7 @@ func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 			&sticky.Locate_y,
 			&sticky.Text,
 			&sticky.Empathy,
+			&sticky.Height,
 		); er != nil {
 			fmt.Println("エラー:", er)
 		}
@@ -87,11 +91,11 @@ func createSticky(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("エラー")
 	}
 
-	sql, err := Db.Prepare("insert into lecture_" + TABLE_NAME + "(page, color, shape, location_x, location_y, text, empathy) values(?, ?, ?, ?, ?, ?, ?)")
+	sql, err := Db.Prepare("insert into lecture_" + TABLE_NAME + "(page, color, shape, location_x, location_y, text, empathy, height) values(?, ?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {
 		fmt.Println("エラー:", err)
 	}
-	sql.Exec(sticky.Page, sticky.Color, sticky.Shape, sticky.Locate_x, sticky.Locate_y, sticky.Text, sticky.Empathy)
+	sql.Exec(sticky.Page, sticky.Color, sticky.Shape, sticky.Locate_x, sticky.Locate_y, sticky.Text, sticky.Empathy, sticky.Height)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {

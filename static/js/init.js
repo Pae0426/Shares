@@ -27,10 +27,13 @@ function loadSticky() {
                 let id = stickies[i]['id'];
                 let x = stickies[i]['location_x'];
                 let y = stickies[i]['location_y'];
+                let height = stickies[i]['height'];
+                
                 if(exist_id.includes(id)) {
                     $('[data-sticky-id="'+ id +'"]').animate({
                         'left': x + 'px',
-                        'top': y + 'px'
+                        'top': y + 'px',
+                        'height': height
                     });
                     exist_id[$.inArray(id, exist_id)] = -1;
                     continue;
@@ -59,7 +62,8 @@ function loadSticky() {
                 });
                 $('.init-sticky').css({
                     left: x + 'px',
-                    top: y + 'px'
+                    top: y + 'px',
+                    height: height
                 });
                 if(page != page_now) {
                     $('.init-sticky').hide();
