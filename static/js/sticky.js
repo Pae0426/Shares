@@ -83,10 +83,11 @@ function updateSticy(id, location_x, location_y) {
 
 //付箋モデルの形を変更した際に、テキストエリアとモデル内の文字をその形に合った文字数に変更
 function changeTextAreaSize(shape) {
-    let input_text = $('.create-sticky-textarea').val();
+    let input_text;
     let textarea_size;
     switch(shape) {
         case 'square':
+            input_text = $('.static-input').val();
             textarea_size = 22;
             break;
         case 'rectangle':
@@ -94,6 +95,7 @@ function changeTextAreaSize(shape) {
             break;
         case 'left':
         case 'right':
+            input_text = $('.dynamic-input').val();
             textarea_size = 16;
             break;
     }
@@ -101,7 +103,8 @@ function changeTextAreaSize(shape) {
     if (input_text.length >= textarea_size) {
         input_text = input_text.slice(0, textarea_size);
     }
-    $('.create-sticky-textarea').val(input_text);
+    $('.dynamic-input').val(input_text);
+    $('.static-input').val(input_text);
     $('.create-sticky-model-text').html(input_text);
     $('.create-sticky-textarea').attr('maxlength', '' + textarea_size);
 }
@@ -122,6 +125,9 @@ function resetDesign() {
     $('.create-sticky-model').removeClass('change-color-left-' + color);
     $('.create-sticky-model').removeClass('change-color-right-' + color);
     $('.create-sticky-model-text').text('');
+    $('.create-sticky-model').css({
+        height: '50px'
+    });
 }
 
 //付箋作成モーダルの表示・非表示
@@ -144,24 +150,24 @@ $('.template-sticky-title').on('click', function() {
 });
 
 //付箋サイズを動的に変更
-$('.create-sticky-textarea').on('input', function() {
-    let count = $(this).val().length;
-    let maxlength = parseInt($(this).attr('maxlength'));
-    if(count > maxlength) {
-        maxlength += 11;
-        $(this).attr('maxlength', '' + maxlength);
-        $('.create-sticky-model').css({
-            'height': '+=16px'
-        });
-    }
-    if(maxlength > 22 && count <= maxlength-11) {
-        maxlength -= 11;
-        $(this).attr('maxlength', '' + maxlength);
-        $('.create-sticky-model').css({
-            'height': '-=16px'
-        });
-    }
-});
+// $('.dynamic-input').on('input', function() {
+//     let count = $(this).val().length;
+//     let maxlength = parseInt($(this).attr('maxlength'));
+//     if(count > maxlength) {
+//         maxlength += 11;
+//         $(this).attr('maxlength', '' + maxlength);
+//         $('.create-sticky-model').css({
+//             height: '+=16px'
+//         });
+//     }
+//     if(maxlength > 22 && count <= maxlength-11) {
+//         maxlength -= 11;
+//         $(this).attr('maxlength', '' + maxlength);
+//         $('.create-sticky-model').css({
+//             height: '-=16px'
+//         });
+//     }
+// });
 
 //色の変更
 $('[class^=create-sticky-color-]').on('click', function() {
@@ -213,6 +219,8 @@ $('[class^=create-sticky-shape-]').on('click', function() {
     if(/square$/.test(shape)) {
         $(this).addClass('selected-shape');
         $('.create-sticky-model').attr('data-shape', 'square');
+        $('.dynamic-input').show();
+        $('.static-input').hide();
 
         changeTextAreaSize('square');
     }
@@ -225,25 +233,54 @@ $('[class^=create-sticky-shape-]').on('click', function() {
     else if(/left$/.test(shape)) {
         $('.create-sticky-shape-left').addClass('selected-shape selected-shape-left');
         $('.create-sticky-shape-triangle-left').addClass('selected-shape-triangle-left');
+        $('.dynamic-input').hide();
+        $('.static-input').show();
 
         $('.create-sticky-model').attr('data-shape', 'left');
         $('.create-sticky-model').addClass('change-color-left-' + color);
+        $('.create-sticky-model').css({
+            height: '50px'
+        });
 
         changeTextAreaSize('left');
     }
     else if(/right$/.test(shape)) {
         $('.create-sticky-shape-right').addClass('selected-shape selected-shape-right');
         $('.create-sticky-shape-triangle-right').addClass('selected-shape-triangle-right');
+        $('.dynamic-input').hide();
+        $('.static-input').show();
 
         $('.create-sticky-model').attr('data-shape', 'right');
         $('.create-sticky-model').addClass('change-color-right-' + color);
+        $('.create-sticky-model').css({
+            height: '50px'
+        });
 
         changeTextAreaSize('right');
     }
 });
 
-$(document).on('input', '.create-sticky-textarea', function() {
-    $('.create-sticky-model-text').text($('.create-sticky-textarea').val());
+$(document).on('input', '.dynamic-input', function() {
+    $('.create-sticky-model-text').text($('.dynamic-input').val());
+    let count = $(this).val().length;
+    let maxlength = parseInt($(this).attr('maxlength'));
+    if(count > maxlength) {
+        maxlength += 11;
+        $(this).attr('maxlength', '' + maxlength);
+        $('.create-sticky-model').css({
+            height: '+=16px'
+        });
+    }
+    if(maxlength > 22 && count <= maxlength-11) {
+        maxlength -= 11;
+        $(this).attr('maxlength', '' + maxlength);
+        $('.create-sticky-model').css({
+            height: '-=16px'
+        });
+    }
+});
+$(document).on('input', '.static-input', function() {
+    $('.create-sticky-model-text').text($('.static-input').val());
 });
 
 $('.template-sticky-title').on('click', function() {

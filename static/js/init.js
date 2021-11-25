@@ -1,4 +1,5 @@
 $('.progressbar').css('width', 'calc(1 / ' + page_total + ' * 100%)');
+$('.static-input').hide();
 $('.template-sticky-container').hide();
 $('.invisible-sticky-btn').hide();
 
@@ -22,7 +23,7 @@ function loadSticky() {
             let exist_id = $('.sticky').map(function() {
                 return $(this).data('sticky-id');
             }).toArray();
-            
+
             for(let i in stickies) {
                 let id = stickies[i]['id'];
                 let x = stickies[i]['location_x'];
