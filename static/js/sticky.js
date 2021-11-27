@@ -128,6 +128,7 @@ function resetDesign() {
     $('.create-sticky-model').css({
         height: '50px'
     });
+    $('.dynamic-input').attr('maxlength', '22');
 }
 
 //付箋作成モーダルの表示・非表示
