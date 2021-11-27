@@ -52,8 +52,8 @@ function createSticky(page_now, color, shape, text, height) {
             page: parseInt(page_now),
             color: color,
             shape: shape,
-            location_x: 0,
-            location_y: 0,
+            location_x: 1,
+            location_y: 1,
             text: text,
             empathy: 0,
             height: height
@@ -313,8 +313,8 @@ $('.add-sticky-btn').on('click', function() {
             $('.slide').append(sticky);
             createSticky(page_now, color, shape, text, height);
             $('.init-sticky').css({
-                left: 0,
-                top: 0,
+                left: '1px',
+                top: '1px',
                 height: height,
             });
         }
@@ -327,8 +327,8 @@ $('.add-sticky-btn').on('click', function() {
             $('.slide').append(sticky);
             createSticky(page_now, color, shape, text, "50px");
             $('.init-sticky').css({
-                left: 0,
-                top: 0,
+                left: '1px',
+                top: '1px',
             });
         }
         
