@@ -134,8 +134,8 @@ func main() {
 		Addr: ":9000",
 	}
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	http.HandleFunc("/home", templateHandler)
 	http.HandleFunc("/", setDummyCookie)
+	http.HandleFunc("/home", templateHandler)
 	http.HandleFunc("/stickies", getStickiesInfo)
 	http.HandleFunc("/load-sticky-id", loadStickyId)
 	http.HandleFunc("/create-sticky", createSticky)

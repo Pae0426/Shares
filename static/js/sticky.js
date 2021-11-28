@@ -328,7 +328,7 @@ $('.add-sticky-btn').on('click', function() {
                 top: '1px',
             });
         }
-        
+        console.log(id);
         $('[data-sticky-id="' + id + '"]').draggable({
             containment: '.slide',
         });
