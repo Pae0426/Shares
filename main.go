@@ -72,7 +72,7 @@ func setDummyCookie(w http.ResponseWriter, r *http.Request) {
 }
 
 func templateHandler(w http.ResponseWriter, r *http.Request) {
-	row, err := Db.Query("select max(id) from user_cookie_info_" + TABLE_NAME)
+	row, err := Db.Query("select ifnull(max(id),0) from user_cookie_info_" + TABLE_NAME)
 	if err != nil {
 		log.Println("エラー:", err.Error())
 	}

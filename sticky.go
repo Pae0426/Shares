@@ -8,15 +8,16 @@ import (
 )
 
 type Sticky struct {
-	Id       int    `json:"id,omitempty"`
-	Page     int    `json:"page,omitempty"`
-	Color    string `json:"color,omitempty"`
-	Shape    string `json:"shape,omitempty"`
-	Locate_x int    `json:"location_x,omitempty"`
-	Locate_y int    `json:"location_y,omitempty"`
-	Text     string `json:"text,omitempty"`
-	Empathy  int    `json:"empathy,omitempty"`
-	Height   string `json:"height,omitempty"`
+	Id         int    `json:"id,omitempty"`
+	Page       int    `json:"page,omitempty"`
+	Color      string `json:"color,omitempty"`
+	Shape      string `json:"shape,omitempty"`
+	Locate_x   int    `json:"location_x,omitempty"`
+	Locate_y   int    `json:"location_y,omitempty"`
+	Text       string `json:"text,omitempty"`
+	Empathy    int    `json:"empathy,omitempty"`
+	Height     string `json:"height,omitempty"`
+	UserCookie string `json:"user_cookie,omitempty"`
 }
 
 //付箋の情報をDBから取得しjson形式で表示
@@ -41,6 +42,7 @@ func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 			&sticky.Text,
 			&sticky.Empathy,
 			&sticky.Height,
+			&sticky.UserCookie,
 		); er != nil {
 			fmt.Println("エラー:", er)
 		}
@@ -59,7 +61,7 @@ func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 }
 
 func loadStickyId(w http.ResponseWriter, r *http.Request) {
-	row, err := Db.Query("select max(id) from lecture_" + TABLE_NAME)
+	row, err := Db.Query("select ifnull(max(id),0) from lecture_" + TABLE_NAME)
 	if err != nil {
 		fmt.Println("エラー:", err.Error())
 	}
@@ -83,6 +85,11 @@ func loadStickyId(w http.ResponseWriter, r *http.Request) {
 }
 
 func createSticky(w http.ResponseWriter, r *http.Request) {
+	cookie, err := r.Cookie("user-id")
+	if err != nil {
+		fmt.Println("エラー: ", err)
+	}
+
 	var sticky Sticky
 	len := r.ContentLength
 	body := make([]byte, len)
@@ -91,11 +98,11 @@ func createSticky(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("エラー")
 	}
 
-	sql, err := Db.Prepare("insert into lecture_" + TABLE_NAME + "(page, color, shape, location_x, location_y, text, empathy, height) values(?, ?, ?, ?, ?, ?, ?, ?)")
+	sql, err := Db.Prepare("insert into lecture_" + TABLE_NAME + "(page, color, shape, location_x, location_y, text, empathy, height, user_cookie) values(?, ?, ?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {
 		fmt.Println("エラー:", err)
 	}
-	sql.Exec(sticky.Page, sticky.Color, sticky.Shape, sticky.Locate_x, sticky.Locate_y, sticky.Text, sticky.Empathy, sticky.Height)
+	sql.Exec(sticky.Page, sticky.Color, sticky.Shape, sticky.Locate_x, sticky.Locate_y, sticky.Text, sticky.Empathy, sticky.Height, cookie.Value)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
@@ -129,7 +136,7 @@ func updateSticky(w http.ResponseWriter, r *http.Request) {
 }
 
 func getEmpathyInfo(w http.ResponseWriter, r *http.Request) {
-	row, err := Db.Query("select max(id) from lecture_" + TABLE_NAME)
+	row, err := Db.Query("select ifnull(max(id),0) from lecture_" + TABLE_NAME)
 	if err != nil {
 		fmt.Println("エラー:", err.Error())
 	}

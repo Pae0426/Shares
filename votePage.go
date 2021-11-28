@@ -12,7 +12,7 @@ type VoteInfo struct {
 }
 
 func getVotePageInfo(w http.ResponseWriter, r *http.Request) {
-	row, err := Db.Query("select max(id) from vote_page_info_" + TABLE_NAME)
+	row, err := Db.Query("select ifnull(max(id),0) from vote_page_info_" + TABLE_NAME)
 	if err != nil {
 		fmt.Println("エラー:", err.Error())
 	}

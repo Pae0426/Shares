@@ -42,7 +42,7 @@ func getVoteWordInfo(w http.ResponseWriter, r *http.Request) {
 }
 
 func getWordEmpathyInfo(w http.ResponseWriter, r *http.Request) {
-	row, err := Db.Query("select max(id) from vote_word_info_" + TABLE_NAME)
+	row, err := Db.Query("select ifnull(max(id),0) from vote_word_info_" + TABLE_NAME)
 	if err != nil {
 		fmt.Println("エラー:", err.Error())
 	}
@@ -99,7 +99,7 @@ func voteWord(w http.ResponseWriter, r *http.Request) {
 	}
 	sql.Exec(voteWord.Word)
 
-	row, err := Db.Query("select max(id) from vote_word_info_" + TABLE_NAME)
+	row, err := Db.Query("select ifnull(max(id),0) from vote_word_info_" + TABLE_NAME)
 	if err != nil {
 		fmt.Println("エラー:", err.Error())
 	}

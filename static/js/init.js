@@ -55,12 +55,22 @@ function loadSticky() {
                 } else {
                     isEmpathy = false
                 }
+                let user_id = stickies[i]['user_cookie'];
+                let cookie_user_id = $.cookie('user-id');
+                let isCreated;
+                if(user_id == cookie_user_id) {
+                    isCreated = true;
+                } else {
+                    isCreated = false;
+                }
 
-                let sticky = newSticky(id, color, shape, text, page, empathy, isEmpathy);
+                let sticky = newSticky(id, color, shape, text, page, empathy, isEmpathy, isCreated);
                 $('.slide').append(sticky);
-                $('.sticky').draggable({
-                    containment: '.slide',
-                });
+                if(isCreated) {
+                    $('[data-sticky-id="' + id + '"]').draggable({
+                        containment: '.slide',
+                    });
+                }
                 $('.init-sticky').css({
                     left: x + 'px',
                     top: y + 'px',
@@ -77,6 +87,12 @@ function loadSticky() {
                     $('[data-sticky-id="' + exist_id[i] + '"]').remove();
                 }
             }
+
+            $('.sticky').each(function() {
+                if($(this).hasClass('created-false')) {
+                    $(this).find('.sticky-trash-btn').remove();
+                }
+            });
         }).fail(function() {
             console.log('通信失敗');
         });
