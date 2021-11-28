@@ -143,6 +143,7 @@ button[disabled] {
 }
 
 .explain-add-sticky-container,
+.explain-vote-word-container,
 .explain-vote-page-container,
 .explain-visible-sticky-container {
     display: flex;
@@ -151,6 +152,7 @@ button[disabled] {
     align-items: center;
 }
 .explain-add-sticky-icon,
+.explain-vote-word-icon,
 .explain-vote-page-icon,
 .explain-visible-sticky-icon {
     color: rgb(100, 100, 100);
@@ -158,6 +160,7 @@ button[disabled] {
     padding: 0 50px;
 }
 .explain-add-sticky-text,
+.explain-vote-word-text,
 .explain-vote-page-text,
 .explain-visible-sticky-text {
     color: rgb(100, 100, 100);
