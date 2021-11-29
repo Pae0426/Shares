@@ -121,6 +121,8 @@ function resetDesign() {
     $('.create-sticky-model').removeClass('change-color-left-' + color);
     $('.create-sticky-model').removeClass('change-color-right-' + color);
     $('.create-sticky-model-text').text('');
+    $('.square-limit-input-text').show();
+    $('.left-right-limit-input-text').hide();
     $('.create-sticky-model').css({
         height: '50px'
     });
@@ -218,6 +220,8 @@ $('[class^=create-sticky-shape-]').on('click', function() {
         $('.create-sticky-model').attr('data-shape', 'square');
         $('.dynamic-input').show();
         $('.static-input').hide();
+        $('.square-limit-input-text').show();
+        $('.left-right-limit-input-text').hide();
 
         changeTextAreaSize('square');
     }
@@ -232,6 +236,8 @@ $('[class^=create-sticky-shape-]').on('click', function() {
         $('.create-sticky-shape-triangle-left').addClass('selected-shape-triangle-left');
         $('.dynamic-input').hide();
         $('.static-input').show();
+        $('.square-limit-input-text').hide();
+        $('.left-right-limit-input-text').show();
 
         $('.create-sticky-model').attr('data-shape', 'left');
         $('.create-sticky-model').addClass('change-color-left-' + color);
@@ -246,6 +252,8 @@ $('[class^=create-sticky-shape-]').on('click', function() {
         $('.create-sticky-shape-triangle-right').addClass('selected-shape-triangle-right');
         $('.dynamic-input').hide();
         $('.static-input').show();
+        $('.square-limit-input-text').hide();
+        $('.left-right-limit-input-text').show();
 
         $('.create-sticky-model').attr('data-shape', 'right');
         $('.create-sticky-model').addClass('change-color-right-' + color);

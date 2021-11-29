@@ -357,6 +357,14 @@ button[disabled] {
     width: 300px;
     margin: 0 10x;
 }
+.square-limit-input-text,
+.left-right-limit-input-text {
+    font-size: 14px;
+    color: rgb(190, 190, 190);
+    position: relative;
+    left: 20px;
+    margin-bottom: 5px;
+}
 
 /* ページ投票画面 */
 
