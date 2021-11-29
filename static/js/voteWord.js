@@ -1,6 +1,6 @@
-function newVoteWord(id, word, empathy, isEmpathy) {
+function newVoteWord(id, word, empathy, isEmpathy, isCreated) {
     return `
-    <div class="voted-word" data-word-id=` + id + `>
+    <div class="voted-word word-created-` + isCreated + `" data-word-id=` + id + `>
         <div class="word-text-container">
             <span class="word-text">` + word + `</span>
         </div>
@@ -38,9 +38,24 @@ $('.vote-word-modal-btn').on('click', function() {
                 } else {
                     isEmpathy = false;
                 }
-                let voteWord = newVoteWord(id, word, empathy, isEmpathy);
+                let user_id = voteWords[i]['user_cookie'];
+                let cookie_user_id = $.cookie('user-id');
+                let isCreated;
+                if(user_id == cookie_user_id) {
+                    isCreated = true;
+                } else {
+                    isCreated = false;
+                }
+
+                let voteWord = newVoteWord(id, word, empathy, isEmpathy, isCreated);
                 $('.voted-word-container').append(voteWord);
             }
+
+            $('.voted-word').each(function() {
+                if($(this).hasClass('word-created-false')) {
+                    $(this).find('.word-trash-btn').remove();
+                }
+            });
             $('.vote-word-modal-item').fadeIn();
         }).fail(function() {
             console.log('通信失敗');

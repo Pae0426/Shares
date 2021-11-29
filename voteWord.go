@@ -7,9 +7,10 @@ import (
 )
 
 type VoteWordInfo struct {
-	Id      int    `json:"id"`
-	Word    string `json:"word"`
-	Empathy int    `json:"empathy"`
+	Id         int    `json:"id"`
+	Word       string `json:"word"`
+	Empathy    int    `json:"empathy"`
+	UserCookie string `json:"user_cookie,omitempty"`
 }
 
 func getVoteWordInfo(w http.ResponseWriter, r *http.Request) {
@@ -25,6 +26,7 @@ func getVoteWordInfo(w http.ResponseWriter, r *http.Request) {
 			&voteWord.Id,
 			&voteWord.Word,
 			&voteWord.Empathy,
+			&voteWord.UserCookie,
 		)
 		if err != nil {
 			fmt.Println("エラー:", err)
@@ -82,6 +84,11 @@ func getWordEmpathyInfo(w http.ResponseWriter, r *http.Request) {
 }
 
 func voteWord(w http.ResponseWriter, r *http.Request) {
+	cookie, err := r.Cookie("user-id")
+	if err != nil {
+		fmt.Println("エラー: ", err)
+	}
+
 	type VoteWord struct {
 		Word string `json:"word"`
 	}
@@ -93,11 +100,11 @@ func voteWord(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("エラー:", err)
 	}
 
-	sql, err := Db.Prepare("insert into vote_word_info_" + TABLE_NAME + "(word) values(?)")
+	sql, err := Db.Prepare("insert into vote_word_info_" + TABLE_NAME + "(word, user_cookie) values(?, ?)")
 	if err != nil {
 		fmt.Println(err)
 	}
-	sql.Exec(voteWord.Word)
+	sql.Exec(voteWord.Word, cookie.Value)
 
 	row, err := Db.Query("select ifnull(max(id),0) from vote_word_info_" + TABLE_NAME)
 	if err != nil {
@@ -105,10 +112,6 @@ func voteWord(w http.ResponseWriter, r *http.Request) {
 	}
 	defer row.Close()
 
-	// type maxId struct {
-	// 	Id sql.NullInt64 `json:"id"`
-	// }
-	// var maxid maxId
 	var id int
 	for row.Next() {
 		if er := row.Scan(&id); er != nil {
