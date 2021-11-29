@@ -68,9 +68,7 @@ function loadSticky() {
                 let sticky = newSticky(id, color, shape, text, page, empathy, isEmpathy, isCreated);
                 $('.slide').append(sticky);
                 if(isCreated) {
-                    $('[data-sticky-id="' + id + '"]').draggable({
-                        containment: '.slide',
-                    });
+                    
                 }
                 $('.init-sticky').css({
                     left: x + 'px',
@@ -89,8 +87,12 @@ function loadSticky() {
                 }
             }
 
-            $('.sticky').each(function() {
-                if($(this).hasClass('created-false')) {
+            $('.sticky').each(function(i) {
+                if($(this).hasClass('created-true')) {
+                    $(this).draggable({
+                        containment: '.slide',
+                    });
+                } else {
                     $(this).find('.sticky-trash-btn').remove();
                 }
             });
