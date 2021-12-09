@@ -41,6 +41,11 @@ $('.vote-page-modal-btn').on('click', function() {
                     }
                 },
                 scales: {
+                    y: {
+                        ticks: {
+                            stepSize: 1,
+                        }
+                    },
                     xAxes: [{
                         ticks: {
                             stepSize: 1,
@@ -48,12 +53,8 @@ $('.vote-page-modal-btn').on('click', function() {
                             maxRotation: 0,
                             minRotation: 0,
                         },
-                    }],
-                    yAxes: [{
-                        display: false,
-                        ticks: {
-                            min: 0,
-                            max: 100,
+                        gridLines: {
+                            display: false,
                         },
                     }],
                 },
