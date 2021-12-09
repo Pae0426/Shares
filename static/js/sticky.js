@@ -269,12 +269,14 @@ $(document).on('input', '.dynamic-input', function() {
     $('.create-sticky-model-text').text($('.dynamic-input').val());
     let count = $(this).val().length;
     let maxlength = parseInt($(this).attr('maxlength'));
-    if(count > maxlength) {
-        maxlength += 11;
-        $(this).attr('maxlength', '' + maxlength);
-        $('.create-sticky-model').css({
-            height: '+=16px'
-        });
+    if(count <= 110) {
+        if(count > maxlength) {
+            maxlength += 11;
+            $(this).attr('maxlength', '' + maxlength);
+            $('.create-sticky-model').css({
+                height: '+=16px'
+            });
+        }
     }
     if(maxlength > 22 && count <= maxlength-11) {
         maxlength -= 11;
