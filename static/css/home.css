@@ -145,7 +145,8 @@ button[disabled] {
 .explain-add-sticky-container,
 .explain-vote-word-container,
 .explain-vote-page-container,
-.explain-visible-sticky-container {
+.explain-visible-sticky-container,
+.explain-question-container {
     display: flex;
     justify-content: flex-start;
     margin: 30px 0;
@@ -154,15 +155,31 @@ button[disabled] {
 .explain-add-sticky-icon,
 .explain-vote-word-icon,
 .explain-vote-page-icon,
-.explain-visible-sticky-icon {
+.explain-visible-sticky-icon,
+.explain-question-icon {
     color: rgb(100, 100, 100);
     font-size: 2.5em;
+}
+.explain-add-sticky-icon {
+    padding: 5px 50px;
+}
+.explain-vote-word-icon {
     padding: 0 50px;
+}
+.explain-vote-page-icon {
+    padding: 5px 47.5px;
+}
+.explain-visible-sticky-icon {
+    padding: 10px 45px;
+}
+.explain-question-icon {
+    padding: 10px 52.5px;
 }
 .explain-add-sticky-text,
 .explain-vote-word-text,
 .explain-vote-page-text,
-.explain-visible-sticky-text {
+.explain-visible-sticky-text,
+.explain-question-text {
     color: rgb(100, 100, 100);
     font-size: 20px;
     line-height: 150%;
