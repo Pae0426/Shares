@@ -1,7 +1,7 @@
 $(function() {
     setInterval(function() {
         loadSticky();
-    }, 10000);
+    }, 20000);
 })
 
 //スライドの遷移を制御
