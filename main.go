@@ -16,8 +16,8 @@ import (
 
 var Db *sql.DB
 
-const TABLE_NAME = "nagai"
-const PDF_DIR = "nagai"
+const TABLE_NAME = "12"
+const PDF_DIR = "12"
 
 func init() {
 	var err error
@@ -128,6 +128,10 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func Pdf(w http.ResponseWriter, r *http.Request) {
+	Pdf_to_image()
+}
+
 func main() {
 	log.Println("Webサーバーを開始します...")
 	server := http.Server{
@@ -154,5 +158,6 @@ func main() {
 	http.HandleFunc("/get-vote-page-info", getVotePageInfo)
 	http.HandleFunc("/vote-page", votePage)
 	http.HandleFunc("/remove-vote-page", removeVotePage)
+	http.HandleFunc("/pdf", Pdf)
 	server.ListenAndServe()
 }
