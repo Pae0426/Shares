@@ -167,6 +167,49 @@ $(document).on('click', '.sticky-trash-btn', function() {
     });
 });
 
+$('.vote-page-btn').hover(function() {
+    $(this).next('.vote-page-caption').show();
+}, function() {
+    $(this).next('.vote-page-caption').hide();
+});
+
+$('.add-highlight-btn').hover(function() {
+    $(this).next('.add-highlight-caption').show();
+}, function() {
+    $(this).next('.add-highlight-caption').hide();
+});
+
+$('.add-sticky-modal-btn').hover(function() {
+    $(this).next('.add-sticky-caption').show();
+}, function() {
+    $(this).next('.add-sticky-caption').hide();
+});
+
+$('.visible-sticky-btn').hover(function() {
+    $(this).next('.visible-sticky-caption').show();
+}, function() {
+    $(this).next('.visible-sticky-caption').hide();
+});
+
+$('.invisible-sticky-btn').hover(function() {
+    $(this).next('.invisible-sticky-caption').show();
+}, function() {
+    $(this).next('.invisible-sticky-caption').hide();
+});
+
+$('.show-graph-btn').hover(function() {
+    $(this).next('.show-graph-caption').show();
+}, function() {
+    $(this).next('.show-graph-caption').hide();
+});
+
+$('.question-btn').hover(function() {
+    $(this).next('.question-caption').show();
+}, function() {
+    $(this).next('.question-caption').hide();
+});
+
+
 // let oldX = null;//始点
 // let oldY = null;//始点
 // let moveX = null;

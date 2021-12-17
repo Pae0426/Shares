@@ -97,6 +97,7 @@ footer {
     cursor: pointer;
     border-radius: .15rem;
     font-size: 1.5em;
+    position: relative;
 }
 .fa-sticky-note {
     transform: scale(-1, -1);
@@ -212,6 +213,73 @@ button[disabled] {
     line-height: 150%;
 }
 
+.vote-page-caption,
+.add-highlight-caption,
+.add-sticky-caption,
+.visible-sticky-caption,
+.invisible-sticky-caption,
+.show-graph-caption,
+.question-caption {
+    display: none;
+    position: absolute;
+    padding: 16px;
+    margin-top: 15px;
+    border-radius: 8px;
+    background: #aaacaf;
+    color: #fff;
+}
+.vote-page-caption {
+    left: -10px;
+}
+.add-highlight-caption {
+    left: 50px;
+}
+.add-sticky-caption {
+    left: 95px;
+}
+.visible-sticky-caption {
+    right: 85px;
+}
+.invisible-sticky-caption {
+    right: 90px;
+}
+.show-graph-caption {
+    right: 30px;
+}
+.question-caption {
+    right: 0;
+}
+.vote-page-caption:after,
+.add-highlight-caption:after,
+.add-sticky-caption:after,
+.visible-sticky-caption:after,
+.invisible-sticky-caption:after,
+.show-graph-caption:after,
+.question-caption:after {
+    position: absolute;
+    bottom: 100%;
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    border-color: #aaacaf(51, 51, 51, 0);
+    border-bottom-color: #aaacaf;
+    border-width: 10px;
+    pointer-events: none;
+    content: " ";
+}
+.vote-page-caption:after,
+.add-highlight-caption:after,
+.add-sticky-caption:after {
+    left: 20%;
+    margin-left: -10px;
+}
+.visible-sticky-caption:after,
+.invisible-sticky-caption:after,
+.show-graph-caption:after,
+.question-caption:after {
+    right: 20%;
+    margin-right: -10px;
+}
 
 
 /* スライド上の付箋 */
