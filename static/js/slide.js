@@ -51,9 +51,10 @@ function pageControl(action) {
         $('.sticky-page' + page_now).show();
     }
     $('.vote-page-btn').removeClass('voted-page');
-    console.log(page_now);
+    $('.vote-page-caption').text('このページに投票する');
     if(pageVotedInfo[page_now-1] == 1) {
         $('.vote-page-btn').addClass('voted-page');
+        $('.vote-page-caption').text('このページの投票をやめる');
     }
 }
 

@@ -126,9 +126,9 @@ function loadVotedPage() {
         url: '/get-vote-page-info',
     }).done(function(vote_info) {
         pageVotedInfo = vote_info.userVotePage;
-        console.log(pageVotedInfo);
         if(pageVotedInfo[0] == 1) {
             $('.vote-page-btn').addClass('voted-page');
+            $('.vote-page-caption').text('このページの投票をやめる');
         }
     }).fail(function(){
         console.log('通信失敗');
