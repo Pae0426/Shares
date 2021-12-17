@@ -5,3 +5,4 @@ let isVisible = true;
 let pageChart;
 let isHighlight = false;
 let pageVoted;
+let pageVotedInfo;

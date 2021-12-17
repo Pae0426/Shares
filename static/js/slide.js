@@ -8,6 +8,7 @@ $(function() {
 function pageControl(action) {
     let page_now = $('.page-now-text').html();
     page_now = parseInt(page_now);
+    
     if(action == 'next') {
         //最終ページか否かで処理を分岐
         if (page_now == PAGE_TOTAL) {
@@ -24,8 +25,6 @@ function pageControl(action) {
             $('.sticky-page' + page_now).hide();
         }
         page_now += 1;
-        // $('.vote-page-btn').removeClass('[class^="vote-page-"]')
-        // $('.vote-page-btn').addClass('vote-page-'+page_now);
     } else if(action == 'prev') {
         //初期ページか否かで処理を分岐
         if (page_now == 1) {
@@ -42,8 +41,6 @@ function pageControl(action) {
             $('.sticky-page' + page_now).hide();
         }
         page_now -= 1;
-        // $('.vote-page-btn').removeClass('[class^="vote-page-"]')
-        // $('.vote-page-btn').addClass('vote-page-'+page_now);
     }
     let next_jpeg_file_path = '/static/pdf/' + PDF_DIR + '/' + page_now + '.jpeg';
     $('.display-page').attr('src', next_jpeg_file_path);
@@ -52,6 +49,11 @@ function pageControl(action) {
     $('.page-now-vote').html(page_now);
     if(isVisible) {
         $('.sticky-page' + page_now).show();
+    }
+    $('.vote-page-btn').removeClass('voted-page');
+    console.log(page_now);
+    if(pageVotedInfo[page_now-1] == 1) {
+        $('.vote-page-btn').addClass('voted-page');
     }
 }
 

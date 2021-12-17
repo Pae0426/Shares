@@ -99,6 +99,7 @@ $('.vote-page-btn').on('click', function() {
         }).done(function() {
             $('.remove-vote-page-container').hide();
             $('.vote-page-container').show();
+            pageVotedInfo[page_now-1] = 0;
             // pageChart.data.datasets[0].data[page_now-1]--;
             // pageChart.data.datasets[0].backgroundColor[page_now-1] = '#9eceff';
             // pageChart.update();
@@ -120,6 +121,7 @@ $('.vote-page-btn').on('click', function() {
         }).done(function() {
             $('.vote-page-container').hide();
             $('.remove-vote-page-container').show();
+            pageVotedInfo[page_now-1] = 1;
             // pageChart.data.datasets[0].data[page_now-1]++;
             // pageChart.data.datasets[0].backgroundColor[page_now-1] = '#9eff9e';
             // pageChart.update();

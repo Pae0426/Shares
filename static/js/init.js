@@ -125,11 +125,10 @@ function loadVotedPage() {
         type: 'GET',
         url: '/get-vote-page-info',
     }).done(function(vote_info) {
-        if(vote_info.userVotePage[0] == 1) {
-            pageVoted = true;
+        pageVotedInfo = vote_info.userVotePage;
+        console.log(pageVotedInfo);
+        if(pageVotedInfo[0] == 1) {
             $('.vote-page-btn').addClass('voted-page');
-        } else {
-            pageVoted = false;
         }
     }).fail(function(){
         console.log('通信失敗');
