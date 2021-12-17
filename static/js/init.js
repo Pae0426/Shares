@@ -118,5 +118,25 @@ function loadStikyIdCallBack(callback) {
     });
 }
 
+function loadVotedPage() {
+    $.ajax({
+        dataType: 'json',
+        contentType: 'application/json',
+        type: 'GET',
+        url: '/get-vote-page-info',
+    }).done(function(vote_info) {
+        if(vote_info.userVotePage[0] == 1) {
+            pageVoted = true;
+            $('.vote-page-btn').addClass('voted-page');
+        } else {
+            pageVoted = false;
+        }
+    }).fail(function(){
+        console.log('通信失敗');
+    });
+}
+
 //初期付箋を読み込み
 loadSticky();
+
+loadVotedPage();

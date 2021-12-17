@@ -1,4 +1,4 @@
-$('.vote-page-modal-btn').on('click', function() {
+$('.show-graph-btn').on('click', function() {
     $('.vote-page-modal-item').fadeIn();
     $.ajax({
         dataType: 'json',
@@ -85,44 +85,46 @@ $('.vote-page-modal-close-btn, .vote-page-modal-bg').on('click', function() {
 });
 
 $('.vote-page-btn').on('click', function() {
-    let page_now = $('.page-now-text').html();
-    page_now = parseInt(page_now);
-    $.ajax({
-        dataType: 'json',
-        contentType: 'application/json',
-        type: 'POST',
-        url: '/vote-page',
-        data: JSON.stringify({
-            page: page_now,
-        })
-    }).done(function() {
-        $('.vote-page-container').hide();
-        $('.remove-vote-page-container').show();
-        pageChart.data.datasets[0].data[page_now-1]++;
-        pageChart.data.datasets[0].backgroundColor[page_now-1] = '#9eff9e';
-        pageChart.update();
-    }).fail(function() {
-        console.log('通信失敗');
-    });
-});
-
-$('.remove-vote-page-btn').on('click', function() {
-    let page_now = $('.page-now-text').html();
-    $.ajax({
-        dataType: 'json',
-        contentType: 'application/json',
-        type: 'POST',
-        url: '/remove-vote-page',
-        data: JSON.stringify({
-            page: parseInt(page_now),
-        })
-    }).done(function() {
-        $('.remove-vote-page-container').hide();
-        $('.vote-page-container').show();
-        pageChart.data.datasets[0].data[page_now-1]--;
-        pageChart.data.datasets[0].backgroundColor[page_now-1] = '#9eceff';
-        pageChart.update();
-    }).fail(function() {
-        console.log('通信失敗');
-    });
+    if($(this).hasClass('voted-page')) {
+        $('.vote-page-btn').removeClass('voted-page');
+        let page_now = $('.page-now-text').html();
+        $.ajax({
+            dataType: 'json',
+            contentType: 'application/json',
+            type: 'POST',
+            url: '/remove-vote-page',
+            data: JSON.stringify({
+                page: parseInt(page_now),
+            })
+        }).done(function() {
+            $('.remove-vote-page-container').hide();
+            $('.vote-page-container').show();
+            // pageChart.data.datasets[0].data[page_now-1]--;
+            // pageChart.data.datasets[0].backgroundColor[page_now-1] = '#9eceff';
+            // pageChart.update();
+        }).fail(function() {
+            console.log('通信失敗');
+        });
+    } else {
+        $('.vote-page-btn').addClass('voted-page');
+        let page_now = $('.page-now-text').html();
+        page_now = parseInt(page_now);
+        $.ajax({
+            dataType: 'json',
+            contentType: 'application/json',
+            type: 'POST',
+            url: '/vote-page',
+            data: JSON.stringify({
+                page: page_now,
+            })
+        }).done(function() {
+            $('.vote-page-container').hide();
+            $('.remove-vote-page-container').show();
+            // pageChart.data.datasets[0].data[page_now-1]++;
+            // pageChart.data.datasets[0].backgroundColor[page_now-1] = '#9eff9e';
+            // pageChart.update();
+        }).fail(function() {
+            console.log('通信失敗');
+        });   
+    }
 });
