@@ -198,6 +198,10 @@ button[disabled] {
     width: 40px;
     height: 40px;
 }
+.explain-img-highlight-mini {
+    width: 18px;
+    height: 18px;
+}
 .explain-add-highlight-icon {
     padding: 4px 45px;
 }
@@ -235,7 +239,7 @@ button[disabled] {
     left: -10px;
 }
 .add-highlight-caption {
-    left: 50px;
+    left: 15px;
 }
 .add-sticky-caption {
     left: 95px;
