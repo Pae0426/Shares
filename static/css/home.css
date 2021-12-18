@@ -242,10 +242,10 @@ button[disabled] {
     left: 15px;
 }
 .add-sticky-caption {
-    left: 95px;
+    left: 60px;
 }
 .visible-sticky-caption {
-    right: 85px;
+    right: 57px;
 }
 .invisible-sticky-caption {
     right: 90px;

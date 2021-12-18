@@ -193,9 +193,9 @@ $('.visible-sticky-btn').hover(function() {
 });
 
 $('.invisible-sticky-btn').hover(function() {
-    $(this).next('.invisible-sticky-caption').show();
+    $(this).next('.visible-sticky-caption').show();
 }, function() {
-    $(this).next('.invisible-sticky-caption').hide();
+    $(this).next('.visible-sticky-caption').hide();
 });
 
 $('.show-graph-btn').hover(function() {

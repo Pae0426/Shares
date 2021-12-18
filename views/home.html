@@ -13,7 +13,7 @@
                 <button class="add-highlight-btn" type="image"><img class="img-highlight" src="/static/img/highlight.png"></img></button>
                 <p class="add-highlight-caption">スライド上にマーカーを引く<br>※使い方はヘルプから確認してください</p>
                 <button class="add-sticky-modal-btn" type="image"><i class="far fa-edit"></i></button>
-                <p class="add-sticky-caption">付箋を作成する</p>
+                <p class="add-sticky-caption">スライド上に付箋を作成する<br>付箋の移動と削除は付箋作成者のみ可能</p>
             </div>
             <div class="slide-control-center">
                 <button class="prev-slide-btn" type="image" disabled><i class="fas fa-chevron-left"></i></button>
@@ -24,9 +24,9 @@
             </div>
             <div class="slide-control-right">
                 <button class="visible-sticky-btn" type="image"><i class="far fa-eye"></i></button>
-                <p class="visible-sticky-caption">付箋・マーキング表示中</p>
+                <p class="visible-sticky-caption">付箋・マーカーの表示/非表示を切り替える</p>
                 <button class="invisible-sticky-btn" type="image"><i class="far fa-eye-slash"></i></button>
-                <p class="invisible-sticky-caption">付箋・マーキング非表示中</p>
+                <p class="visible-sticky-caption">付箋・マーカーの表示/非表示を切り替える</p>
                 <button class="show-graph-btn" type="image"><i class="fas fa-chart-bar"></i></button>
                 <p class="show-graph-caption">ページ投票グラフを表示する</p>
                 <button class="question-btn"><i class="fas fa-question"></i></button>
@@ -169,9 +169,8 @@
             <p>このツールは学生の理解度に合わせて疑問を表現し、講義の理解度向上を支援するWebアプリです。</p>
             <br>
             <p>
-                分からないところがあればスライドにオンライン付箋を貼ったり、単語登録・ページ投票をして疑問を共有してみましょう。
+                分からないところがあればスライドにオンライン付箋を貼ったり、マーキング・ページ投票をして疑問を共有してみましょう。
             </p>
-            <p>「いいね」が多い付箋や単語、投票数が多いページは教員が改めて解説してくれるかもしれません。</p>
             <p>
                 各種機能は匿名で利用できるので気軽に疑問を表現してみてください。
             </p>
@@ -189,13 +188,13 @@
                 各種機能の説明
             </div>
         </div>
-        <div class="explain-add-sticky-container">
-            <span class="explain-add-sticky-icon">
-                <i class="far fa-edit"></i>
+        <div class="explain-vote-page-container">
+            <span class="explain-vote-page-icon">
+                <i class="far fa-sticky-note"></i>
             </span>
-            <span class="explain-add-sticky-text">
-                スライド上に付箋を作成します。<br>
-                付箋の色・形・内容を編集できるほか、テンプレートを使用することもできます。
+            <span class="explain-vote-page-text">
+                ページに投票してグラフで集計します。<br>
+                理解ができていないページがあれば投票してみましょう。
             </span>
         </div>
         <div class="explain-add-highlight-container">
@@ -208,13 +207,22 @@
                 ②緑色の点が出てくるので、右側をドラッグして線を引く。
             </span>
         </div>
-        <div class="explain-vote-page-container">
-            <span class="explain-vote-page-icon">
-                <i class="far fa-sticky-note"></i>
+        <div class="explain-add-sticky-container">
+            <span class="explain-add-sticky-icon">
+                <i class="far fa-edit"></i>
             </span>
-            <span class="explain-vote-page-text">
-                ページに投票してグラフで集計します。<br>
-                理解ができていないページがあれば投票してみましょう。
+            <span class="explain-add-sticky-text">
+                スライド上に付箋を作成します。<br>
+                付箋の色・形・内容を編集できるほか、テンプレートを使用することもできます。<br>
+                付箋の内容に同意したら、「いいね」ボタンで共感してみましょう。
+            </span>
+        </div>
+        <div class="explain-visible-sticky-container">
+            <span class="explain-visible-sticky-icon">
+                <i class="far fa-eye"></i>
+            </span>
+            <span class="explain-visible-sticky-text">
+                スライド上の付箋の表示/非表示を切り替えます。
             </span>
         </div>
         <div class="explain-show-graph-container">
@@ -224,14 +232,6 @@
             <span class="explain-show-graph-text">
                 投票されたページを集計したグラフを表示します。<br>
                 自分が投票したページは緑色で表示されます。
-            </span>
-        </div>
-        <div class="explain-visible-sticky-container">
-            <span class="explain-visible-sticky-icon">
-                <i class="far fa-eye"></i>
-            </span>
-            <span class="explain-visible-sticky-text">
-                スライド上の付箋の表示/非表示を切り替えます。
             </span>
         </div>
         <div class="explain-question-container">
