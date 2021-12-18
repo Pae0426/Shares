@@ -27,8 +27,8 @@ $('.display-page').on('click', function(e) {
         }
         width_sum += width;
     }
-    let x = x_abs - x_diff - width_sum;
-    let y = y_abs - y_diff - height_slide - 5;
+    let x = Math.round(x_abs - x_diff - width_sum);
+    let y = Math.round(y_abs - y_diff - height_slide - 5);
 
     if(isHighlight) {
         let highlight = `
@@ -45,8 +45,8 @@ $('.display-page').on('click', function(e) {
         
         isHighlight = false;
         $('.highlight'+n).removeClass('ui-resizable');
-        x = x + width_sum;
-        y = y + height_slide;
+        x = Math.round(x + width_sum);
+        y = Math.round(y + height_slide);
         $('.highlight'+n).css({
             position: "absolute",
             left: x+"px",
