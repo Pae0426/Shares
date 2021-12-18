@@ -45,6 +45,9 @@ footer {
     width: 60%;
     position: relative;
 }
+.slide {
+    position: relative;
+}
 .progressbar-background {
     position: relative;
     background-color: #aaacaf;
@@ -523,6 +526,30 @@ button[disabled] {
     line-height: 2em;
 }
 
+/* ハイライト */
+
+.img-highlight{
+    width: 22px;
+    height: 22px;
+    position: relative;
+    top: 3px;
+}
+
+[class^="highlight"] {
+    background-color: rgb(95, 252, 95);
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    z-index: 3;
+    opacity: 0.5;
+}
+
+.highlighting {
+    background-color: rgb(117, 255, 117);
+}
+.highlighting:hover {
+    background-color: rgb(117, 255, 117) !important;
+}
 
 /* 自作付箋 */
 
@@ -952,59 +979,4 @@ button[disabled] {
 /* コピーライト */
 #copyright {
     text-align: center;
-}
-
-
-
-
-.img-highlight{
-    width: 22px;
-    height: 22px;
-    position: relative;
-    top: 3px;
-}
-
-/* .simpleIcon:before{
-    content:"";
-    display:block;
-    
-    background-size:100%;
-    background-position:0px 0px;
-    position: absolute;
-    overflow:hidden;
-    left:0px;
-} */
-
-.highlight {
-    background-color: red;
-    display: inline-block;
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    z-index: 3;
-}
-
-.arrow_box {
-    display: none;
-    position: absolute;
-    padding: 16px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;  
-    border-radius: 8px;
-    background: #333;
-    color: #fff;
-}
-.arrow_box:after {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    margin-left: -10px;
-    border: solid transparent;
-    border-color: rgba(51, 51, 51, 0);
-    border-bottom-color: #333;
-    border-width: 10px;
-    pointer-events: none;
-    content: " ";
 }
