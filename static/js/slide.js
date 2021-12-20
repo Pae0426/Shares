@@ -19,10 +19,12 @@ function pageControl(action) {
             $('.fa-chevron-right').css('color', '#C0C0C0');
             $('.next-slide-btn').prop('disabled', true);
             $('.sticky-page' + page_now).hide();
+            $('.highlight-page' + page_now).hide();
         } else {
             $('.fa-chevron-left').css('color', '#fff');
             $('.prev-slide-btn').prop('disabled', false);
             $('.sticky-page' + page_now).hide();
+            $('.highlight-page' + page_now).hide();
         }
         page_now += 1;
     } else if(action == 'prev') {
@@ -35,10 +37,12 @@ function pageControl(action) {
             $('.fa-chevron-left').css('color', '#C0C0C0');
             $('.prev-slide-btn').prop('disabled', true);
             $('.sticky-page' + page_now).hide();
+            $('.highlight-page' + page_now).hide();
         } else {
             $('.fa-chevron-right').css('color', '#fff');
             $('.next-slide-btn').prop('disabled', false);
             $('.sticky-page' + page_now).hide();
+            $('.highlight-page' + page_now).hide();
         }
         page_now -= 1;
     }
@@ -49,6 +53,7 @@ function pageControl(action) {
     $('.page-now-vote').html(page_now);
     if(isVisible) {
         $('.sticky-page' + page_now).show();
+        $('.highlight-page' + page_now).show();
     }
     $('.vote-page-btn').removeClass('voted-page');
     $('.vote-page-caption').text('このページに投票する');

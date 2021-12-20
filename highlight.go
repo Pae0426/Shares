@@ -1,0 +1,136 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+	"strconv"
+)
+
+type HighlightInfo struct {
+	SumWidth   []int       `json:"sumWidth"`
+	Highlights []Highlight `json:"highlights"`
+}
+
+type Highlight struct {
+	Id         int    `json:"id, omitempty"`
+	Width      int    `json:width`
+	Page       int    `json:"page"`
+	X          int    `json:"x"`
+	Y          int    `json:"y"`
+	UserCookie string `json:"user_cookie,omitempty"`
+}
+
+func getHighlightInfo(w http.ResponseWriter, r *http.Request) {
+	row, err := Db.Query("select ifnull(max(id),0) from highlight_info_" + TABLE_NAME)
+	if err != nil {
+		fmt.Println("エラー:", err.Error())
+	}
+
+	defer row.Close()
+
+	var id int
+	for row.Next() {
+		if er := row.Scan(&id); er != nil {
+			fmt.Println("エラー:", er)
+		}
+	}
+
+	total_page := countFiles()
+	var sum_width_page int
+	var sum_width_all []int
+	for page := 1; page <= total_page; page++ {
+		row, err = Db.Query("select ifnull(sum(width),0) as sum_page from highlight_info_" + TABLE_NAME + " where page=" + strconv.Itoa(page))
+
+		for row.Next() {
+			if er := row.Scan(&sum_width_page); er != nil {
+				fmt.Println("エラー:", er)
+			}
+		}
+		sum_width_all = append(sum_width_all, sum_width_page)
+	}
+
+	row, err = Db.Query("select * from highlight_info_" + TABLE_NAME + " order by page")
+	if err != nil {
+		fmt.Println("エラー:", err.Error())
+	}
+
+	var highlights []Highlight
+	for row.Next() {
+		highlight := Highlight{}
+		if er := row.Scan(
+			&highlight.Id,
+			&highlight.Width,
+			&highlight.Page,
+			&highlight.X,
+			&highlight.Y,
+			&highlight.UserCookie,
+		); er != nil {
+			fmt.Println("エラー:", er)
+		}
+		highlights = append(highlights, highlight)
+	}
+
+	highlightInfo := HighlightInfo{
+		SumWidth:   sum_width_all,
+		Highlights: highlights,
+	}
+
+	result, err := json.Marshal(highlightInfo)
+	if err != nil {
+		fmt.Println("エラー:", err)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(result)
+}
+
+func getHighlightId(w http.ResponseWriter, r *http.Request) {
+	row, err := Db.Query("select ifnull(max(id),0) from highlight_info_" + TABLE_NAME)
+	if err != nil {
+		fmt.Println("エラー:", err.Error())
+	}
+
+	defer row.Close()
+
+	var id int
+	for row.Next() {
+		if er := row.Scan(&id); er != nil {
+			fmt.Println("エラー:", er)
+		}
+	}
+
+	res, err := json.Marshal(id)
+	if err != nil {
+		fmt.Println("エラー:", err)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(res)
+}
+
+func addHighlight(w http.ResponseWriter, r *http.Request) {
+	var highlight Highlight
+	len := r.ContentLength
+	body := make([]byte, len)
+	r.Body.Read(body)
+	if err := json.Unmarshal(body[:len], &highlight); err != nil {
+		fmt.Println("エラー:", err)
+	}
+
+	cookie, err := r.Cookie("user-id")
+	if err != nil {
+		fmt.Println("エラー: ", err)
+	}
+	sql, err := Db.Prepare("insert into highlight_info_" + TABLE_NAME + "(width, page, x, y, user_cookie) values(?, ?, ?, ?, ?)")
+	if err != nil {
+		fmt.Println("エラー:", err)
+	}
+	sql.Exec(highlight.Width, highlight.Page, highlight.X, highlight.Y, cookie.Value)
+
+	res, err := json.Marshal("{200, \"ok\"}")
+	if err != nil {
+		fmt.Println("エラー:", err)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(res)
+}

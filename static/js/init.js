@@ -118,6 +118,41 @@ function loadStikyIdCallBack(callback) {
     });
 }
 
+function loadHighlight() {
+    $.ajax({
+        dataType: 'json',
+        contentType: 'application/json',
+        type: 'GET',
+        url: '/get-highlight-info',
+    }).done(function(highlightInfo) {
+        let page_count = 1;
+        for(i in highlightInfo.sumWidth) {
+            let sum_width = highlightInfo.sumWidth[i];
+            for(j in highlightInfo.highlights) {
+                let page = highlightInfo.highlights[j]['page'];
+                console.log(page+'::'+page_count);
+                if(page == page_count) {
+                    console.log('abcd');
+                    let id = highlightInfo.highlights[j]['id'];
+                    let width = highlightInfo.highlights[j]['width'];
+                    let height_slide = $('.slide').height();
+                    let x = highlightInfo.highlights[j]['x'];
+                    let y = highlightInfo.highlights[j]['y'];
+                    let page_now = parseInt($('.page-now-text').html());
+                    console.log('page:'+page);
+                    addHighlight(id, width, sum_width, height_slide, page, x, y, page_now);
+                    highlightInfo.highlights.shift();
+                } else {
+                    page_count += 1;
+                    break;
+                }
+            }
+        }
+    }).fail(function() {
+        console.log('通信失敗');
+    })
+}
+
 function loadVotedPage() {
     $.ajax({
         dataType: 'json',
@@ -135,7 +170,9 @@ function loadVotedPage() {
     });
 }
 
-//初期付箋を読み込み
+// 初期付箋を読み込み
 loadSticky();
-
+// 初期ハイライトを読み込み
+loadHighlight();
+// ページ投票を読み込み
 loadVotedPage();
