@@ -542,7 +542,7 @@ button[disabled] {
 [class^="highlight"] {
     background-color: rgb(95, 252, 95);
     display: inline-block;
-    width: 10px;
+    /* width: 10px; */
     height: 10px;
     z-index: 3;
     opacity: 0.5;

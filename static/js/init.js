@@ -130,18 +130,16 @@ function loadHighlight() {
             let sum_width = highlightInfo.sumWidth[i];
             for(j in highlightInfo.highlights) {
                 let page = highlightInfo.highlights[j]['page'];
-                console.log(page+'::'+page_count);
                 if(page == page_count) {
-                    console.log('abcd');
                     let id = highlightInfo.highlights[j]['id'];
                     let width = highlightInfo.highlights[j]['width'];
                     let height_slide = $('.slide').height();
                     let x = highlightInfo.highlights[j]['x'];
                     let y = highlightInfo.highlights[j]['y'];
                     let page_now = parseInt($('.page-now-text').html());
-                    console.log('page:'+page);
-                    addHighlight(id, width, sum_width, height_slide, page, x, y, page_now);
-                    highlightInfo.highlights.shift();
+                    addHighlight(false, id, width, sum_width, height_slide, page, x, y, page_now);
+                    highlightWidth[id] = width;
+                    delete highlightInfo.highlights[j]
                 } else {
                     page_count += 1;
                     break;

@@ -6,3 +6,4 @@ let pageChart;
 let isHighlight = false;
 let pageVoted;
 let pageVotedInfo;
+let highlightWidth = {};

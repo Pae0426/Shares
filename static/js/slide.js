@@ -2,7 +2,11 @@ $(function() {
     setInterval(function() {
         loadSticky();
     }, 20000);
-})
+
+    setInterval(function() {
+        updateHighlight();
+    }, 5000)
+});
 
 //スライドの遷移を制御
 function pageControl(action) {

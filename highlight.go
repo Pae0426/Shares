@@ -14,10 +14,10 @@ type HighlightInfo struct {
 
 type Highlight struct {
 	Id         int    `json:"id, omitempty"`
-	Width      int    `json:width`
-	Page       int    `json:"page"`
-	X          int    `json:"x"`
-	Y          int    `json:"y"`
+	Width      int    `json:"width, omitempty"`
+	Page       int    `json:"page, omitempty"`
+	X          int    `json:"x, omitempty"`
+	Y          int    `json:"y, omitempty"`
 	UserCookie string `json:"user_cookie,omitempty"`
 }
 
@@ -50,7 +50,7 @@ func getHighlightInfo(w http.ResponseWriter, r *http.Request) {
 		sum_width_all = append(sum_width_all, sum_width_page)
 	}
 
-	row, err = Db.Query("select * from highlight_info_" + TABLE_NAME + " order by page")
+	row, err = Db.Query("select * from highlight_info_" + TABLE_NAME + " order by page desc")
 	if err != nil {
 		fmt.Println("エラー:", err.Error())
 	}
@@ -85,7 +85,7 @@ func getHighlightInfo(w http.ResponseWriter, r *http.Request) {
 	w.Write(result)
 }
 
-func getHighlightId(w http.ResponseWriter, r *http.Request) {
+func getHighlightId() int {
 	row, err := Db.Query("select ifnull(max(id),0) from highlight_info_" + TABLE_NAME)
 	if err != nil {
 		fmt.Println("エラー:", err.Error())
@@ -100,12 +100,7 @@ func getHighlightId(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	res, err := json.Marshal(id)
-	if err != nil {
-		fmt.Println("エラー:", err)
-	}
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(res)
+	return id
 }
 
 func addHighlight(w http.ResponseWriter, r *http.Request) {
@@ -126,6 +121,30 @@ func addHighlight(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("エラー:", err)
 	}
 	sql.Exec(highlight.Width, highlight.Page, highlight.X, highlight.Y, cookie.Value)
+
+	id := getHighlightId()
+	res, err := json.Marshal(id)
+	if err != nil {
+		fmt.Println("エラー:", err)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(res)
+}
+
+func updateHighlight(w http.ResponseWriter, r *http.Request) {
+	var highlight Highlight
+	len := r.ContentLength
+	body := make([]byte, len)
+	r.Body.Read(body)
+	if err := json.Unmarshal(body[:len], &highlight); err != nil {
+		fmt.Println("エラー:", err)
+	}
+
+	sql, err := Db.Prepare("update highlight_info_" + TABLE_NAME + " set width=? where id=?")
+	if err != nil {
+		fmt.Println("エラー:", err)
+	}
+	sql.Exec(highlight.Width, highlight.Id)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
