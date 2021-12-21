@@ -123,3 +123,20 @@ $('.display-page').on('click', function(e) {
         createHighlight(page_now, 10, width_sum, height_slide, x, y);
     }
 });
+
+$(document).on('dblclick', '[class^="highlight"]', function() {
+    let id = $(this).data('highlight-id');
+    $.ajax({
+        dataType: 'json',
+        contentType: 'application/json',
+        type: 'POST',
+        url: '/remove-highlight',
+        data: JSON.stringify({
+            id: parseInt(id),
+        })
+    }).done(function() {
+        $('[data-highlight-id="' + id + '"]').remove();
+    }).fail(function() {
+        console.log('通信失敗');
+    });
+});

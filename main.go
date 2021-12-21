@@ -157,6 +157,7 @@ func main() {
 	http.HandleFunc("/get-highlight-info", getHighlightInfo)
 	http.HandleFunc("/add-highlight", addHighlight)
 	http.HandleFunc("/update-highlight", updateHighlight)
+	http.HandleFunc("/remove-highlight", removeHighlight)
 	http.HandleFunc("/set-total-page", setTotalPage)
 	http.HandleFunc("/get-vote-page-info", getVotePageInfo)
 	http.HandleFunc("/vote-page", votePage)

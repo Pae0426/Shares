@@ -50,7 +50,7 @@ func getHighlightInfo(w http.ResponseWriter, r *http.Request) {
 		sum_width_all = append(sum_width_all, sum_width_page)
 	}
 
-	row, err = Db.Query("select * from highlight_info_" + TABLE_NAME + " order by page desc")
+	row, err = Db.Query("select * from highlight_info_" + TABLE_NAME + " order by page")
 	if err != nil {
 		fmt.Println("エラー:", err.Error())
 	}
@@ -145,6 +145,32 @@ func updateHighlight(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("エラー:", err)
 	}
 	sql.Exec(highlight.Width, highlight.Id)
+
+	res, err := json.Marshal("{200, \"ok\"}")
+	if err != nil {
+		fmt.Println("エラー:", err)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(res)
+}
+
+func removeHighlight(w http.ResponseWriter, r *http.Request) {
+	type TargetId struct {
+		Id int `json:"id"`
+	}
+	var targetId TargetId
+	len := r.ContentLength
+	body := make([]byte, len)
+	r.Body.Read(body)
+	if err := json.Unmarshal(body[:len], &targetId); err != nil {
+		fmt.Println("エラー:", err)
+	}
+
+	sql, err := Db.Prepare("delete from highlight_info_" + TABLE_NAME + " where id=?")
+	if err != nil {
+		fmt.Println("エラー:", err)
+	}
+	sql.Exec(targetId.Id)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
