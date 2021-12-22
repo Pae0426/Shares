@@ -1,4 +1,4 @@
-function createHighlight(page_now, width, width_sum, height_slide, x, y) {
+function createHighlight(page_now, width, width_sum, slide_height, x, y) {
     $.ajax({
         dataType: 'json',
         contentType: 'application/json',
@@ -10,16 +10,16 @@ function createHighlight(page_now, width, width_sum, height_slide, x, y) {
            x: x + width_sum,
            y: y,
            win_width: winWidth,
-           win_height: winHeight,
+           slide_height: slide_height,
         })
     }).done(function(id) {
-        addHighlight(true, id, width, width_sum, height_slide, page_now, x, y, page_now);
+        addHighlight(true, id, width, width_sum, slide_height, page_now, x, y, page_now);
     }).fail(function() {
         console.log('通信失敗');
     });
 }
 
-function addHighlight(isCreate, id, width, width_sum, height_slide, page, x, y, page_now) {
+function addHighlight(isCreate, id, width, width_sum, slide_height, page, x, y, page_now) {
     let highlight;
     if(page == page_now){
         highlight = `
@@ -43,7 +43,7 @@ function addHighlight(isCreate, id, width, width_sum, height_slide, page, x, y, 
     $('[data-highlight-id="' + id + '"]').removeClass('ui-resizable');
 
     x = Math.round(x + width_sum);
-    y = Math.round(y + height_slide);
+    y = Math.round(y + slide_height);
     if(!(isCreate)) {
         x -= width_sum;
     }
@@ -97,7 +97,7 @@ $('.display-page').on('click', function(e) {
         let x_diff = (x_margin - x_border) / 2;
         let y_abs = e.pageY;
         let y_diff = 184;
-        let height_slide = $('.slide').height();
+        let slide_height = Math.round($('.slide').height());
 
         let page_highlights = [];
         $('.highlight-page' + page_now).each(function() {
@@ -113,9 +113,9 @@ $('.display-page').on('click', function(e) {
             width_sum += width;
         }
         let x = Math.round(x_abs - x_diff - width_sum);
-        let y = Math.round(y_abs - y_diff - height_slide - 5);
+        let y = Math.round(y_abs - y_diff - slide_height - 5);
 
-        createHighlight(page_now, 10, width_sum, height_slide, x, y);
+        createHighlight(page_now, 10, width_sum, slide_height, x, y);
     }
 });
 

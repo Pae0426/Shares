@@ -140,24 +140,25 @@ function loadHighlight() {
                 }
                 let page = highlightInfo.highlights[j]['page'];
                 if(page == page_count) {
-                    
-                    let height_slide = $('.slide').height();
                     let x = highlightInfo.highlights[j]['x'];
                     let y = highlightInfo.highlights[j]['y'];
                     let page_now = parseInt($('.page-now-text').html());
                     let win_width = highlightInfo.highlights[j]['win_width'];
-                    let win_height = highlightInfo.highlights[j]['win_height'];
+                    let slide_height = highlightInfo.highlights[j]['slide_height'];
+                    let slideHeight = Math.round($('.slide').height());
                     if(winWidth != win_width) {
                         let rate_width = winWidth / win_width;
                         x *= rate_width;
                     }
-                    // if(winHeight != win_height) {
-                    //     let rate_height =  Math.abs(winHeight) / Math.abs(win_height);
-                    //     y *= rate_height;
-                    //     let rate_slide_height = 540/ height_slide;
-                    //     height_slide *= rate_slide_height;
-                    // }
-                    addHighlight(false, id, width, sum_width, height_slide, page, x, y, page_now);
+                    if(slideHeight != slide_height) {
+                        if(slideHeight > slide_height) {
+                            y = Math.round(y*slideHeight/slide_height + 10);
+                        } else if(slideHeight < slide_height) {
+                            y = Math.round(y*slideHeight/slide_height - 10);
+                        }
+                        
+                    }
+                    addHighlight(false, id, width, sum_width, slideHeight, page, x, y, page_now);
                     highlightWidth[id] = width;
                     delete highlightInfo.highlights[j]
                 } else {

@@ -13,14 +13,14 @@ type HighlightInfo struct {
 }
 
 type Highlight struct {
-	Id         int    `json:"id, omitempty"`
-	Width      int    `json:"width, omitempty"`
-	Page       int    `json:"page, omitempty"`
-	X          int    `json:"x, omitempty"`
-	Y          int    `json:"y, omitempty"`
-	UserCookie string `json:"user_cookie,omitempty"`
-	WinWidth   int    `json:"win_width,omitempty"`
-	WinHeight  int    `json:"win_height,omitempty"`
+	Id          int    `json:"id, omitempty"`
+	Width       int    `json:"width, omitempty"`
+	Page        int    `json:"page, omitempty"`
+	X           int    `json:"x, omitempty"`
+	Y           int    `json:"y, omitempty"`
+	UserCookie  string `json:"user_cookie,omitempty"`
+	WinWidth    int    `json:"win_width,omitempty"`
+	SlideHeight int    `json:"slide_height,omitempty"`
 }
 
 func getHighlightInfo(w http.ResponseWriter, r *http.Request) {
@@ -68,7 +68,7 @@ func getHighlightInfo(w http.ResponseWriter, r *http.Request) {
 			&highlight.Y,
 			&highlight.UserCookie,
 			&highlight.WinWidth,
-			&highlight.WinHeight,
+			&highlight.SlideHeight,
 		); er != nil {
 			fmt.Println("エラー:", er)
 		}
@@ -120,11 +120,11 @@ func addHighlight(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println("エラー: ", err)
 	}
-	sql, err := Db.Prepare("insert into highlight_info_" + TABLE_NAME + "(width, page, x, y, user_cookie, win_width, win_height) values(?, ?, ?, ?, ?, ?, ?)")
+	sql, err := Db.Prepare("insert into highlight_info_" + TABLE_NAME + "(width, page, x, y, user_cookie, win_width, slide_height) values(?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {
 		fmt.Println("エラー:", err)
 	}
-	sql.Exec(highlight.Width, highlight.Page, highlight.X, highlight.Y, cookie.Value, highlight.WinWidth, highlight.WinHeight)
+	sql.Exec(highlight.Width, highlight.Page, highlight.X, highlight.Y, cookie.Value, highlight.WinWidth, highlight.SlideHeight)
 
 	id := getHighlightId()
 	res, err := json.Marshal(id)
