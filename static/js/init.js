@@ -68,9 +68,6 @@ function loadSticky() {
 
                 let sticky = newSticky(id, color, shape, text, page, empathy, isEmpathy, isCreated);
                 $('.slide').append(sticky);
-                if(isCreated) {
-                    
-                }
                 $('.init-sticky').css({
                     left: x + 'px',
                     top: y + 'px',
@@ -125,14 +122,25 @@ function loadHighlight() {
         type: 'GET',
         url: '/get-highlight-info',
     }).done(function(highlightInfo) {
+        let exist_id = $('.highlight').map(function() {
+            return $(this).data('highlight-id');
+        }).toArray();
+
         let page_count = 1;
         for(i in highlightInfo.sumWidth) {
             let sum_width = highlightInfo.sumWidth[i];
             for(j in highlightInfo.highlights) {
+                let id = highlightInfo.highlights[j]['id'];
+                let width = highlightInfo.highlights[j]['width'];
+                if(exist_id.includes(id)) {
+                    continue;
+                }
+                if(width == 10) {
+                    continue
+                }
                 let page = highlightInfo.highlights[j]['page'];
                 if(page == page_count) {
-                    let id = highlightInfo.highlights[j]['id'];
-                    let width = highlightInfo.highlights[j]['width'];
+                    
                     let height_slide = $('.slide').height();
                     let x = highlightInfo.highlights[j]['x'];
                     let y = highlightInfo.highlights[j]['y'];

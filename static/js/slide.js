@@ -5,7 +5,11 @@ $(function() {
 
     setInterval(function() {
         updateHighlight();
-    }, 5000)
+    }, 5000);
+
+    setInterval(function() {
+        loadHighlight();
+    }, 10000);
 });
 
 //スライドの遷移を制御
