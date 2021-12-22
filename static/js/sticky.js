@@ -148,26 +148,6 @@ $('.template-sticky-title').on('click', function() {
     $('.template-sticky-container').show();
 });
 
-//付箋サイズを動的に変更
-// $('.dynamic-input').on('input', function() {
-//     let count = $(this).val().length;
-//     let maxlength = parseInt($(this).attr('maxlength'));
-//     if(count > maxlength) {
-//         maxlength += 11;
-//         $(this).attr('maxlength', '' + maxlength);
-//         $('.create-sticky-model').css({
-//             height: '+=16px'
-//         });
-//     }
-//     if(maxlength > 22 && count <= maxlength-11) {
-//         maxlength -= 11;
-//         $(this).attr('maxlength', '' + maxlength);
-//         $('.create-sticky-model').css({
-//             height: '-=16px'
-//         });
-//     }
-// });
-
 //色の変更
 $('[class^=create-sticky-color-]').on('click', function() {
     if($(this).hasClass("selected-color")) {

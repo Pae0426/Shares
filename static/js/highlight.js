@@ -45,9 +45,6 @@ function addHighlight(isCreate, id, width, width_sum, height_slide, page, x, y, 
     x = Math.round(x + width_sum);
     y = Math.round(y + height_slide);
     if(!(isCreate)) {
-        // let x_margin = $('.slide-container').outerWidth(true);
-        // let x_border = $('.slide-container').outerWidth();
-        // let x_diff = (x_margin - x_border) / 2;
         x -= width_sum;
     }
     $('[data-highlight-id="' + id + '"]').css({
@@ -61,11 +58,8 @@ function addHighlight(isCreate, id, width, width_sum, height_slide, page, x, y, 
 }
 
 function updateHighlight() {
-    console.log(highlightWidth);
     for(let id in highlightWidth) {
-        console.log(highlightWidth[id]);
         if($('[data-highlight-id="' + id + '"').width() != highlightWidth[id]) {
-            console.log('------------');
             $.ajax({
                 dataType: 'json',
                 contentType: 'application/json',
@@ -120,7 +114,6 @@ $('.display-page').on('click', function(e) {
         }
         let x = Math.round(x_abs - x_diff - width_sum);
         let y = Math.round(y_abs - y_diff - height_slide - 5);
-        console.log(width_sum);
 
         createHighlight(page_now, 10, width_sum, height_slide, x, y);
     }

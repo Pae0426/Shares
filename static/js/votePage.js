@@ -101,9 +101,6 @@ $('.vote-page-btn').on('click', function() {
             $('.vote-page-container').show();
             $('.vote-page-caption').text('このページに投票する');
             pageVotedInfo[page_now-1] = 0;
-            // pageChart.data.datasets[0].data[page_now-1]--;
-            // pageChart.data.datasets[0].backgroundColor[page_now-1] = '#9eceff';
-            // pageChart.update();
         }).fail(function() {
             console.log('通信失敗');
         });
@@ -124,9 +121,6 @@ $('.vote-page-btn').on('click', function() {
             $('.remove-vote-page-container').show();
             $('.vote-page-caption').text('このページの投票をやめる');
             pageVotedInfo[page_now-1] = 1;
-            // pageChart.data.datasets[0].data[page_now-1]++;
-            // pageChart.data.datasets[0].backgroundColor[page_now-1] = '#9eff9e';
-            // pageChart.update();
         }).fail(function() {
             console.log('通信失敗');
         });   
