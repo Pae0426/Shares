@@ -127,16 +127,19 @@ function loadHighlight() {
         }).toArray();
 
         let page_count = 1;
+        let not_remove_highlight = [];
         for(i in highlightInfo.sumWidth) {
             let sum_width = highlightInfo.sumWidth[i];
             for(j in highlightInfo.highlights) {
                 let id = highlightInfo.highlights[j]['id'];
                 let width = highlightInfo.highlights[j]['width'];
                 if(exist_id.includes(id)) {
+                    not_remove_highlight.push(exist_id[j]);
                     continue;
                 }
                 if(width == 10) {
-                    continue
+                    not_remove_highlight.push(exist_id[j]);
+                    continue;
                 }
                 let page = highlightInfo.highlights[j]['page'];
                 if(page == page_count) {
@@ -160,12 +163,19 @@ function loadHighlight() {
                     }
                     addHighlight(false, id, width, sum_width, slideHeight, page, x, y, page_now);
                     highlightWidth[id] = width;
-                    delete highlightInfo.highlights[j]
+                    delete highlightInfo.highlights[j];
+                    not_remove_highlight.push(exist_id[j]);
                 } else {
                     page_count += 1;
                     break;
                 }
             }
+        }
+        let remove_highlight = exist_id.filter(item => 
+            not_remove_highlight.indexOf(item) == -1
+        )
+        for(let i in remove_highlight) {
+            $('[data-highlight-id="' + remove_highlight[i] + '"]').remove();
         }
     }).fail(function() {
         console.log('通信失敗');
