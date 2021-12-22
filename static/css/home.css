@@ -89,8 +89,8 @@ footer {
 .add-sticky-modal-btn,
 .add-highlight-btn,
 .vote-page-btn,
-.visible-sticky-btn,
-.invisible-sticky-btn,
+.visible-btn,
+.invisible-btn,
 .show-graph-btn,
 .question-btn {
     border: none;
@@ -110,8 +110,8 @@ footer {
 .add-sticky-modal-btn:hover,
 .add-highlight-btn:hover,
 .vote-page-btn:hover,
-.visible-sticky-btn:hover,
-.invisible-sticky-btn:hover,
+.visible-btn:hover,
+.invisible-btn:hover,
 .show-graph-btn:hover,
 .question-btn:hover {
     background-color: #22a7da;
@@ -145,13 +145,13 @@ button[disabled] {
 .add-sticky-modal-btn,
 .vote-word-modal-btn,
 .vote-page-btn,
-.visible-sticky-btn,
-.invisible-sticky-btn,
+.visible-btn,
+.invisible-btn,
 .show-graph-btn,
 .question-btn {
     color: #fff;
 }
-.visible-sticky-btn {
+.visible-btn {
     transform: scale(-1, 1);
 }
 .add-sticky-modal-btn:before {

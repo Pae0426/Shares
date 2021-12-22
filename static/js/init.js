@@ -2,7 +2,7 @@ $('.progressbar').css('width', 'calc(1 / ' + page_total + ' * 100%)');
 $('.left-right-limit-input-text').hide();
 $('.static-input').hide();
 $('.template-sticky-container').hide();
-$('.invisible-sticky-btn').hide();
+$('.invisible-btn').hide();
 $('.explain-modal-item').fadeIn();
 
 // いいね情報をbool型配列で取得

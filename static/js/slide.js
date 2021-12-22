@@ -86,20 +86,22 @@ $('html').keyup(function(e) {
 });
 
 //付箋表示・非表示切り替え
-$('.visible-sticky-btn').on('click', function() {
+$('.visible-btn').on('click', function() {
     let page_now = $('.page-now-text').html();
     page_now = parseInt(page_now);
     $(this).hide();
     $('.sticky-page' + page_now).hide();
-    $('.invisible-sticky-btn').show();
+    $('.highlight-page' + page_now).hide();
+    $('.invisible-btn').show();
     isVisible = false;
 });
-$('.invisible-sticky-btn').on('click', function() {
+$('.invisible-btn').on('click', function() {
     let page_now = $('.page-now-text').html();
     page_now = parseInt(page_now);
     $(this).hide();
     $('.sticky-page' + page_now).show();
-    $('.visible-sticky-btn').show();
+    $('.highlight-page' + page_now).show();
+    $('.visible-btn').show();
     isVisible = true;
 });
 
@@ -195,13 +197,13 @@ $('.add-sticky-modal-btn').hover(function() {
     $(this).next('.add-sticky-caption').hide();
 });
 
-$('.visible-sticky-btn').hover(function() {
+$('.visible-btn').hover(function() {
     $(this).next('.visible-sticky-caption').show();
 }, function() {
     $(this).next('.visible-sticky-caption').hide();
 });
 
-$('.invisible-sticky-btn').hover(function() {
+$('.invisible-btn').hover(function() {
     $(this).next('.visible-sticky-caption').show();
 }, function() {
     $(this).next('.visible-sticky-caption').hide();
