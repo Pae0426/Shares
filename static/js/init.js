@@ -148,10 +148,14 @@ function loadHighlight() {
                     let page_now = parseInt($('.page-now-text').html());
                     let win_width = highlightInfo.highlights[j]['win_width'];
                     let slide_height = highlightInfo.highlights[j]['slide_height'];
+                    let slide_width = highlightInfo.highlights[j]['slide_width'];
                     let slideHeight = Math.round($('.slide').height());
+                    let slideWidth = Math.round($('.slide').width());
+
+                    // ハイライト登録時と現在のウィンドウサイズが異なる場合、位置を調整する
                     if(winWidth != win_width) {
                         let rate_width = winWidth / win_width;
-                        x *= rate_width;
+                        x = Math.round(x*rate_width);
                     }
                     if(slideHeight != slide_height) {
                         if(slideHeight > slide_height) {
@@ -161,6 +165,13 @@ function loadHighlight() {
                         }
                         
                     }
+
+                    // ハイライト登録時と現在のウィンドウサイズが異なる場合、長さを調整する
+                    if(slideWidth != slide_width) {
+                        let rate_slide_width = slideWidth / slide_width;
+                        width = Math.round(width*rate_slide_width);
+                    }
+
                     addHighlight(false, id, width, sum_width, slideHeight, page, x, y, page_now);
                     highlightWidth[id] = width;
                     delete highlightInfo.highlights[j];

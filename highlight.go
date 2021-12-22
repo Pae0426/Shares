@@ -21,6 +21,7 @@ type Highlight struct {
 	UserCookie  string `json:"user_cookie,omitempty"`
 	WinWidth    int    `json:"win_width,omitempty"`
 	SlideHeight int    `json:"slide_height,omitempty"`
+	SlideWidth  int    `json:"slide_width,omitempty"`
 }
 
 func getHighlightInfo(w http.ResponseWriter, r *http.Request) {
@@ -69,6 +70,7 @@ func getHighlightInfo(w http.ResponseWriter, r *http.Request) {
 			&highlight.UserCookie,
 			&highlight.WinWidth,
 			&highlight.SlideHeight,
+			&highlight.SlideWidth,
 		); er != nil {
 			fmt.Println("エラー:", er)
 		}
@@ -120,11 +122,11 @@ func addHighlight(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println("エラー: ", err)
 	}
-	sql, err := Db.Prepare("insert into highlight_info_" + TABLE_NAME + "(width, page, x, y, user_cookie, win_width, slide_height) values(?, ?, ?, ?, ?, ?, ?)")
+	sql, err := Db.Prepare("insert into highlight_info_" + TABLE_NAME + "(width, page, x, y, user_cookie, win_width, slide_height, slide_width) values(?, ?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {
 		fmt.Println("エラー:", err)
 	}
-	sql.Exec(highlight.Width, highlight.Page, highlight.X, highlight.Y, cookie.Value, highlight.WinWidth, highlight.SlideHeight)
+	sql.Exec(highlight.Width, highlight.Page, highlight.X, highlight.Y, cookie.Value, highlight.WinWidth, highlight.SlideHeight, highlight.SlideWidth)
 
 	id := getHighlightId()
 	res, err := json.Marshal(id)

@@ -1,4 +1,4 @@
-function createHighlight(page_now, width, width_sum, slide_height, x, y) {
+function createHighlight(page_now, width, width_sum, slide_height, slide_width, x, y) {
     $.ajax({
         dataType: 'json',
         contentType: 'application/json',
@@ -11,6 +11,7 @@ function createHighlight(page_now, width, width_sum, slide_height, x, y) {
            y: y,
            win_width: winWidth,
            slide_height: slide_height,
+           slide_width: slide_width,
         })
     }).done(function(id) {
         addHighlight(true, id, width, width_sum, slide_height, page_now, x, y, page_now);
@@ -98,6 +99,7 @@ $('.display-page').on('click', function(e) {
         let y_abs = e.pageY;
         let y_diff = 184;
         let slide_height = Math.round($('.slide').height());
+        let slide_width = Math.round($('.slide').width());
 
         let page_highlights = [];
         $('.highlight-page' + page_now).each(function() {
@@ -115,7 +117,7 @@ $('.display-page').on('click', function(e) {
         let x = Math.round(x_abs - x_diff - width_sum);
         let y = Math.round(y_abs - y_diff - slide_height - 5);
 
-        createHighlight(page_now, 10, width_sum, slide_height, x, y);
+        createHighlight(page_now, 10, width_sum, slide_height, slide_width, x, y);
     }
 });
 

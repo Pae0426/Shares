@@ -1,7 +1,6 @@
 const PDF_DIR = '12';
 let winWidth = Math.round($(window).width());
 let winHeight = Math.round($(window).height());
-let slideHeight = Math.round($('.slide').height());
 let page_total = $('.progressbar').data('total-progress');
 const PAGE_TOTAL = parseInt(page_total);
 let isVisible = true;
