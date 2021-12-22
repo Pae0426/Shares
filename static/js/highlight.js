@@ -27,7 +27,7 @@ function addHighlight(isCreate, id, width, width_sum, height_slide, page, x, y, 
         `;
     } else {
         highlight = `
-        <span class="highlight` + id + ` highlight-page` + page + `" data-highlight-id="` + id + `" style="width:` + width + `px;height:10px;left:` + x + `px; top:` + y + `px;display:none"></span>
+        <span class="highlight highlight-page` + page + `" data-highlight-id="` + id + `" style="width:` + width + `px;height:10px;left:` + x + `px; top:` + y + `px;display:none"></span>
         `;
     }
     $('.slide').append(highlight);
