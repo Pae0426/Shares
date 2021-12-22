@@ -8,7 +8,9 @@ function createHighlight(page_now, width, width_sum, height_slide, x, y) {
            page: page_now,
            width: width,
            x: x + width_sum,
-           y: y
+           y: y,
+           win_width: winWidth,
+           win_height: winHeight,
         })
     }).done(function(id) {
         addHighlight(true, id, width, width_sum, height_slide, page_now, x, y, page_now);

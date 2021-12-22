@@ -1,4 +1,6 @@
 const PDF_DIR = '12';
+let winWidth = $(window).width();
+let winHeight = $(window).height();
 let page_total = $('.progressbar').data('total-progress');
 const PAGE_TOTAL = parseInt(page_total);
 let isVisible = true;
