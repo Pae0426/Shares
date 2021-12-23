@@ -6,7 +6,7 @@ function newSticky(id, color, shape, text, page_now, empathy, isEmpathy, isCreat
                 <div class="sticky-text">` + text + `</div>
                 <div class="empathy-container">
                     <i class="fas fa-heart empathy-`+ isEmpathy +`" data-empathy-id="` + id + `"></i>
-                    <span class="empathy-count empathy-count-`+ isEmpathy +`">` + empathy + `</span>
+                    <span class="empathy-count empathy-count-`+ isEmpathy +` empathy` + id + `">` + empathy + `</span>
                     <i class="fas fa-trash-alt sticky-trash-btn" data-sticky-trash-id="` + id + `"></i>
                 </div>
             </span>
@@ -18,7 +18,7 @@ function newSticky(id, color, shape, text, page_now, empathy, isEmpathy, isCreat
                 <div class="sticky-text">` + text + `</div>
                 <div class="empathy-container">
                     <i class="fas fa-heart empathy-`+ isEmpathy +`" data-empathy-id="` + id + `"></i>
-                    <span class="empathy-count empathy-count-`+ isEmpathy +`">` + empathy + `</span>
+                    <span class="empathy-count empathy-count-`+ isEmpathy +` empathy` + id + `">` + empathy + `</span>
                     <i class="fas fa-trash-alt sticky-trash-btn" data-sticky-trash-id="` + id + `"></i>
                 </div>
             </span>
@@ -30,7 +30,7 @@ function newSticky(id, color, shape, text, page_now, empathy, isEmpathy, isCreat
                 <div class="sticky-text">` + text + `</div>
                 <div class="empathy-container">
                     <i class="fas fa-heart empathy-`+ isEmpathy +`" data-empathy-id="` + id + `"></i>
-                    <span class="empathy-count empathy-count-`+ isEmpathy +`">` + empathy + `</span>
+                    <span class="empathy-count empathy-count-`+ isEmpathy +` empathy` + id + `">` + empathy + `</span>
                     <i class="fas fa-trash-alt sticky-trash-btn" data-sticky-trash-id="` + id + `"></i>
                 </div>
             </span>

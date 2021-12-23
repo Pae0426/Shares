@@ -21,6 +21,7 @@ function loadSticky() {
         type: 'GET',
         url: '/stickies',
     }).done(function(stickies) {
+        console.log(stickies);
         getEmpathyInfo().done(function(empathyInfo) {
             let exist_id = $('.sticky').map(function() {
                 return $(this).data('sticky-id');
@@ -47,11 +48,15 @@ function loadSticky() {
                 if(slideHeight != slide_height) {
                     let rate_slide_height = slideHeight / slide_height;
                     if(slideHeight < slide_height) {
-                        y = Math.round((y * rate_slide_height) - half_height);
+                        y = Math.round((y * rate_slide_height) - (half_height * rate_slide_height));
                     } else if(slideHeight > slide_height) {
-                        y = Math.round((y * rate_slide_height) + half_height);
+                        y = Math.round((y * rate_slide_height) + (half_height * rate_slide_height));
                     }
-                    
+                }
+                
+                let empathy = stickies[i]['empathy'];
+                if (empathy == undefined) {
+                    empathy = 0;
                 }
                 
                 if(exist_id.includes(id)) {
@@ -61,6 +66,8 @@ function loadSticky() {
                         'height': height
                     });
                     exist_id[$.inArray(id, exist_id)] = -1;
+
+                    $('.empathy'+id).text(empathy);
                     continue;
                 }
 
@@ -68,10 +75,6 @@ function loadSticky() {
                 let text = stickies[i]['text'];
                 let page = stickies[i]['page'];
                 let page_now = parseInt($('.page-now-text').html());
-                let empathy = stickies[i]['empathy'];
-                if (empathy == undefined) {
-                    empathy = 0;
-                }
                 let isEmpathy;
                 if (empathyInfo[id] == 1) {
                     isEmpathy = true
