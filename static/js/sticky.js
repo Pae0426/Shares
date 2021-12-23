@@ -39,6 +39,8 @@ function newSticky(id, color, shape, text, page_now, empathy, isEmpathy, isCreat
 }
 
 function createSticky(page_now, color, shape, text, height) {
+    let slide_height = Math.round($('.slide').height());
+    let slide_width = Math.round($('.slide').width());
     $.ajax({
         dataType: 'json',
         contentType: 'application/json',
@@ -52,7 +54,9 @@ function createSticky(page_now, color, shape, text, height) {
             location_y: 1,
             text: text,
             empathy: 0,
-            height: height
+            height: height,
+            slide_height, slide_height,
+            slide_width: slide_width,
         })
     }).done(function() {
     }).fail(function() {

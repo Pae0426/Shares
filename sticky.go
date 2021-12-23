@@ -8,16 +8,18 @@ import (
 )
 
 type Sticky struct {
-	Id         int    `json:"id,omitempty"`
-	Page       int    `json:"page,omitempty"`
-	Color      string `json:"color,omitempty"`
-	Shape      string `json:"shape,omitempty"`
-	Locate_x   int    `json:"location_x,omitempty"`
-	Locate_y   int    `json:"location_y,omitempty"`
-	Text       string `json:"text,omitempty"`
-	Empathy    int    `json:"empathy,omitempty"`
-	Height     string `json:"height,omitempty"`
-	UserCookie string `json:"user_cookie,omitempty"`
+	Id          int    `json:"id,omitempty"`
+	Page        int    `json:"page,omitempty"`
+	Color       string `json:"color,omitempty"`
+	Shape       string `json:"shape,omitempty"`
+	Locate_x    int    `json:"location_x,omitempty"`
+	Locate_y    int    `json:"location_y,omitempty"`
+	Text        string `json:"text,omitempty"`
+	Empathy     int    `json:"empathy,omitempty"`
+	Height      string `json:"height,omitempty"`
+	UserCookie  string `json:"user_cookie,omitempty"`
+	SlideHeight int    `json:"slide_height,omitempty"`
+	SlideWidth  int    `json:"slide_width,omitempty"`
 }
 
 //付箋の情報をDBから取得しjson形式で表示
@@ -43,6 +45,8 @@ func getStickiesInfo(w http.ResponseWriter, r *http.Request) {
 			&sticky.Empathy,
 			&sticky.Height,
 			&sticky.UserCookie,
+			&sticky.SlideHeight,
+			&sticky.SlideWidth,
 		); er != nil {
 			fmt.Println("エラー:", er)
 		}
@@ -98,11 +102,11 @@ func createSticky(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("エラー")
 	}
 
-	sql, err := Db.Prepare("insert into lecture_" + TABLE_NAME + "(page, color, shape, location_x, location_y, text, empathy, height, user_cookie) values(?, ?, ?, ?, ?, ?, ?, ?, ?)")
+	sql, err := Db.Prepare("insert into lecture_" + TABLE_NAME + "(page, color, shape, location_x, location_y, text, empathy, height, user_cookie, slide_height, slide_width) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {
 		fmt.Println("エラー:", err)
 	}
-	sql.Exec(sticky.Page, sticky.Color, sticky.Shape, sticky.Locate_x, sticky.Locate_y, sticky.Text, sticky.Empathy, sticky.Height, cookie.Value)
+	sql.Exec(sticky.Page, sticky.Color, sticky.Shape, sticky.Locate_x, sticky.Locate_y, sticky.Text, sticky.Empathy, sticky.Height, cookie.Value, sticky.SlideHeight, sticky.SlideWidth)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {

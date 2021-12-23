@@ -30,7 +30,29 @@ function loadSticky() {
                 let id = stickies[i]['id'];
                 let x = stickies[i]['location_x'];
                 let y = stickies[i]['location_y'];
+                let shape = stickies[i]['shape'];
                 let height = stickies[i]['height'];
+                let slideWidth = Math.round($('.slide').width());
+                let slideHeight = Math.round($('.slide').height());
+                let slide_width = stickies[i]['slide_width'];
+                let slide_height = stickies[i]['slide_height'];
+                if(slideWidth != slide_width) {
+                    let rate_slide_width = slideWidth / slide_width;
+                    x = Math.round(x * rate_slide_width);
+                    if(shape == 'right') {
+                        x += 100;
+                    }
+                }
+                let half_height = parseInt(height.replace('px', '')) / 2;
+                if(slideHeight != slide_height) {
+                    let rate_slide_height = slideHeight / slide_height;
+                    if(slideHeight < slide_height) {
+                        y = Math.round((y * rate_slide_height) - half_height);
+                    } else if(slideHeight > slide_height) {
+                        y = Math.round((y * rate_slide_height) + half_height);
+                    }
+                    
+                }
                 
                 if(exist_id.includes(id)) {
                     $('[data-sticky-id="'+ id +'"]').animate({
@@ -43,7 +65,6 @@ function loadSticky() {
                 }
 
                 let color = stickies[i]['color'];
-                let shape = stickies[i]['shape'];
                 let text = stickies[i]['text'];
                 let page = stickies[i]['page'];
                 let page_now = parseInt($('.page-now-text').html());
@@ -155,13 +176,13 @@ function loadHighlight() {
                     // ハイライト登録時と現在のウィンドウサイズが異なる場合、位置を調整する
                     if(winWidth != win_width) {
                         let rate_width = winWidth / win_width;
-                        x = Math.round(x*rate_width);
+                        x = Math.round(x * rate_width);
                     }
                     if(slideHeight != slide_height) {
                         if(slideHeight > slide_height) {
-                            y = Math.round(y*slideHeight/slide_height + 10);
+                            y = Math.round(y * slideHeight/slide_height + 10);
                         } else if(slideHeight < slide_height) {
-                            y = Math.round(y*slideHeight/slide_height - 10);
+                            y = Math.round(y * slideHeight/slide_height - 10);
                         }
                         
                     }
