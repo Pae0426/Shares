@@ -296,20 +296,20 @@ button[disabled] {
     overflow: visible !important;
 }
 .sticky-left::before {
-    z-index: 1 !important;
+    z-index: 0 !important;
     left: -117px !important;
 }
 .sticky-left::after {
-    z-index: 1 !important;
+    z-index: 0 !important;
     height: 60px !important;
     left: -10px !important;
 }
 .sticky-right::before {
-    z-index: 1 !important;
+    z-index: 0 !important;
     left: 159px !important;
 }
 .sticky-right::after {
-    z-index: 1 !important;
+    z-index: 0 !important;
     height: 60px !important;
     left: 152px !important;
 }
