@@ -21,7 +21,6 @@ function loadSticky() {
         type: 'GET',
         url: '/stickies',
     }).done(function(stickies) {
-        console.log(stickies);
         getEmpathyInfo().done(function(empathyInfo) {
             let exist_id = $('.sticky').map(function() {
                 return $(this).data('sticky-id');

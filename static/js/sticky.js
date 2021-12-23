@@ -59,6 +59,7 @@ function createSticky(page_now, color, shape, text, height) {
             slide_width: slide_width,
         })
     }).done(function() {
+        loadSticky();
     }).fail(function() {
         console.log('通信失敗');
     });
