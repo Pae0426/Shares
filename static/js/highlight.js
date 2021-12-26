@@ -117,7 +117,7 @@ $('.display-page').on('click', function(e) {
         let x = Math.round(x_abs - x_diff - width_sum);
         let y = Math.round(y_abs - y_diff - slide_height - 5);
 
-        createHighlight(page_now, 10, width_sum, slide_height, slide_width, x, y);
+        createHighlight(page_now, 80, width_sum, slide_height, slide_width, x, y);
     }
 });
 
