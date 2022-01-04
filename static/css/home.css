@@ -170,36 +170,6 @@ button[disabled] {
     margin: 30px 0;
     align-items: center;
 }
-/* .explain-add-sticky-icon,
-.explain-vote-word-icon,
-.explain-vote-page-icon,
-.explain-visible-sticky-icon,
-.explain-show-graph-icon,
-.explain-question-icon {
-    color: rgb(100, 100, 100);
-    font-size: 2.5em;
-}
-.explain-add-sticky-icon {
-    padding: 5px 42.5px;
-}
-.explain-vote-word-icon {
-    padding: 0 50px;
-}
-.explain-vote-page-icon {
-    padding: 5px 47.5px;
-}
-.explain-visible-sticky-icon {
-    padding: 5px 45px;
-}
-.explain-question-icon {
-    padding: 5px 52.5px;
-}
-.explain-add-highlight-icon {
-    padding: 4px 45px;
-}
-.explain-show-graph-icon {
-    padding: 0 45.5px;
-} */
 .explain-img-highlight {
     width: 40px;
     height: 40px;
@@ -231,15 +201,27 @@ button[disabled] {
 .explain-visible-sticky-icon,
 .explain-show-graph-icon,
 .explain-question-icon {
-    color: rgb(100, 100, 100);
+    color: rgb(220, 220, 220);
     font-size: 2.5em;
     margin: 0 20px;
+}
+.vote-page-icon,
+.add-highlight-icon,
+.add-sticky-icon,
+.visible-sticky-icon,
+.show-graph-icon,
+.question-icon {
+    cursor: pointer;
 }
 .explain-function-default {
     text-align: center;
     font-size: 30px;
     color: rgb(100, 100, 100);
     margin-top: 100px;
+}
+.explain-default-icon,
+.selected-explain-icon  {
+    color: rgb(100, 100, 100);
 }
 
 .vote-page-caption,
@@ -486,7 +468,7 @@ button[disabled] {
     cursor: pointer;
 }
 .selected-title {
-    color: rgb(190, 190, 190);
+    color: rgb(170, 170, 170);
 }
 .vote-word-title,
 .vote-page-title,

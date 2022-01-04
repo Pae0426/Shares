@@ -361,3 +361,14 @@ $('.explain-function-title').on('click', function() {
     $('.explain-app-item').hide();
     $('.explain-function-item').show();
 });
+
+$('.vote-page-icon, .add-highlight-icon, .add-sticky-icon, .visible-sticky-icon, .show-graph-icon, .question-icon').on('click', function() {
+    if($(this).hasClass('add-highlight-icon')) {
+        $(this).attr('src', '/static/img/highlight-black.png');
+    } else {
+        $('.add-highlight-icon').attr('src', '/static/img/highlight-gray.png');
+    }
+    $('.explain-default-icon').removeClass('explain-default-icon');
+    $('.selected-explain-icon').removeClass('selected-explain-icon');
+    $(this).addClass('selected-explain-icon');
+});
