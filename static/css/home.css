@@ -170,7 +170,7 @@ button[disabled] {
     margin: 30px 0;
     align-items: center;
 }
-.explain-add-sticky-icon,
+/* .explain-add-sticky-icon,
 .explain-vote-word-icon,
 .explain-vote-page-icon,
 .explain-visible-sticky-icon,
@@ -194,6 +194,12 @@ button[disabled] {
 .explain-question-icon {
     padding: 5px 52.5px;
 }
+.explain-add-highlight-icon {
+    padding: 4px 45px;
+}
+.explain-show-graph-icon {
+    padding: 0 45.5px;
+} */
 .explain-img-highlight {
     width: 40px;
     height: 40px;
@@ -202,12 +208,7 @@ button[disabled] {
     width: 18px;
     height: 18px;
 }
-.explain-add-highlight-icon {
-    padding: 4px 45px;
-}
-.explain-show-graph-icon {
-    padding: 0 45.5px;
-}
+
 .explain-add-sticky-text,
 .explain-vote-word-text,
 .explain-add-highlight-text,
@@ -218,6 +219,27 @@ button[disabled] {
     color: rgb(100, 100, 100);
     font-size: 20px;
     line-height: 150%;
+}
+
+.explain-function-nav {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.explain-vote-page-icon,
+.explain-add-highlight-icon,
+.explain-add-sticky-icon,
+.explain-visible-sticky-icon,
+.explain-show-graph-icon,
+.explain-question-icon {
+    color: rgb(100, 100, 100);
+    font-size: 2.5em;
+    margin: 0 20px;
+}
+.explain-function-default {
+    text-align: center;
+    font-size: 30px;
+    color: rgb(100, 100, 100);
+    margin-top: 100px;
 }
 
 .vote-page-caption,
@@ -451,7 +473,9 @@ button[disabled] {
     cursor: pointer;
 }
 .create-sticky-title,
-.template-sticky-title {
+.template-sticky-title,
+.explain-function-title,
+.explain-app-title {
     text-align: center;
     font-size: 30px;
     color: rgb(230, 230, 230);
@@ -466,8 +490,6 @@ button[disabled] {
 }
 .vote-word-title,
 .vote-page-title,
-.explain-app-title,
-.explain-function-title,
 .explain-unavailable-title {
     text-align: center;
     font-size: 30px;

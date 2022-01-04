@@ -348,3 +348,16 @@ $('.question-btn').on('click', function() {
 $('.explain-modal-close-btn, .explain-modal-bg').on('click', function() {
     $('.explain-modal-item').fadeOut();
 });
+
+$('.explain-app-title').on('click', function() {
+    $('.explain-function-title').removeClass('selected-title');
+    $(this).addClass('selected-title');
+    $('.explain-function-item').hide();
+    $('.explain-app-item').show();
+});
+$('.explain-function-title').on('click', function() {
+    $('.explain-app-title').removeClass('selected-title');
+    $(this).addClass('selected-title');
+    $('.explain-app-item').hide();
+    $('.explain-function-item').show();
+});

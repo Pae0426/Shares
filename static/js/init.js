@@ -2,6 +2,7 @@ $('.progressbar').css('width', 'calc(1 / ' + page_total + ' * 100%)');
 $('.left-right-limit-input-text').hide();
 $('.static-input').hide();
 $('.template-sticky-container').hide();
+$('.explain-app-item').hide();
 $('.invisible-btn').hide();
 $('.explain-modal-item').fadeIn();
 
