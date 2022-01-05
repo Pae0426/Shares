@@ -369,6 +369,28 @@ $('.vote-page-icon, .add-highlight-icon, .add-sticky-icon, .visible-sticky-icon,
         $('.add-highlight-icon').attr('src', '/static/img/highlight-gray.png');
     }
     $('.explain-default-icon').removeClass('explain-default-icon');
+    $('.explain-function-default').hide();
     $('.selected-explain-icon').removeClass('selected-explain-icon');
     $(this).addClass('selected-explain-icon');
+
+
+    if($(this).hasClass('vote-page-icon')) {
+        $('.explain-text').hide();
+        $('.explain-vote-page-text').show();
+    } else if($(this).hasClass('add-highlight-icon')) {
+        $('.explain-text').hide();
+        $('.explain-add-highlight-text').show();
+    } else if($(this).hasClass('add-sticky-icon')) {
+        $('.explain-text').hide();
+        $('.explain-add-sticky-text').show();
+    } else if($(this).hasClass('visible-sticky-icon')) {
+        $('.explain-text').hide();
+        $('.explain-visible-sticky-text').show();
+    } else if($(this).hasClass('show-graph-icon')) {
+        $('.explain-text').hide();
+        $('.explain-show-graph-text').show();
+    } else if($(this).hasClass('question-icon')) {
+        $('.explain-text').hide();
+        $('.explain-question-text').show();
+    }
 });

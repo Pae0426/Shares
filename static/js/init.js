@@ -3,6 +3,7 @@ $('.left-right-limit-input-text').hide();
 $('.static-input').hide();
 $('.template-sticky-container').hide();
 $('.explain-app-item').hide();
+$('.explain-vote-page-text, .explain-add-highlight-text, .explain-add-sticky-text, .explain-visible-sticky-text, .explain-show-graph-text, .explain-question-text').hide();
 $('.invisible-btn').hide();
 $('.explain-modal-item').fadeIn();
 
