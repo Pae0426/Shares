@@ -174,9 +174,19 @@ button[disabled] {
     width: 40px;
     height: 40px;
 }
-.explain-img-highlight-mini {
+.explain-img-highlight-mini,
+.show-graph-mini,
+.explain-graph-mini,
+.question-mini {
     width: 18px;
     height: 18px;
+}
+.show-graph-mini,
+.explain-vote-mini {
+    margin-right: 5px;
+}
+.question-mini {
+    margin-left: 5px;
 }
 
 .explain-add-sticky-text,
@@ -189,11 +199,12 @@ button[disabled] {
     color: rgb(100, 100, 100);
     font-size: 20px;
     line-height: 150%;
+    margin: 0 100px;
 }
 
 .explain-function-nav {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 .explain-vote-page-icon,
 .explain-add-highlight-icon,
@@ -224,6 +235,20 @@ button[disabled] {
 .selected-explain-icon  {
     color: rgb(100, 100, 100);
 }
+.explain-img-add-sticky,
+.explain-gif-highlight {
+    float: right;
+    margin-left: 20px;
+}
+.explain-vote-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+    text-align: center;
+}
+/* .explain-vote1 {
+    margin-right: 30px;
+} */
 
 .vote-page-caption,
 .add-highlight-caption,
@@ -235,34 +260,35 @@ button[disabled] {
     display: none;
     position: absolute;
     padding: 16px;
-    margin-top: 15px;
+    bottom: 0;
+    margin-bottom: 70px;
     border-radius: 8px;
     background: #aaacaf;
     color: #fff;
 }
-.vote-page-caption {
-    left: -10px;
+.add-sticky-caption {
+    left: -35px;
 }
 .add-highlight-caption {
     left: 15px;
 }
-.add-sticky-caption {
-    left: 60px;
+.vote-page-caption {
+    left: 88px;
 }
 .visible-sticky-caption {
-    right: 57px;
+    right: 10px;
 }
 .invisible-sticky-caption {
     right: 90px;
 }
 .show-graph-caption {
-    right: 30px;
+    right: 78px;
 }
 .question-caption {
     right: 0;
 }
 .vote-page-caption:after,
-.add-highlight-caption:after,
+/* .add-highlight-caption:after,
 .add-sticky-caption:after,
 .visible-sticky-caption:after,
 .invisible-sticky-caption:after,
@@ -278,7 +304,7 @@ button[disabled] {
     border-width: 10px;
     pointer-events: none;
     content: " ";
-}
+} */
 .vote-page-caption:after,
 .add-highlight-caption:after,
 .add-sticky-caption:after {
@@ -968,8 +994,7 @@ button[disabled] {
 }
 .explain-app-text,
 .unavailable-element {
-    margin-left: 50px;
-    margin-bottom: 30px;
+    margin: 50px 100px;
 }
 .recommend-window-size {
     color: red;
