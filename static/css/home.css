@@ -195,7 +195,8 @@ button[disabled] {
 .explain-vote-page-text,
 .explain-visible-sticky-text,
 .explain-show-graph-text,
-.explain-question-text {
+.explain-question-text,
+.explain-app-text {
     color: rgb(100, 100, 100);
     font-size: 20px;
     line-height: 150%;
@@ -466,6 +467,7 @@ button[disabled] {
 .vote-page-title-container,
 .vote-word-title-container,
 .explain-app-title-container,
+.explain-app-title-container-init,
 .explain-function-title-container,
 .explain-unavailable-title-container {
     padding: 30px 100px;
@@ -499,6 +501,7 @@ button[disabled] {
 }
 .vote-word-title,
 .vote-page-title,
+.explain-app-title-init,
 .explain-unavailable-title {
     text-align: center;
     font-size: 30px;
