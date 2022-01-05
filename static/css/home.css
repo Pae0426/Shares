@@ -247,9 +247,6 @@ button[disabled] {
     margin-top: 50px;
     text-align: center;
 }
-/* .explain-vote1 {
-    margin-right: 30px;
-} */
 
 .vote-page-caption,
 .add-highlight-caption,
@@ -288,24 +285,6 @@ button[disabled] {
 .question-caption {
     right: 0;
 }
-.vote-page-caption:after,
-/* .add-highlight-caption:after,
-.add-sticky-caption:after,
-.visible-sticky-caption:after,
-.invisible-sticky-caption:after,
-.show-graph-caption:after,
-.question-caption:after {
-    position: absolute;
-    bottom: 100%;
-    width: 0;
-    height: 0;
-    border: solid transparent;
-    border-color: #aaacaf(51, 51, 51, 0);
-    border-bottom-color: #aaacaf;
-    border-width: 10px;
-    pointer-events: none;
-    content: " ";
-} */
 .vote-page-caption:after,
 .add-highlight-caption:after,
 .add-sticky-caption:after {
