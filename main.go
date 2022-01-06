@@ -63,8 +63,9 @@ func setTotalPage(w http.ResponseWriter, r *http.Request) {
 
 func setDummyCookie(w http.ResponseWriter, r *http.Request) {
 	dummyCookie := &http.Cookie{ //Cookieが空によるエラーを回避するためのCookie
-		Name:  "dummyName1",
-		Value: "dummyValue1",
+		Name:   "dummyName1",
+		Value:  "dummyValue1",
+		MaxAge: 60 * 60 * 3,
 	}
 	http.SetCookie(w, dummyCookie)
 
@@ -98,8 +99,9 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 		if i == len(cookies)-1 { //Cookie作成
 			newCookie := "user" + strconv.Itoa(lastId+1)
 			cookie := &http.Cookie{
-				Name:  "user-id",
-				Value: newCookie,
+				Name:   "user-id",
+				Value:  newCookie,
+				MaxAge: 60 * 60 * 3,
 			}
 			http.SetCookie(w, cookie)
 			log.Println("Cookie設定完了")
