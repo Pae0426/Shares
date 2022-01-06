@@ -1,4 +1,4 @@
-const PDF_DIR = '13';
+const PDF_DIR = '14';
 let winWidth = Math.round($(window).width());
 let winHeight = Math.round($(window).height());
 let page_total = $('.progressbar').data('total-progress');
