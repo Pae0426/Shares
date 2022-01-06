@@ -16,8 +16,8 @@ import (
 
 var Db *sql.DB
 
-const TABLE_NAME = "14"
-const PDF_DIR = "14"
+const TABLE_NAME = "eth14"
+const PDF_DIR = "eth14"
 
 func init() {
 	var err error

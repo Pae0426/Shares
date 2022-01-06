@@ -38,6 +38,7 @@ function addHighlight(isCreate, id, width, width_sum, slide_height, page, x, y, 
         maxHeight: 10,
         handles: "e",
         autoHide: true,
+        containment: ".slide",
     });
     
     isHighlight = false;
