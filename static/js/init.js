@@ -41,19 +41,11 @@ function loadSticky() {
                 let slide_height = stickies[i]['slide_height'];
                 if(slideWidth != slide_width) {
                     let rate_slide_width = slideWidth / slide_width;
-                    x = Math.round(x * rate_slide_width);
-                    if(shape == 'right') {
-                        x += 100;
-                    }
+                    x = Math.round(x * rate_slide_width);             
                 }
-                let half_height = parseInt(height.replace('px', '')) / 2;
                 if(slideHeight != slide_height) {
                     let rate_slide_height = slideHeight / slide_height;
-                    if(slideHeight < slide_height) {
-                        y = Math.round((y * rate_slide_height) - (half_height * rate_slide_height));
-                    } else if(slideHeight > slide_height) {
-                        y = Math.round((y * rate_slide_height) + (half_height * rate_slide_height));
-                    }
+                    y = Math.round(y * rate_slide_height);
                 }
                 
                 let empathy = stickies[i]['empathy'];
@@ -163,10 +155,7 @@ function loadHighlight() {
                     not_remove_highlight.push(exist_id[j]);
                     continue;
                 }
-                if(width == 10) {
-                    not_remove_highlight.push(exist_id[j]);
-                    continue;
-                }
+
                 let page = highlightInfo.highlights[j]['page'];
                 if(page == page_count) {
                     let x = highlightInfo.highlights[j]['x'];

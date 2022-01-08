@@ -134,6 +134,7 @@ $(document).on('dblclick', '[class^="highlight"]', function() {
         })
     }).done(function() {
         $('[data-highlight-id="' + id + '"]').remove();
+        delete highlightWidth[id];
     }).fail(function() {
         console.log('通信失敗');
     });

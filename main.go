@@ -16,8 +16,8 @@ import (
 
 var Db *sql.DB
 
-const TABLE_NAME = "eth14"
-const PDF_DIR = "eth14"
+const TABLE_NAME = "14"
+const PDF_DIR = "14"
 
 func init() {
 	var err error
@@ -150,12 +150,6 @@ func main() {
 	http.HandleFunc("/increment-empathy", incrementEmpathy)
 	http.HandleFunc("/decrement-empathy", decrementEmpathy)
 	http.HandleFunc("/remove-sticky", removeSticky)
-	http.HandleFunc("/get-vote-word-info", getVoteWordInfo)
-	http.HandleFunc("/get-word-empathy-info", getWordEmpathyInfo)
-	http.HandleFunc("/increment-word-empathy", incrementWordEmpathy)
-	http.HandleFunc("/decrement-word-empathy", decrementWordEmpathy)
-	http.HandleFunc("/vote-word", voteWord)
-	http.HandleFunc("/remove-vote-word", removeVoteWord)
 	http.HandleFunc("/get-highlight-info", getHighlightInfo)
 	http.HandleFunc("/add-highlight", addHighlight)
 	http.HandleFunc("/update-highlight", updateHighlight)
