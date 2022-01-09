@@ -146,11 +146,13 @@ func updateHighlight(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("エラー:", err)
 	}
 
-	sql, err := Db.Prepare("update highlight_info_" + TABLE_NAME + " set width=? where id=?")
-	if err != nil {
-		fmt.Println("エラー:", err)
+	if highlight.Width != 0 {
+		sql, err := Db.Prepare("update highlight_info_" + TABLE_NAME + " set width=? where id=?")
+		if err != nil {
+			fmt.Println("エラー:", err)
+		}
+		sql.Exec(highlight.Width, highlight.Id)
 	}
-	sql.Exec(highlight.Width, highlight.Id)
 
 	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
