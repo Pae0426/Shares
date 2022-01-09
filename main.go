@@ -61,17 +61,6 @@ func setTotalPage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func setDummyCookie(w http.ResponseWriter, r *http.Request) {
-	dummyCookie := &http.Cookie{ //Cookieが空によるエラーを回避するためのCookie
-		Name:   "dummyName1",
-		Value:  "dummyValue1",
-		MaxAge: 60 * 60 * 3,
-	}
-	http.SetCookie(w, dummyCookie)
-
-	http.Redirect(w, r, "/home", 301)
-}
-
 func templateHandler(w http.ResponseWriter, r *http.Request) {
 	row, err := Db.Query("select ifnull(max(id),0) from user_cookie_info_" + TABLE_NAME)
 	if err != nil {
@@ -89,29 +78,22 @@ func templateHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println("エラー:", err.Error())
 	}
 
-	cookies := r.Cookies()
-	lastCookie := "user" + strconv.Itoa(lastId)
-
-	for i, c := range cookies {
-		if c.Value == lastCookie {
-			break
+	_, err = r.Cookie("user-id")
+	if err == http.ErrNoCookie {
+		newCookie := "user" + strconv.Itoa(lastId+1)
+		cookie := &http.Cookie{
+			Name:   "user-id",
+			Value:  newCookie,
+			MaxAge: 60 * 60 * 3,
 		}
-		if i == len(cookies)-1 { //Cookie作成
-			newCookie := "user" + strconv.Itoa(lastId+1)
-			cookie := &http.Cookie{
-				Name:   "user-id",
-				Value:  newCookie,
-				MaxAge: 60 * 60 * 3,
-			}
-			http.SetCookie(w, cookie)
-			log.Println("Cookie設定完了")
+		http.SetCookie(w, cookie)
+		log.Println("Cookie設定完了")
 
-			sql, err := Db.Prepare("insert into user_cookie_info_" + TABLE_NAME + "(user_cookie) values(?)")
-			if err != nil {
-				log.Println("エラー:", err)
-			}
-			sql.Exec(newCookie)
+		sql, err := Db.Prepare("insert into user_cookie_info_" + TABLE_NAME + "(user_cookie) values(?)")
+		if err != nil {
+			log.Println("エラー:", err)
 		}
+		sql.Exec(newCookie)
 	}
 
 	data := map[string]int{
@@ -140,8 +122,7 @@ func main() {
 		Addr: ":9000",
 	}
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	http.HandleFunc("/", setDummyCookie)
-	http.HandleFunc("/home", templateHandler)
+	http.HandleFunc("/", templateHandler)
 	http.HandleFunc("/stickies", getStickiesInfo)
 	http.HandleFunc("/load-sticky-id", loadStickyId)
 	http.HandleFunc("/create-sticky", createSticky)
