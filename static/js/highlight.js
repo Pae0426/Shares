@@ -61,7 +61,11 @@ function addHighlight(isCreate, id, width, width_sum, slide_height, page, x, y, 
 
 function updateHighlight() {
     for(let id in highlightWidth) {
-        if($('[data-highlight-id="' + id + '"').width() != highlightWidth[id]) {
+        let width = parseInt($('[data-highlight-id="' + id + '"').width());
+        if(width == 0) {
+            width = parseInt(highlightWidth[id]);
+        }
+        if(width != parseInt(highlightWidth[id])) {
             $.ajax({
                 dataType: 'json',
                 contentType: 'application/json',
@@ -69,7 +73,7 @@ function updateHighlight() {
                 url: '/update-highlight',
                 data: JSON.stringify({
                     id: parseInt(id),
-                    width: parseInt($('[data-highlight-id="' + id + '"').width()),
+                    width: width,
                 }),
             }).done(function() {
                 highlightWidth[id] = $('[data-highlight-id="' + id + '"').width();
