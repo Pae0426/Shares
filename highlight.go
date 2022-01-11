@@ -174,39 +174,13 @@ func removeHighlight(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("エラー:", err)
 	}
 
-	cookie, err := r.Cookie("user-id")
-	if err != nil {
-		fmt.Println("エラー: ", err)
-	}
-
-	row, err := Db.Query("select user_cookie from highlight_info_" + TABLE_NAME + " where id=" + strconv.Itoa(targetId.Id))
+	sql, err := Db.Prepare("delete from highlight_info_" + TABLE_NAME + " where id=?")
 	if err != nil {
 		fmt.Println("エラー:", err)
 	}
+	sql.Exec(targetId.Id)
 
-	defer row.Close()
-
-	var highlight_cookie string
-	for row.Next() {
-		if er := row.Scan(&highlight_cookie); er != nil {
-			fmt.Println("エラー:", er)
-		}
-	}
-
-	var result string
-	if cookie.Value == highlight_cookie {
-		sql, err := Db.Prepare("delete from highlight_info_" + TABLE_NAME + " where id=?")
-		if err != nil {
-			fmt.Println("エラー:", err)
-		}
-		sql.Exec(targetId.Id)
-
-		result = "deleted"
-	} else {
-		result = "returned"
-	}
-
-	res, err := json.Marshal(result)
+	res, err := json.Marshal("{200, \"ok\"}")
 	if err != nil {
 		fmt.Println("エラー:", err)
 	}

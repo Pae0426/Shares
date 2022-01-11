@@ -127,6 +127,9 @@ $('.display-page').on('click', function(e) {
 });
 
 $(document).on('dblclick', '[class^="highlight"]', function() {
+    if($(this).hasClass('created-highlight-false')) {
+        return;
+    }
     let id = $(this).data('highlight-id');
     $.ajax({
         dataType: 'json',
@@ -136,11 +139,9 @@ $(document).on('dblclick', '[class^="highlight"]', function() {
         data: JSON.stringify({
             id: parseInt(id),
         })
-    }).done(function(result) {
-        if(result == "deleted") {
-            $('[data-highlight-id="' + id + '"]').remove();
-            delete highlightWidth[id];
-        }
+    }).done(function() {
+        $('[data-highlight-id="' + id + '"]').remove();
+        delete highlightWidth[id];
     }).fail(function() {
         console.log('通信失敗');
     });
