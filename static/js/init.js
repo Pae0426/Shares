@@ -187,7 +187,15 @@ function loadHighlight() {
                         width = Math.round(width*rate_slide_width);
                     }
 
-                    addHighlight(false, id, width, sum_width, slideHeight, page, x, y, page_now);
+                    let isCreated;
+                    let highlight_cookie = highlightInfo.highlights[j]['user_cookie'];
+                    let user_cookie = $.cookie('user-id');
+                    if(highlight_cookie == user_cookie) {
+                        isCreated = true;
+                    } else {
+                        isCreated = false;
+                    }
+                    addHighlight(false, isCreated, id, width, sum_width, slideHeight, page, x, y, page_now);
                     highlightWidth[id] = width;
                     delete highlightInfo.highlights[j];
                     not_remove_highlight.push(exist_id[j]);

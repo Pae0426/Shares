@@ -59,6 +59,8 @@ function pageControl(action) {
     $('.progressbar').css('width', 'calc(' + page_now + ' / ' + PAGE_TOTAL + ' * 100%)');
     $('.page-now-text').html(page_now);
     $('.page-now-vote').html(page_now);
+    $('.sticky-page' + page_now + '.created-true').show();
+    $('.highlight-page' + page_now + '.created-highlight-true').show();
     if(isVisible) {
         $('.sticky-page' + page_now).show();
         $('.highlight-page' + page_now).show();
@@ -94,8 +96,8 @@ $('.visible-btn').on('click', function() {
     let page_now = $('.page-now-text').html();
     page_now = parseInt(page_now);
     $(this).hide();
-    $('.sticky-page' + page_now).hide();
-    $('.highlight-page' + page_now).hide();
+    $('.sticky-page' + page_now + '.created-false').hide();
+    $('.highlight-page' + page_now + '.created-highlight-false').hide();
     $('.invisible-btn').show();
     isVisible = false;
 });

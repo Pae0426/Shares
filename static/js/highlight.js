@@ -14,21 +14,21 @@ function createHighlight(page_now, width, width_sum, slide_height, slide_width, 
            slide_width: slide_width,
         })
     }).done(function(id) {
-        addHighlight(true, id, width, width_sum, slide_height, page_now, x, y, page_now);
+        addHighlight(true, true, id, width, width_sum, slide_height, page_now, x, y, page_now);
     }).fail(function() {
         console.log('通信失敗');
     });
 }
 
-function addHighlight(isCreate, id, width, width_sum, slide_height, page, x, y, page_now) {
+function addHighlight(isInit, isCreated, id, width, width_sum, slide_height, page, x, y, page_now) {
     let highlight;
     if(page == page_now){
         highlight = `
-        <span class="highlight highlight-page` + page + `" data-highlight-id="` + id + `" style="width:` + width + `px;height:10px;left:` + x + `px; top:` + y + `px"></span>
+        <span class="highlight highlight-page` + page + ` created-highlight-` + isCreated + `" data-highlight-id="` + id + `" style="width:` + width + `px;height:10px;left:` + x + `px; top:` + y + `px"></span>
         `;
     } else {
         highlight = `
-        <span class="highlight highlight-page` + page + `" data-highlight-id="` + id + `" style="width:` + width + `px;height:10px;left:` + x + `px; top:` + y + `px;display:none"></span>
+        <span class="highlight highlight-page` + page + ` created-highlight-` + isCreated + `" data-highlight-id="` + id + `" style="width:` + width + `px;height:10px;left:` + x + `px; top:` + y + `px;display:none"></span>
         `;
     }
     $('.slide').append(highlight);
@@ -46,7 +46,7 @@ function addHighlight(isCreate, id, width, width_sum, slide_height, page, x, y, 
 
     x = Math.round(x + width_sum);
     y = Math.round(y + slide_height);
-    if(!(isCreate)) {
+    if(!(isInit)) {
         x -= width_sum;
     }
     $('[data-highlight-id="' + id + '"]').css({
