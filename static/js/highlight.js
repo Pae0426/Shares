@@ -136,9 +136,11 @@ $(document).on('dblclick', '[class^="highlight"]', function() {
         data: JSON.stringify({
             id: parseInt(id),
         })
-    }).done(function() {
-        $('[data-highlight-id="' + id + '"]').remove();
-        delete highlightWidth[id];
+    }).done(function(result) {
+        if(result == "deleted") {
+            $('[data-highlight-id="' + id + '"]').remove();
+            delete highlightWidth[id];
+        }
     }).fail(function() {
         console.log('通信失敗');
     });
