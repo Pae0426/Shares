@@ -22,7 +22,7 @@ function loadSticky() {
     $.ajax({
         dataType: 'json',
         type: 'GET',
-        url: '/stickies',
+        url: '/get-sticky-info',
     }).done(function(stickies) {
         getEmpathyInfo().done(function(empathyInfo) {
             let exist_id = $('.sticky').map(function() {

@@ -16,8 +16,8 @@ import (
 
 var Db *sql.DB
 
-const TABLE_NAME = "15"
-const PDF_DIR = "15"
+const TABLE_NAME = "med15"
+const PDF_DIR = "med15"
 
 func init() {
 	var err error
@@ -123,7 +123,7 @@ func main() {
 	}
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", templateHandler)
-	http.HandleFunc("/stickies", getStickiesInfo)
+	http.HandleFunc("/get-sticky-info", getStickiesInfo)
 	http.HandleFunc("/load-sticky-id", loadStickyId)
 	http.HandleFunc("/create-sticky", createSticky)
 	http.HandleFunc("/update-sticky", updateSticky)
