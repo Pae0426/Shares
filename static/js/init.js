@@ -120,7 +120,7 @@ function loadSticky() {
     })
 }
 
-function loadStikyIdCallBack(callback) {
+function loadStickyIdCallBack(callback) {
     $.ajax({
         dataType: 'json',
         type: 'GET',

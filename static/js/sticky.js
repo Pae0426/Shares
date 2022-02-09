@@ -335,7 +335,7 @@ $('.add-sticky-btn').on('click', function() {
             resetDesign();
         });
     }
-    loadStikyIdCallBack(callback);
+    loadStickyIdCallBack(callback);
 });
 
 $("[class^='template-sticky-model-']").on('click', function() {

@@ -91,7 +91,7 @@ $('html').keyup(function(e) {
     }
 });
 
-//付箋表示・非表示切り替え
+//付箋とハイライトの表示・非表示切り替え
 $('.visible-btn').on('click', function() {
     let page_now = $('.page-now-text').html();
     page_now = parseInt(page_now);
@@ -144,6 +144,7 @@ $(document).on('click', '.empathy-false', function(e) {
         console.log('通信失敗');
     });
 });
+
 $(document).on('click', '.empathy-true', function(e) {
     $(this).addClass('empathy-false');
     $(this).removeClass('empathy-true');
@@ -168,6 +169,7 @@ $(document).on('click', '.empathy-true', function(e) {
     });
 });
 
+//付箋の削除
 $(document).on('click', '.sticky-trash-btn', function() {
     let id = $(this).data("sticky-trash-id");
     $.ajax({
